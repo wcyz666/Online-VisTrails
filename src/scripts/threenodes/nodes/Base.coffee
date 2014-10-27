@@ -21,7 +21,7 @@ define [
 
     Boolean: class Boolean extends ThreeNodes.NodeBase
       @node_name = 'Boolean'
-      @group_name = 'Base'
+      @group_name = 'BasicModules'
 
       initialize: (options) =>
         super
@@ -41,7 +41,7 @@ define [
 
     String: class String extends ThreeNodes.NodeBase
       @node_name = 'String'
-      @group_name = 'Base'
+      @group_name = 'BasicModules'
 
       initialize: (options) =>
         super
@@ -61,7 +61,7 @@ define [
 
     Vector2: class Vector2 extends ThreeNodes.NodeBase
       @node_name = 'Vector2'
-      @group_name = 'Base'
+      @group_name = 'BasicModules'
 
       getFields: =>
         base_fields = super
@@ -92,7 +92,7 @@ define [
 
     Vector3: class Vector3 extends ThreeNodes.NodeBase
       @node_name = 'Vector3'
-      @group_name = 'Base'
+      @group_name = 'BasicModules'
 
       getFields: =>
         base_fields = super
@@ -128,7 +128,7 @@ define [
 
     Color: class Color extends ThreeNodes.NodeBase
       @node_name = 'Color'
-      @group_name = 'Base'
+      @group_name = 'BasicModules'
 
       getFields: =>
         base_fields = super

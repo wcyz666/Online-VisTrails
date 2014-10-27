@@ -129,6 +129,8 @@ define [
           @ui.menubar.on("LoadFile", @file_handler.loadLocalFile)
           @ui.menubar.on("ExportImage", @webgl.exportImage)
           @ui.menubar.on("GroupSelectedNodes", @group_definitions.groupSelectedNodes)
+          # Added by Gautam
+          @ui.menubar.on("Execute", @file_handler.executeAndSave)
 
           # Special events
           @ui.on("CreateNode", @nodes.createNode)
