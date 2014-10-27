@@ -10,7 +10,7 @@ define [
   namespace "ThreeNodes.nodes.models",
     IfElse: class IfElse extends ThreeNodes.NodeBase
       @node_name = 'IfElse'
-      @group_name = 'Conditional'
+      @group_name = 'ControlFlow'
 
       getFields: =>
         base_fields = super
@@ -33,7 +33,7 @@ define [
 
     And: class And extends ThreeNodes.NodeBase
       @node_name = 'And'
-      @group_name = 'Conditional'
+      @group_name = 'ControlFlow'
 
       getFields: =>
         base_fields = super
@@ -51,7 +51,7 @@ define [
 
     Or: class Or extends ThreeNodes.NodeBase
       @node_name = 'Or'
-      @group_name = 'Conditional'
+      @group_name = 'ControlFlow'
 
       getFields: =>
         base_fields = super
@@ -69,7 +69,7 @@ define [
 
     Equal: class Equal extends ThreeNodes.NodeBase
       @node_name = 'Equal'
-      @group_name = 'Conditional'
+      @group_name = 'ControlFlow'
 
       getFields: =>
         base_fields = super
@@ -87,7 +87,7 @@ define [
 
     Smaller: class Smaller extends ThreeNodes.NodeBase
       @node_name = 'Smaller'
-      @group_name = 'Conditional'
+      @group_name = 'ControlFlow'
 
       getFields: =>
         base_fields = super
@@ -105,7 +105,7 @@ define [
 
     Greater: class Greater extends ThreeNodes.NodeBase
       @node_name = 'Greater'
-      @group_name = 'Conditional'
+      @group_name = 'ControlFlow'
 
       getFields: =>
         base_fields = super

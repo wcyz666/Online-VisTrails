@@ -117,7 +117,7 @@ define [
         # inital groups to have a coherent ordering in sidebar
         nodes_by_group =
           BasicModules: []
-          Conditional: []
+          ControlFlow: []
           Math: []
           Utils: []
           Three: []
