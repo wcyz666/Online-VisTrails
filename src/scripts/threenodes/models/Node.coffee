@@ -250,7 +250,8 @@ define [
             when "number" then res[i] = @process_val(ref, i)
             when "object"
               switch ref.constructor
-                when THREE.Vector2
+              # change the class name from Vector 2
+                when THREE.StringConcatenate
                   res[i].x = @process_val(ref.x, i)
                   res[i].y = @process_val(ref.y, i)
                 when THREE.Vector3

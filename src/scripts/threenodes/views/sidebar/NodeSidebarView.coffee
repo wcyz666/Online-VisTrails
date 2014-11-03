@@ -7,6 +7,9 @@ define [
   'cs!threenodes/views/sidebar/fields/Vector2Field',
   'cs!threenodes/views/sidebar/fields/Vector3Field',
   'cs!threenodes/views/sidebar/fields/Vector4Field',
+  'cs!threenodes/views/sidebar/fields/StringConcatenateField',
+  'cs!threenodes/views/sidebar/fields/FileSinkField',
+  'cs!threenodes/views/sidebar/fields/WriteFileField',
 ], (_, Backbone) ->
   #"use strict"
 
@@ -26,6 +29,10 @@ define [
             when ThreeNodes.fields.Bool then ThreeNodes.views.fields.BoolField
             when ThreeNodes.fields.String then ThreeNodes.views.fields.StringField
             when ThreeNodes.fields.Float then ThreeNodes.views.fields.FloatField
+            # Add concatenation, Write File, File
+            when ThreeNodes.fields.WriteFile then ThreeNodes.views.fields.WriteFileField
+            when ThreeNodes.fields.StringConcatenate then ThreeNodes.views.fields.StringConcatenateField
+            when ThreeNodes.fields.FileSink then ThreeNodes.views.fields.FileSinkField
             when ThreeNodes.fields.Vector2 then ThreeNodes.views.fields.Vector2Field
             when ThreeNodes.fields.Vector3 then ThreeNodes.views.fields.Vector3Field
             when ThreeNodes.fields.Vector4 then ThreeNodes.views.fields.Vector4Field
