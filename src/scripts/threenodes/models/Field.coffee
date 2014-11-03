@@ -174,7 +174,7 @@ define [
 
         # We may still need to save basic values
         if val_type == "object"
-          if val.constructor == THREE.Vector2 || val.constructor == THREE.Vector3 || val.constructor == THREE.Vector4 || val.constructor == THREE.Color
+          if val.constructor == THREE.StringConcatenate val.constructor == THREE.Vector2 || val.constructor == THREE.Vector3 || val.constructor == THREE.Vector4 || val.constructor == THREE.Color
             res.val = val
 
         return res
@@ -257,6 +257,17 @@ define [
           when "number" then return val.toString
           when "string" then return val
         return null
+        
+    #Compute the value of write file
+    WriteFile: class WriteFile extends NodeField
+      computeValue : (val) =>
+        return val
+        
+    #Compute the value of write file
+    FileSink: class FileSink extends NodeField
+      computeValue : (val) =>
+        return val
+        
 
     Float: class Float extends NodeField
       computeValue : (val) =>
@@ -271,6 +282,14 @@ define [
             else
               return 0
         return null
+        
+    StringConcatenate: class StringConcatenate extends NodeField
+      computeValue : (val) =>
+        if $.type(val) == "object"
+          if val.constructor == THREE.StringConcatenate
+            return val
+        #return null
+        return val
 
     Vector2: class Vector2 extends NodeField
       computeValue : (val) =>

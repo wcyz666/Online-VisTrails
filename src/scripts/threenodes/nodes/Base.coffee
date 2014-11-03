@@ -59,8 +59,8 @@ define [
       compute: =>
         @fields.setField("out", @fields.getField("string").getValue())
 
-    Vector2: class Vector2 extends ThreeNodes.NodeBase
-      @node_name = 'Vector2'
+    StringConcatenate: class StringConcatenate extends ThreeNodes.NodeBase
+      @node_name = 'StringConcatenate'
       @group_name = 'BasicModules'
 
       getFields: =>
@@ -70,9 +70,9 @@ define [
             "x" : 0
             "y" : 0
           outputs:
-            "xy" : {type: "Vector2", val: false}
-            "x" : 0
-            "y" : 0
+            "xy" : {type: "StringConcatenate", val: false}
+            #"x" : 0
+            #"y" : 0
         return $.extend(true, base_fields, fields)
 
       compute: =>
@@ -84,11 +84,52 @@ define [
         for i in [0..numItems]
           resx[i] = @fields.getField("x").getValue(i)
           resy[i] = @fields.getField("y").getValue(i)
-          res[i] = new THREE.Vector3(resx[i], resy[i])
+          res[i] = resx[i] + resy[i]
+          #res[i] = new THREE.Vector3(resx[i], resy[i])
 
         @fields.setField("xy", res)
-        @fields.setField("x", resx)
-        @fields.setField("y", resy)
+        #@fields.setField("x", resx)
+        #@fields.setField("y", resy)
+        
+    WriteFile: class WriteFile extends ThreeNodes.NodeBase
+      @node_name = 'WriteFile'
+      @group_name = 'BasicModules'
+
+      initialize: (options) =>
+        super
+        @value = ""
+
+      getFields: =>
+        base_fields = super
+        fields =
+          inputs:
+            "in" : {type: "Any", val: @value}
+          outputs:
+            "out" : {type: "Any", val: @value}
+        return $.extend(true, base_fields, fields)
+
+      compute: =>
+        @fields.setField("out", @fields.getField("in").getValue())
+
+    FileSink: class FileSink extends ThreeNodes.NodeBase
+      @node_name = 'FileSink'
+      @group_name = 'BasicModules'
+
+      initialize: (options) =>
+        super
+        @value = ""
+
+      getFields: =>
+        base_fields = super
+        fields =
+          inputs:
+            "in" : {type: "Any", val: @value}
+          outputs:
+            "out" : {type: "Any", val: @value}
+        return $.extend(true, base_fields, fields)
+
+      compute: =>
+        @fields.setField("out", @fields.getField("in").getValue())
 
     Vector3: class Vector3 extends ThreeNodes.NodeBase
       @node_name = 'Vector3'

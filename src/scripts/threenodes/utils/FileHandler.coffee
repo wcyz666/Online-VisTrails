@@ -91,14 +91,24 @@ define [
 		# Execute event to give output
 			executeAndSave: () =>
 				#convert to JSON and send to Server
-				console.log "reached execute and save"
 				json = @getLocalJson(false)
 				res = @sendToServer(json)
 				bb = new BlobBuilder()
 				bb.append(res)
+				console.log "reached execute and save"
+				console.log res
+				console.log bb
 				fileSaver = saveAs(bb.getBlob("application/json;charset=utf-8"), "result.json")
 				console.log fileSaver
 		# Send Data to the server
 			sendToServer: (data) =>
-				#consider I get data from Li
-				return '24'    
+				$.ajax
+					type: "GET"
+					url: "http://api.openweathermap.org/data/2.5/weather?q=london&mode=xml"
+					cache: false
+					success: (xml) ->
+						alert "Success!"
+				return "HelloWorld!"
+
+				
+				
