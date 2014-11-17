@@ -29,7 +29,7 @@ define [
             when ThreeNodes.fields.Bool then ThreeNodes.views.fields.BoolField
             when ThreeNodes.fields.String then ThreeNodes.views.fields.StringField
             when ThreeNodes.fields.Float then ThreeNodes.views.fields.FloatField
-            # Add concatenation, Write File, File
+            # Add concatenation, Write File, File,
             when ThreeNodes.fields.WriteFile then ThreeNodes.views.fields.WriteFileField
             when ThreeNodes.fields.StringConcatenate then ThreeNodes.views.fields.StringConcatenateField
             when ThreeNodes.fields.FileSink then ThreeNodes.views.fields.FileSinkField
