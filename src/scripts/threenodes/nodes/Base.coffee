@@ -38,6 +38,255 @@ define [
 
       compute: =>
         @fields.setField("out", @fields.getField("bool").getValue())
+        
+    Assert: class Assert extends ThreeNodes.NodeBase
+      @node_name = 'Assert'
+      @group_name = 'BasicModules'
+
+      initialize: (options) =>
+        super
+        @value = ""
+		
+      getFields: =>
+        base_fields = super
+        fields =
+          inputs:
+            "in": ""
+          outputs:
+            "out": {type: "Any", val: @value}
+        return $.extend(true, base_fields, fields)
+
+      compute: =>
+        @fields.setField("out", @fields.getField("in").getValue())
+
+    AssertEqual: class AssertEqual extends ThreeNodes.NodeBase
+      @node_name = 'AsserEqual'
+      @group_name = 'BasicModules'
+
+      initialize: (options) =>
+        super
+        @value = ""
+		
+      getFields: =>
+        base_fields = super
+        fields =
+          inputs:
+            "in": ""
+          outputs:
+            "out": {type: "Any", val: @value}
+        return $.extend(true, base_fields, fields)
+
+      compute: =>
+        @fields.setField("out", @fields.getField("in").getValue())
+
+    Dictionary: class Dictionary extends ThreeNodes.NodeBase
+      @node_name = 'Dictionary'
+      @group_name = 'BasicModules'
+
+      initialize: (options) =>
+        super
+        @value = ""
+		
+      getFields: =>
+        base_fields = super
+        fields =
+          inputs:
+            "in": ""
+          outputs:
+            "out": {type: "Any", val: @value}
+        return $.extend(true, base_fields, fields)
+
+      compute: =>
+        @fields.setField("out", @fields.getField("in").getValue())
+
+        
+    Directory: class Directory extends ThreeNodes.NodeBase
+      @node_name = 'Directory'
+      @group_name = 'BasicModules'
+
+      initialize: (options) =>
+        super
+        @value = ""
+		
+      getFields: =>
+        base_fields = super
+        fields =
+          inputs:
+            "in": ""
+          outputs:
+            "out": {type: "Any", val: @value}
+        return $.extend(true, base_fields, fields)
+
+      compute: =>
+        @fields.setField("out", @fields.getField("in").getValue())
+
+
+    DirectorySink: class DirectorySink extends ThreeNodes.NodeBase
+      @node_name = 'DirectorySink'
+      @group_name = 'BasicModules'
+
+      initialize: (options) =>
+        super
+        @value = ""
+		
+      getFields: =>
+        base_fields = super
+        fields =
+          inputs:
+            "in": ""
+          outputs:
+            "out": {type: "Any", val: @value}
+        return $.extend(true, base_fields, fields)
+
+      compute: =>
+        @fields.setField("out", @fields.getField("in").getValue())
+
+    File: class File extends ThreeNodes.NodeBase
+      @node_name = 'File'
+      @group_name = 'BasicModules'
+
+      initialize: (options) =>
+        super
+        @value = ""
+		
+      getFields: =>
+        base_fields = super
+        fields =
+          inputs:
+            "in": ""
+          outputs:
+            "out": {type: "Any", val: @value}
+        return $.extend(true, base_fields, fields)
+
+      compute: =>
+        @fields.setField("out", @fields.getField("in").getValue())
+
+
+    Float: class Float extends ThreeNodes.NodeBase
+      @node_name = 'Float'
+      @group_name = 'BasicModules'
+
+      initialize: (options) =>
+        super
+        @value = ""
+		
+      getFields: =>
+        base_fields = super
+        fields =
+          inputs:
+            "in": ""
+          outputs:
+            "out": {type: "Any", val: @value}
+        return $.extend(true, base_fields, fields)
+
+      compute: =>
+        @fields.setField("out", @fields.getField("in").getValue())
+        
+        
+    InputPort: class InputPort extends ThreeNodes.NodeBase
+      @node_name = 'InputPort'
+      @group_name = 'BasicModules'
+
+      initialize: (options) =>
+        super
+        @value = ""
+		
+      getFields: =>
+        base_fields = super
+        fields =
+          inputs:
+            "in": ""
+          outputs:
+            "out": {type: "Any", val: @value}
+        return $.extend(true, base_fields, fields)
+
+      compute: =>
+        @fields.setField("out", @fields.getField("in").getValue())
+        
+
+    OutputPort: class OutputPort extends ThreeNodes.NodeBase
+      @node_name = 'OutputPort'
+      @group_name = 'BasicModules'
+
+      initialize: (options) =>
+        super
+        @value = ""
+		
+      getFields: =>
+        base_fields = super
+        fields =
+          inputs:
+            "in": ""
+          outputs:
+            "out": {type: "Any", val: @value}
+        return $.extend(true, base_fields, fields)
+
+      compute: =>
+        @fields.setField("out", @fields.getField("in").getValue())
+
+
+    OutputPath: class OutputPath extends ThreeNodes.NodeBase
+      @node_name = 'OutputPath'
+      @group_name = 'BasicModules'
+
+      initialize: (options) =>
+        super
+        @value = ""
+		
+      getFields: =>
+        base_fields = super
+        fields =
+          inputs:
+            "in": ""
+          outputs:
+            "out": {type: "Any", val: @value}
+        return $.extend(true, base_fields, fields)
+
+      compute: =>
+        @fields.setField("out", @fields.getField("in").getValue())
+
+
+    Not: class Not extends ThreeNodes.NodeBase
+      @node_name = 'Not'
+      @group_name = 'BasicModules'
+
+      initialize: (options) =>
+        super
+        @value = ""
+		
+      getFields: =>
+        base_fields = super
+        fields =
+          inputs:
+            "in": ""
+          outputs:
+            "out": {type: "Any", val: @value}
+        return $.extend(true, base_fields, fields)
+
+      compute: =>
+        @fields.setField("out", @fields.getField("in").getValue())
+
+
+    List: class List extends ThreeNodes.NodeBase
+      @node_name = 'List'
+      @group_name = 'BasicModules'
+
+      initialize: (options) =>
+        super
+        @value = ""
+		
+      getFields: =>
+        base_fields = super
+        fields =
+          inputs:
+            "in": ""
+          outputs:
+            "out": {type: "Any", val: @value}
+        return $.extend(true, base_fields, fields)
+
+      compute: =>
+        @fields.setField("out", @fields.getField("in").getValue())
+
 
     String: class String extends ThreeNodes.NodeBase
       @node_name = 'String'
@@ -46,7 +295,7 @@ define [
       initialize: (options) =>
         super
         @value = ""
-
+		
       getFields: =>
         base_fields = super
         fields =
@@ -130,6 +379,7 @@ define [
 
       compute: =>
         @fields.setField("out", @fields.getField("in").getValue())
+        
 
     Vector3: class Vector3 extends ThreeNodes.NodeBase
       @node_name = 'Vector3'

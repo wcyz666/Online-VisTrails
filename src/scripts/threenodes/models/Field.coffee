@@ -249,7 +249,7 @@ define [
           when "number" then return val != 0
           when "string" then return val == "1"
         return null
-
+        
     String: class String extends NodeField
       computeValue : (val) =>
         switch $.type(val)
