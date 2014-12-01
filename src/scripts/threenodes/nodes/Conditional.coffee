@@ -8,8 +8,134 @@ define [
   #"use strict"
 
   namespace "ThreeNodes.nodes.models",
-    IfElse: class IfElse extends ThreeNodes.NodeBase
-      @node_name = 'IfElse'
+    And: class And extends ThreeNodes.NodeBase
+      @node_name = 'And'
+      @group_name = 'ControlFlow'
+
+      getFields: =>
+        base_fields = super
+        fields =
+          inputs:
+            "val1" : false
+            "val2" : false
+          outputs:
+            "out" : false
+        return $.extend(true, base_fields, fields)
+
+      compute: =>
+        res = @fields.getField("val1").getValue() != false && @fields.getField("val2").getValue() != false
+        @fields.setField("out", res)
+
+	
+    CartesianProduct: class CartesianProduct extends ThreeNodes.NodeBase
+      @node_name = 'CartesianProduct'
+      @group_name = 'ControlFlow'
+
+      getFields: =>
+        base_fields = super
+        fields =
+          inputs:
+            "in": ""
+          outputs:
+            "out": {type: "Any", val: @value}
+        return $.extend(true, base_fields, fields)
+
+
+    Cross: class Cross extends ThreeNodes.NodeBase
+      @node_name = 'Cross'
+      @group_name = 'ControlFlow'
+
+      getFields: =>
+        base_fields = super
+        fields =
+          inputs:
+            "in": ""
+          outputs:
+            "out": {type: "Any", val: @value}
+        return $.extend(true, base_fields, fields)
+
+
+    Default: class Default extends ThreeNodes.NodeBase
+      @node_name = 'Default'
+      @group_name = 'ControlFlow'
+
+      getFields: =>
+        base_fields = super
+        fields =
+          inputs:
+            "in": ""
+          outputs:
+            "out": {type: "Any", val: @value}
+        return $.extend(true, base_fields, fields)
+
+
+    Dot: class Dot extends ThreeNodes.NodeBase
+      @node_name = 'Dot'
+      @group_name = 'ControlFlow'
+
+      getFields: =>
+        base_fields = super
+        fields =
+          inputs:
+            "in": ""
+          outputs:
+            "out": {type: "Any", val: @value}
+        return $.extend(true, base_fields, fields)
+
+    ElementwiseProduct: class ElementwiseProduct extends ThreeNodes.NodeBase
+      @node_name = 'ElementwiseProduct'
+      @group_name = 'ControlFlow'
+
+      getFields: =>
+        base_fields = super
+        fields =
+          inputs:
+            "in": ""
+          outputs:
+            "out": {type: "Any", val: @value}
+        return $.extend(true, base_fields, fields)
+
+    ExecuteInOrder: class ExecuteInOrder extends ThreeNodes.NodeBase
+      @node_name = 'ExecuteInOrder'
+      @group_name = 'ControlFlow'
+
+      getFields: =>
+        base_fields = super
+        fields =
+          inputs:
+            "in": ""
+          outputs:
+            "out": {type: "Any", val: @value}
+        return $.extend(true, base_fields, fields)
+
+    Filter: class Filter extends ThreeNodes.NodeBase
+      @node_name = 'Filter'
+      @group_name = 'ControlFlow'
+
+      getFields: =>
+        base_fields = super
+        fields =
+          inputs:
+            "in": ""
+          outputs:
+            "out": {type: "Any", val: @value}
+        return $.extend(true, base_fields, fields)
+
+    For: class For extends ThreeNodes.NodeBase
+      @node_name = 'For'
+      @group_name = 'ControlFlow'
+
+      getFields: =>
+        base_fields = super
+        fields =
+          inputs:
+            "in": ""
+          outputs:
+            "out": {type: "Any", val: @value}
+        return $.extend(true, base_fields, fields)
+        
+    If: class If extends ThreeNodes.NodeBase
+      @node_name = 'If'
       @group_name = 'ControlFlow'
 
       getFields: =>
@@ -30,24 +156,21 @@ define [
         else
           res = @fields.getField("val2").attributes.value
         @fields.setField("out", res)
+        
 
-    And: class And extends ThreeNodes.NodeBase
-      @node_name = 'And'
+    Map: class Map extends ThreeNodes.NodeBase
+      @node_name = 'Map'
       @group_name = 'ControlFlow'
 
       getFields: =>
         base_fields = super
         fields =
           inputs:
-            "val1" : false
-            "val2" : false
+            "in": ""
           outputs:
-            "out" : false
+            "out": {type: "Any", val: @value}
         return $.extend(true, base_fields, fields)
 
-      compute: =>
-        res = @fields.getField("val1").getValue() != false && @fields.getField("val2").getValue() != false
-        @fields.setField("out", res)
 
     Or: class Or extends ThreeNodes.NodeBase
       @node_name = 'Or'
@@ -67,56 +190,88 @@ define [
         res = @fields.getField("val1").getValue() != false || @fields.getField("val2").getValue() != false
         @fields.setField("out", res)
 
-    Equal: class Equal extends ThreeNodes.NodeBase
-      @node_name = 'Equal'
+
+    Sum: class Sum extends ThreeNodes.NodeBase
+      @node_name = 'Sum'
       @group_name = 'ControlFlow'
 
       getFields: =>
         base_fields = super
         fields =
           inputs:
-            "val1" : {type: "Any", val: 0.0}
-            "val2" : {type: "Any", val: 1.0}
+            "val" : ""
           outputs:
-            "out" : false
+            "out" : {type: "Any", val: @value}
         return $.extend(true, base_fields, fields)
 
       compute: =>
-        res = @fields.getField("val1").getValue(0) == @fields.getField("val2").getValue(0)
         @fields.setField("out", res)
 
-    Smaller: class Smaller extends ThreeNodes.NodeBase
-      @node_name = 'Smaller'
+
+    While: class While extends ThreeNodes.NodeBase
+      @node_name = 'While'
       @group_name = 'ControlFlow'
 
       getFields: =>
         base_fields = super
         fields =
           inputs:
-            "val1" : {type: "Float", val: 0.0}
-            "val2" : {type: "Float", val: 1.0}
+            "val1" : ""
+            "val2" : ""
           outputs:
-            "out" : false
+            "out" : {type: "Any", val: @value}
         return $.extend(true, base_fields, fields)
 
-      compute: =>
-        res = @fields.getField("val1").getValue(0) < @fields.getField("val2").getValue(0)
-        @fields.setField("out", res)
+#    Equal: class Equal extends ThreeNodes.NodeBase
+#      @node_name = 'Equal'
+#      @group_name = 'ControlFlow'
 
-    Greater: class Greater extends ThreeNodes.NodeBase
-      @node_name = 'Greater'
-      @group_name = 'ControlFlow'
+#      getFields: =>
+#        base_fields = super
+#        fields =
+#          inputs:
+#            "val1" : {type: "Any", val: 0.0}
+#            "val2" : {type: "Any", val: 1.0}
+#          outputs:
+#            "out" : false
+#        return $.extend(true, base_fields, fields)
 
-      getFields: =>
-        base_fields = super
-        fields =
-          inputs:
-            "val1" : {type: "Float", val: 0.0}
-            "val2" : {type: "Float", val: 1.0}
-          outputs:
-            "out" : false
-        return $.extend(true, base_fields, fields)
+#      compute: =>
+#        res = @fields.getField("val1").getValue(0) == @fields.getField("val2").getValue(0)
+#        @fields.setField("out", res)
 
-      compute: =>
-        res = @fields.getField("val1").getValue(0) > @fields.getField("val2").getValue(0)
-        @fields.setField("out", res)
+#    Smaller: class Smaller extends ThreeNodes.NodeBase
+#      @node_name = 'Smaller'
+#      @group_name = 'ControlFlow'
+
+#      getFields: =>
+#        base_fields = super
+#        fields =
+#          inputs:
+#            "val1" : {type: "Float", val: 0.0}
+#            "val2" : {type: "Float", val: 1.0}
+#          outputs:
+#            "out" : false
+#        return $.extend(true, base_fields, fields)
+
+#      compute: =>
+#        res = @fields.getField("val1").getValue(0) < @fields.getField("val2").getValue(0)
+#        @fields.setField("out", res)
+
+#    Greater: class Greater extends ThreeNodes.NodeBase
+#      @node_name = 'Greater'
+#      @group_name = 'ControlFlow'
+
+#      getFields: =>
+#        base_fields = super
+#        fields =
+#          inputs:
+#            "val1" : {type: "Float", val: 0.0}
+#            "val2" : {type: "Float", val: 1.0}
+#          outputs:
+#            "out" : false
+#        return $.extend(true, base_fields, fields)
+
+#      compute: =>
+#        res = @fields.getField("val1").getValue(0) > @fields.getField("val2").getValue(0)
+#        @fields.setField("out", res)

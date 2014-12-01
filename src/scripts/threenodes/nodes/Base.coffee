@@ -15,7 +15,7 @@ define [
       getCenterField: () => @model.fields.getField("string")
 
   namespace "ThreeNodes.nodes.models",
-    Number: class Number extends ThreeNodes.NodeNumberSimple
+    Integer: class Integer extends ThreeNodes.NodeNumberSimple
       @node_name = 'Integer'
       @group_name = 'BasicModules'
 
@@ -279,7 +279,8 @@ define [
         base_fields = super
         fields =
           inputs:
-            "in": ""
+            "in0": ""
+            "in1": ""
           outputs:
             "out": {type: "Any", val: @value}
         return $.extend(true, base_fields, fields)
@@ -416,6 +417,8 @@ define [
         @fields.setField("x", resx)
         @fields.setField("y", resy)
         @fields.setField("z", resz)
+        
+        
 
     Color: class Color extends ThreeNodes.NodeBase
       @node_name = 'Color'
@@ -452,3 +455,190 @@ define [
         @fields.setField("r", resr)
         @fields.setField("g", resg)
         @fields.setField("b", resb)
+        
+    Path: class Path extends ThreeNodes.NodeBase
+      @node_name = 'Path'
+      @group_name = 'BasicModules'
+
+      initialize: (options) =>
+        super
+        @value = ""
+		
+      getFields: =>
+        base_fields = super
+        fields =
+          inputs:
+            "in": ""
+          outputs:
+            "out": {type: "Any", val: @value}
+        return $.extend(true, base_fields, fields)
+
+      compute: =>
+        @fields.setField("out", @fields.getField("in").getValue())
+        
+    PythonSource: class PythonSource extends ThreeNodes.NodeBase
+      @node_name = 'PythonSource'
+      @group_name = 'BasicModules'
+
+      initialize: (options) =>
+        super
+        @value = ""
+		
+      getFields: =>
+        base_fields = super
+        fields =
+          inputs:
+            "in": ""
+          outputs:
+            "out": {type: "Any", val: @value}
+        return $.extend(true, base_fields, fields)
+
+      compute: =>
+        @fields.setField("out", @fields.getField("in").getValue())
+        
+
+    SmartSource: class SmartSource extends ThreeNodes.NodeBase
+      @node_name = 'SmartSource'
+      @group_name = 'BasicModules'
+
+      initialize: (options) =>
+        super
+        @value = ""
+		
+      getFields: =>
+        base_fields = super
+        fields =
+          inputs:
+            "in": ""
+          outputs:
+            "out": {type: "Any", val: @value}
+        return $.extend(true, base_fields, fields)
+
+      compute: =>
+        @fields.setField("out", @fields.getField("in").getValue())
+        
+
+    StandardOutput: class StandardOutput extends ThreeNodes.NodeBase
+      @node_name = 'StandardOutput'
+      @group_name = 'BasicModules'
+
+      initialize: (options) =>
+        super
+        @value = ""
+		
+      getFields: =>
+        base_fields = super
+        fields =
+          inputs:
+            "in": ""
+          outputs:
+            "out": {type: "Any", val: @value}
+        return $.extend(true, base_fields, fields)
+
+      compute: =>
+        @fields.setField("out", @fields.getField("in").getValue())
+
+
+    StringFormat: class StringFormat extends ThreeNodes.NodeBase
+      @node_name = 'StringFormat'
+      @group_name = 'BasicModules'
+
+      initialize: (options) =>
+        super
+        @value = ""
+		
+      getFields: =>
+        base_fields = super
+        fields =
+          inputs:
+            "in": ""
+          outputs:
+            "out": {type: "Any", val: @value}
+        return $.extend(true, base_fields, fields)
+
+      compute: =>
+        @fields.setField("out", @fields.getField("in").getValue())
+        
+
+    Tuple: class Tuple extends ThreeNodes.NodeBase
+      @node_name = 'Tuple'
+      @group_name = 'BasicModules'
+
+      initialize: (options) =>
+        super
+        @value = ""
+		
+      getFields: =>
+        base_fields = super
+        fields =
+          inputs:
+            "in": ""
+          outputs:
+            "out": {type: "Any", val: @value}
+        return $.extend(true, base_fields, fields)
+
+      compute: =>
+        @fields.setField("out", @fields.getField("in").getValue())
+        
+
+    Untuple: class Untuple extends ThreeNodes.NodeBase
+      @node_name = 'Untuple'
+      @group_name = 'BasicModules'
+
+      initialize: (options) =>
+        super
+        @value = ""
+		
+      getFields: =>
+        base_fields = super
+        fields =
+          inputs:
+            "in": ""
+          outputs:
+            "out": {type: "Any", val: @value}
+        return $.extend(true, base_fields, fields)
+
+      compute: =>
+        @fields.setField("out", @fields.getField("in").getValue())
+
+
+    Unzip: class Unzip extends ThreeNodes.NodeBase
+      @node_name = 'Unzip'
+      @group_name = 'BasicModules'
+
+      initialize: (options) =>
+        super
+        @value = ""
+		
+      getFields: =>
+        base_fields = super
+        fields =
+          inputs:
+            "in": ""
+          outputs:
+            "out": {type: "Any", val: @value}
+        return $.extend(true, base_fields, fields)
+
+      compute: =>
+        @fields.setField("out", @fields.getField("in").getValue())
+        
+        
+    UnzipDirectory: class UnzipDirectory extends ThreeNodes.NodeBase
+      @node_name = 'UnzipDirectory'
+      @group_name = 'BasicModules'
+
+      initialize: (options) =>
+        super
+        @value = ""
+		
+      getFields: =>
+        base_fields = super
+        fields =
+          inputs:
+            "in": ""
+          outputs:
+            "out": {type: "Any", val: @value}
+        return $.extend(true, base_fields, fields)
+
+      compute: =>
+        @fields.setField("out", @fields.getField("in").getValue())
