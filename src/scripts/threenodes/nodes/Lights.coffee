@@ -7,127 +7,143 @@ define [
   #"use strict"
 
   namespace "ThreeNodes.nodes.models",
-    PointLight: class PointLight extends ThreeNodes.NodeBase
-      @node_name = 'PointLight'
-      @group_name = 'Lights'
-
-      initialize: (options) =>
-        super
-        @auto_evaluate = true
-        @ob = new THREE.PointLight(0xffffff)
+    CellLocation: class CellLocation extends ThreeNodes.NodeBase
+      @node_name = 'CellLocation'
+      @group_name = 'VisTrailsSpreadsheet'
 
       getFields: =>
         base_fields = super
         fields =
           inputs:
-            "color": {type: "Color", val: new THREE.Color(0xffffff)}
-            "position": {type: "Vector3", val: new THREE.Vector3(0, 300, 0)}
-            "intensity": 1
-            "distance": 0
+            "val1" : ""
+            "val2" : ""
           outputs:
-            "out": {type: "Any", val: @ob}
+            "out" : {type: "Any", val: @value}
         return $.extend(true, base_fields, fields)
-
-      remove: =>
-        delete @ob
-        super
-
-      compute: =>
-        @applyFieldsToVal(@fields.inputs, @ob)
-        @fields.setField("out", @ob)
-
-    SpotLight: class SpotLight extends ThreeNodes.NodeBase
-      @node_name = 'SpotLight'
-      @group_name = 'Lights'
-
-      initialize: (options) =>
-        super
-        @auto_evaluate = true
-        @ob = new THREE.SpotLight(0xffffff)
+        
+        
+    ImageViewerCell: class ImageViewerCell extends ThreeNodes.NodeBase
+      @node_name = 'ImageVieweCell'
+      @group_name = 'VisTrailsSpreadsheet'
 
       getFields: =>
         base_fields = super
         fields =
           inputs:
-            "color": {type: "Color", val: new THREE.Color(0xffffff)}
-            "position": {type: "Vector3", val: new THREE.Vector3(0, 300, 0)}
-            "target": {type: "Any", val: new THREE.Object3D()}
-            "intensity": 1
-            "distance": 0
-            "castShadow": false
-            "shadowCameraNear": 50
-            "shadowCameraFar": 5000
-            "shadowCameraFov": 50
-            "shadowBias": 0
-            "shadowDarkness": 0.5
-            "shadowMapWidth": 512
-            "shadowMapHeight": 512
+            "val1" : ""
+            "val2" : ""
           outputs:
-            "out": {type: "Any", val: @ob}
+            "out" : {type: "Any", val: @value}
         return $.extend(true, base_fields, fields)
-
-      remove: =>
-        delete @ob
-        super
-
-      compute: =>
-        if @fields.getField("castShadow").getValue() != @ob.castShadow
-          @trigger("RebuildAllShaders")
-        @applyFieldsToVal(@fields.inputs, @ob)
-        @fields.setField("out", @ob)
-
-    DirectionalLight: class DirectionalLight extends ThreeNodes.NodeBase
-      @node_name = 'DirectionalLight'
-      @group_name = 'Lights'
-
-      initialize: (options) =>
-        super
-        @auto_evaluate = true
-        @ob = new THREE.DirectionalLight(0xffffff)
+        
+        
+    RichTextCell: class RichTextCell extends ThreeNodes.NodeBase
+      @node_name = 'RichTextCell'
+      @group_name = 'VisTrailsSpreadsheet'
 
       getFields: =>
         base_fields = super
         fields =
           inputs:
-            "color": {type: "Color", val: new THREE.Color(0xffffff)}
-            "position": {type: "Vector3", val: new THREE.Vector3(0, 300, 0)}
-            "intensity": 1
-            "distance": 0
+            "val1" : ""
+            "val2" : ""
           outputs:
-            "out": {type: "Any", val: @ob}
+            "out" : {type: "Any", val: @value}
         return $.extend(true, base_fields, fields)
+        
+        
+    SheetReference: class SheetReference extends ThreeNodes.NodeBase
+      @node_name = 'SheetReference'
+      @group_name = 'VisTrailsSpreadsheet'
 
-      remove: =>
-        delete @ob
-        super
+      getFields: =>
+        base_fields = super
+        fields =
+          outputs:
+            "out" : {type: "Any", val: @value}
+        return $.extend(true, base_fields, fields)
+        
+        
+    SingleCellSheetReference: class SingleCellSheetReference extends ThreeNodes.NodeBase
+      @node_name = 'SingleCellSheetReference'
+      @group_name = 'VisTrailsSpreadsheet'
 
-      compute: =>
-        @applyFieldsToVal(@fields.inputs, @ob)
-        @fields.setField("out", @ob)
-
-    AmbientLight: class AmbientLight extends ThreeNodes.NodeBase
-      @node_name = 'AmbientLight'
-      @group_name = 'Lights'
-
-      initialize: (options) =>
-        super
-        @auto_evaluate = true
-        @ob = new THREE.AmbientLight(0xffffff)
+      getFields: =>
+        base_fields = super
+        fields =
+          outputs:
+            "out" : {type: "Any", val: @value}
+        return $.extend(true, base_fields, fields)      
+        
+        
+    SpreadSheetCell: class SpreadSheetCell extends ThreeNodes.NodeBase
+      @node_name = 'SpreadSheetCell'
+      @group_name = 'VisTrailsSpreadsheet'
 
       getFields: =>
         base_fields = super
         fields =
           inputs:
-            "color": {type: "Color", val: new THREE.Color(0xffffff)}
-            "position": {type: "Vector3", val: new THREE.Vector3(0, 300, 0)}
+            "val1" : ""
           outputs:
-            "out": {type: "Any", val: @ob}
+            "out" : {type: "Any", val: @value}
         return $.extend(true, base_fields, fields)
+        
+        
+    SVGCell: class SVGCell extends ThreeNodes.NodeBase
+      @node_name = 'SVGCell'
+      @group_name = 'VisTrailsSpreadsheet'
 
-      remove: =>
-        delete @ob
-        super
+      getFields: =>
+        base_fields = super
+        fields =
+          inputs:
+            "val1" : ""
+            "val2" : ""
+          outputs:
+            "out" : {type: "Any", val: @value}
+        return $.extend(true, base_fields, fields)
+        
+        
+    SVGSplitter: class SVGSplitter extends ThreeNodes.NodeBase
+      @node_name = 'SVGSplitter'
+      @group_name = 'VisTrailsSpreadsheet'
 
-      compute: =>
-        @applyFieldsToVal(@fields.inputs, @ob)
-        @fields.setField("out", @ob)
+      getFields: =>
+        base_fields = super
+        fields =
+          inputs:
+            "val1" : ""
+        return $.extend(true, base_fields, fields)
+        
+        
+    WebViewCell: class WebViewCell extends ThreeNodes.NodeBase
+      @node_name = 'WebViewCell'
+      @group_name = 'VisTrailsSpreadsheet'
+
+      getFields: =>
+        base_fields = super
+        fields =
+          inputs:
+            "val1" : ""
+            "val2" : ""
+            "val3" : ""
+          outputs:
+            "out" : {type: "Any", val: @value}
+        return $.extend(true, base_fields, fields)
+        
+        
+    XSLCell: class XSLCell extends ThreeNodes.NodeBase
+      @node_name = 'XSLCell'
+      @group_name = 'VisTrailsSpreadsheet'
+
+      getFields: =>
+        base_fields = super
+        fields =
+          inputs:
+            "val1" : ""
+            "val2" : ""
+            "val3" : ""
+          outputs:
+            "out" : {type: "Any", val: @value}
+        return $.extend(true, base_fields, fields)	

@@ -352,8 +352,8 @@ body h3 {
 input,
 button {
   width: 100%;
-  border: 1px solid #333;
-  background: #222;
+  border: 1px solid #fff;
+  background: #fff;
   font-size: 9px;
   color: #aaa;
   font-family: "Helvetica Neue", Arial, Helvetica, sans-serif;
@@ -366,16 +366,16 @@ button {
 }
 button:hover,
 button:focus {
-  background: #444;
+  background: #fff;
   color: #fff;
 }
 button:focus {
-  border: 1px solid #666;
+  border: 1px solid #fff;
 }
 select {
-  background: #222;
+  background: #fff;
   color: #aaa;
-  border: 1px solid #333;
+  border: 1px solid #fff;
   padding: 2px 3px;
   -webkit-border-radius: 3px;
   border-radius: 3px;
@@ -1601,7 +1601,7 @@ body > header h1 {
 }
 .node {
   position: absolute !important;
-  background: #222;
+  background: #fff;
   padding: 4px;
   zoom: 1;
   min-width: 80px;
@@ -1617,12 +1617,12 @@ body > header h1 {
   clear: both;
 }
 .node.ui-selecting {
-  background: #1d1d1d;
-  border: 1px solid #444;
+  background: #fafafa;
+  border: 1px solid #fff;
 }
 .node.ui-selected {
-  background: #272727;
-  border: 1px solid #555;
+  background: #fff;
+  border: 1px solid #fff;
 }
 .node .options {
   zoom: 1;
@@ -1646,11 +1646,11 @@ body > header h1 {
 }
 .node .inner-field span {
   display: inline-block;
-  width: 4px;
-  height: 4px;
+  width: 6px;
+  height: 6px;
   background: #555;
-  -webkit-border-radius: 4px;
-  border-radius: 4px;
+  -webkit-border-radius: 6px;
+  border-radius: 6px;
 }
 .node .inner-field:hover {
   color: #fff;
@@ -1660,11 +1660,11 @@ body > header h1 {
 }
 .node .field-possible-target .inner-field,
 .node .inner-field.ui-state-hover {
-  color: #aaa;
+  color: #000;
 }
 .node .field-possible-target .inner-field span,
 .node .inner-field.ui-state-hover span {
-  background: #ccc;
+  background: #000;
 }
 .node .inner-field.ui-state-hover {
   color: #ff7800;
@@ -1678,7 +1678,7 @@ body > header h1 {
 }
 .node .inputs > div,
 .node .outputs > div {
-  height: 12px;
+  height: 24px;
 }
 .node .inputs > div,
 .node .outputs > div,
