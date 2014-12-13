@@ -1622,7 +1622,7 @@ body > header h1 {
 }
 .node.ui-selected {
   background: #fff;
-  border: 1px solid #fff;
+  border: 2px solid #000;
 }
 .node .options {
   zoom: 1;
@@ -1653,7 +1653,7 @@ body > header h1 {
   border-radius: 6px;
 }
 .node .inner-field:hover {
-  color: #fff;
+  color: #000;
 }
 .node .inner-field:hover span {
   background: #fff;
@@ -1678,7 +1678,7 @@ body > header h1 {
 }
 .node .inputs > div,
 .node .outputs > div {
-  height: 24px;
+  height: 12px;
 }
 .node .inputs > div,
 .node .outputs > div,
@@ -1687,6 +1687,9 @@ body > header h1 {
   width: 100%;
   vertical-align: middle;
   line-height: 10px;
+}
+.node .outputs {
+  float: right;
 }
 .node .inputs .inner-field span {
   margin-right: 4px;

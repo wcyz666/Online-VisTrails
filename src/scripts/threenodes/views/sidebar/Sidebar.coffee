@@ -126,7 +126,7 @@ define [
           Math: []
           PostProcessing: []
           Spread: []
-          Particle: []
+          HTTP: []
           "Particle-sparks": []
           "Particle-sparks-initializers": []
           "Particle-sparks-actions": []

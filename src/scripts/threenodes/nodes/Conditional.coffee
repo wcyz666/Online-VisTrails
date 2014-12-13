@@ -17,14 +17,9 @@ define [
         fields =
           inputs:
             "val1" : false
-            "val2" : false
           outputs:
             "out" : false
         return $.extend(true, base_fields, fields)
-
-      compute: =>
-        res = @fields.getField("val1").getValue() != false && @fields.getField("val2").getValue() != false
-        @fields.setField("out", res)
 
 	
     CartesianProduct: class CartesianProduct extends ThreeNodes.NodeBase
@@ -35,7 +30,8 @@ define [
         base_fields = super
         fields =
           inputs:
-            "in": ""
+            "in0": ""
+            "in1": ""
           outputs:
             "out": {type: "Any", val: @value}
         return $.extend(true, base_fields, fields)
@@ -49,7 +45,8 @@ define [
         base_fields = super
         fields =
           inputs:
-            "in": ""
+            "in0": ""
+            "in1": ""
           outputs:
             "out": {type: "Any", val: @value}
         return $.extend(true, base_fields, fields)
@@ -63,10 +60,12 @@ define [
         base_fields = super
         fields =
           inputs:
-            "in": ""
+            "in0": ""
+            "in1": ""
           outputs:
             "out": {type: "Any", val: @value}
         return $.extend(true, base_fields, fields)
+
 
 
     Dot: class Dot extends ThreeNodes.NodeBase
@@ -77,7 +76,8 @@ define [
         base_fields = super
         fields =
           inputs:
-            "in": ""
+            "in0": ""
+            "in1": ""
           outputs:
             "out": {type: "Any", val: @value}
         return $.extend(true, base_fields, fields)
@@ -90,7 +90,8 @@ define [
         base_fields = super
         fields =
           inputs:
-            "in": ""
+            "in0": ""
+            "in1": ""
           outputs:
             "out": {type: "Any", val: @value}
         return $.extend(true, base_fields, fields)
@@ -103,10 +104,10 @@ define [
         base_fields = super
         fields =
           inputs:
-            "in": ""
-          outputs:
-            "out": {type: "Any", val: @value}
+            "in0": ""
+            "in1": ""
         return $.extend(true, base_fields, fields)
+
 
     Filter: class Filter extends ThreeNodes.NodeBase
       @node_name = 'Filter'
@@ -116,7 +117,10 @@ define [
         base_fields = super
         fields =
           inputs:
-            "in": ""
+            "in0": ""
+            "in1": ""
+            "in2": ""
+            "in3": ""
           outputs:
             "out": {type: "Any", val: @value}
         return $.extend(true, base_fields, fields)
@@ -129,7 +133,8 @@ define [
         base_fields = super
         fields =
           inputs:
-            "in": ""
+            "in0": ""
+            "in1": ""
           outputs:
             "out": {type: "Any", val: @value}
         return $.extend(true, base_fields, fields)
@@ -143,8 +148,8 @@ define [
         fields =
           inputs:
             "condition" : false
-            "val1" : {type: "Any", val: 0.0}
-            "val2" : {type: "Any", val: 1.0}
+            "true" : {type: "Any", val: 1.0}
+            "false" : {type: "Any", val: 0.0}
           outputs:
             "out" : {type: "Any", val: false}
         return $.extend(true, base_fields, fields)
@@ -152,9 +157,9 @@ define [
       compute: =>
         cond = @fields.getField("condition").getValue()
         if cond == false
-          res = @fields.getField("val1").attributes.value
+          res = @fields.getField("false").attributes.value
         else
-          res = @fields.getField("val2").attributes.value
+          res = @fields.getField("true").attributes.value
         @fields.setField("out", res)
         
 
@@ -166,7 +171,10 @@ define [
         base_fields = super
         fields =
           inputs:
-            "in": ""
+            "in0": ""
+            "in1": ""
+            "in2": ""
+            "in3": ""
           outputs:
             "out": {type: "Any", val: @value}
         return $.extend(true, base_fields, fields)
@@ -180,15 +188,10 @@ define [
         base_fields = super
         fields =
           inputs:
-            "val1" : false
-            "val2" : false
+            "val" : false
           outputs:
             "out" : false
         return $.extend(true, base_fields, fields)
-
-      compute: =>
-        res = @fields.getField("val1").getValue() != false || @fields.getField("val2").getValue() != false
-        @fields.setField("out", res)
 
 
     Sum: class Sum extends ThreeNodes.NodeBase
@@ -204,9 +207,6 @@ define [
             "out" : {type: "Any", val: @value}
         return $.extend(true, base_fields, fields)
 
-      compute: =>
-        @fields.setField("out", res)
-
 
     While: class While extends ThreeNodes.NodeBase
       @node_name = 'While'
@@ -216,8 +216,8 @@ define [
         base_fields = super
         fields =
           inputs:
+            "val0" : ""
             "val1" : ""
-            "val2" : ""
           outputs:
             "out" : {type: "Any", val: @value}
         return $.extend(true, base_fields, fields)

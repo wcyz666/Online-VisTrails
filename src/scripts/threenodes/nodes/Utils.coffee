@@ -45,6 +45,8 @@ define [
       getFields: =>
         base_fields = super
         fields =
+          inputs:
+            "in0": ""
           outputs:
             "out" : {type: "Any", val: @value}
         return $.extend(true, base_fields, fields)
