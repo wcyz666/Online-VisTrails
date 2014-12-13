@@ -258,6 +258,10 @@ define [
           when "string" then return val
         return null
         
+    Service: class Service extends NodeField
+      computeValue : (val) =>
+        return val
+        
     #Compute the value of write file
     WriteFile: class WriteFile extends NodeField
       computeValue : (val) =>
@@ -289,6 +293,13 @@ define [
           if val.constructor == THREE.StringConcatenate
             return val
         #return null
+        return val
+        
+    Integer: class Integer extends NodeField
+      computeValue : (val) =>
+        if $.type(val) == "number"
+          if val.contructor == THREE.Integer
+            return val
         return val
 
     Vector2: class Vector2 extends NodeField

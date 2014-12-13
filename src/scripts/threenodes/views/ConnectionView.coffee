@@ -15,8 +15,9 @@ define [
         super
         @container = $("#graph")
         @line = ThreeNodes.UI.svg.path().attr
-          stroke: "#555"
+          stroke: "#000"
           fill: "none"
+          'stroke-width': "2"
         # set the dom element
         @el = @line.node
         @model.bind("render", () => @render())

@@ -33,6 +33,8 @@ define [
             when ThreeNodes.fields.WriteFile then ThreeNodes.views.fields.WriteFileField
             when ThreeNodes.fields.StringConcatenate then ThreeNodes.views.fields.StringConcatenateField
             when ThreeNodes.fields.FileSink then ThreeNodes.views.fields.FileSinkField
+            #Add ServiceField input text 
+            #when ThreeNodes.fields.Service then ThreeNodes.views.fields.ServiceField
             when ThreeNodes.fields.Vector2 then ThreeNodes.views.fields.Vector2Field
             when ThreeNodes.fields.Vector3 then ThreeNodes.views.fields.Vector3Field
             when ThreeNodes.fields.Vector4 then ThreeNodes.views.fields.Vector4Field

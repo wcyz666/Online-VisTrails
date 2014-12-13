@@ -62,8 +62,8 @@ _c = 100
 
   &.ui-selected
     background: node_color + #050505
-    border: 1px solid node_color + #333
-
+    border: 2px solid #000
+      
   .options
     clearfix()
     width: 100%
@@ -83,7 +83,7 @@ _c = 100
       border-radius(field-button-size)
 
     &:hover
-      color: #fff
+      color: #000
       span
         background: #fff
 
@@ -100,7 +100,7 @@ _c = 100
   .inputs, .outputs
     color: #777
     & > div
-      height: 24px
+      height: 12px
 
   .inputs, .outputs, .center
     @extend .inline-float
@@ -109,6 +109,9 @@ _c = 100
       width: 100%
       vertical-align: middle
       line-height: 10px
+
+  .outputs
+    float: right
 
   .inputs .inner-field span
     margin-right: field-label-padding

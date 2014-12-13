@@ -100,15 +100,15 @@ define [
 				console.log fileSaver
 		# Send Data to the server
 			sendToServer: (data) =>
-				#$.ajax
-				#	type: "POST"
-				#	url: "http://localhost:8080/vistrails"
-				#	data: data
-				#	dataType: "json"
-				#	cache: false
-				#	success: (xml) ->
-				#		alert "Success!"
-				return "HelloWorld!"
+				$.ajax
+					type: "POST"
+					url: "http://0.0.0.0:8080/vistrails"
+					data: data
+					dataType: "json"
+					cache: false
+					success: (xml) ->
+						alert "Success!"
+						return xml
 
 				
 				

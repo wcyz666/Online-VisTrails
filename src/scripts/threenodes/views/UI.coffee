@@ -47,6 +47,7 @@ define [
           'stroke-dasharray': "-"
           fill: "none"
           opacity: 0
+          'stroke-width': "6"
 
         # Setup the sidebar and menu subviews
         @sidebar = new ThreeNodes.Sidebar({el: $("#sidebar")})
