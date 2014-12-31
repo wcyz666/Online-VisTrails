@@ -19,5 +19,8 @@
     "body-parser": "~1.0.0",
     "method-override": "~1.0.0"
   },
-  "engine": "node >= 0.8.x"
+  "engine": "node >= 0.8.x",
+  "devDependencies": {
+    "flightplan": "^0.5.5"
+  }
 }
