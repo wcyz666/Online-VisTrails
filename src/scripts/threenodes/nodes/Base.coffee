@@ -317,8 +317,8 @@ define [
             "in1": ""
             "in2": ""
           outputs:
+            "out": {type: "Any", val: @value}
             "out0": {type: "Any", val: @value}
-            "out1": {type: "Any", val: @value}
         return $.extend(true, base_fields, fields)
 
 
@@ -408,8 +408,8 @@ define [
         base_fields = super
         fields =
           inputs:
+            "in" : {type: "Any", val: @value}
             "in0" : {type: "Any", val: @value}
-            "in1" : {type: "Any", val: @value}
         return $.extend(true, base_fields, fields)
         
 
