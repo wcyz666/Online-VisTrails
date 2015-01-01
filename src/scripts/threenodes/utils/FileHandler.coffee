@@ -93,11 +93,10 @@ define [
 				#convert to JSON and send to Server
 				json = @getLocalJson(true)
 				res = @sendToServer(json)
-				console.log res
+				console.log res.responseText
 				bb = new BlobBuilder()
 				bb.append(res)
 				fileSaver = saveAs(bb.getBlob("application/json;charset=utf-8"), "result.json")
-				console.log fileSaver
 		# Send Data to the server
 			sendToServer: (data) =>
 				$.ajax
@@ -106,8 +105,8 @@ define [
 					data: data
 					dataType: "json"
 					cache: false
+					async: false
 					success: (xml) ->
-						alert "Success!"
 						return xml
 
 				
