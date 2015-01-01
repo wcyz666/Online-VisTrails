@@ -96,7 +96,7 @@ define [
 				console.log res.responseText
 				bb = new BlobBuilder()
 				bb.append(res)
-				fileSaver = saveAs(bb.getBlob("application/json;charset=utf-8"), "result.json")
+				#fileSaver = saveAs(bb.getBlob("application/json;charset=utf-8"), "result.json")
 		# Send Data to the server
 			sendToServer: (data) =>
 				$.ajax
