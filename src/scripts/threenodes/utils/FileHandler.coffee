@@ -95,8 +95,8 @@ define [
 				res = @sendToServer(json)
 				console.log res.responseText
 				bb = new BlobBuilder()
-				bb.append(res)
-				#fileSaver = saveAs(bb.getBlob("application/json;charset=utf-8"), "result.json")
+				bb.append(res.responseText)
+				fileSaver = saveAs(bb.getBlob("text/html;charset=utf-8"), "result.txt")
 		# Send Data to the server
 			sendToServer: (data) =>
 				$.ajax
