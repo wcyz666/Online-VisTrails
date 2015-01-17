@@ -16,3 +16,9 @@ This will automatically compile coffescript files to javascript, sass to css and
 
     cd in ThreeNodes
     grunt build
+    
+<h2>To deploy on server </h2>
+    cd in Three Nodes
+    node server.js build
+    A "dest" folder is created including the index.html file
+    Copy this folder to serve and deploy the index.html file
