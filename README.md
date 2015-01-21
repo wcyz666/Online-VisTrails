@@ -12,13 +12,12 @@ This will automatically compile coffescript files to javascript, sass to css and
     cd in ThreeNodes
     npm install -d
 
-<h2>Build / Deploy</h2>
-
-    cd in ThreeNodes
-    grunt build
+<h2> To Run in Development environment <h2?
+    cd in ThreeNodes (project folder)
+    node server.js
     
 <h2>To deploy on server </h2>
-    cd in Three Nodes
+    cd in ThreeNodes
     node server.js build
     A "dist" folder is created including the index.html file
     Copy this folder to serve and deploy the index.html file
