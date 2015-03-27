@@ -91,6 +91,7 @@ define [
 		# Execute event to give output
 			executeAndSave: () =>
 				#convert to JSON and send to Server
+				console.log "execute and save"
 				json = @getLocalJson(true)
 				res = @sendToServer(json)
 				console.log res.responseText
@@ -99,15 +100,23 @@ define [
 				fileSaver = saveAs(bb.getBlob("text/html;charset=utf-8"), "result.txt")
 		# Send Data to the server
 			sendToServer: (data) =>
+				console.log "sending to server"
 				$.ajax
 					type: "POST"
-					url: "http://0.0.0.0:8080/vistrails"
+					url: "http://0.0.0.0:9018/vistrails"
 					data: data
+					crossDomain: true
 					dataType: "json"
 					cache: false
 					async: false
 					success: (xml) ->
+						console.log "success"
 						return xml
+					error: (xml) ->
+						console.log "error case"
+						console.log xml
+						return "Error from Server"
+
 
 				
 				
