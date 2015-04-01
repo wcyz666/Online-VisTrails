@@ -12,6 +12,10 @@ define [
     Integer: class Integer extends ThreeNodes.nodes.views.NodeWithCenterTextfield
       getCenterField: () => @model.fields.getField("in")
 
+    PythonSource: class PythonSource extends ThreeNodes.nodes.views.NodeWithCenterTextfield
+      getCenterField: () => @model.fields.getField("in")
+
+
     String: class String extends ThreeNodes.nodes.views.NodeWithCenterTextfield
       getCenterField: () => @model.fields.getField("string")
       
@@ -517,6 +521,8 @@ define [
       getFields: =>
         base_fields = super
         fields =
+          inputs:
+            "in": ""
           outputs:
             "out": {type: "Any", val: @value}
         return $.extend(true, base_fields, fields)
