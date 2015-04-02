@@ -5,6 +5,7 @@ define [
   #"libs/Three",
   'cs!threenodes/utils/Utils',
   'cs!threenodes/nodes/views/NodeWithCenterTextfield',
+  'cs!threenodes/nodes/views/NodeWithCenterTextarea'
 ], (_, Backbone) ->
   #"use strict"
 
@@ -12,7 +13,7 @@ define [
     Integer: class Integer extends ThreeNodes.nodes.views.NodeWithCenterTextfield
       getCenterField: () => @model.fields.getField("in")
 
-    PythonSource: class PythonSource extends ThreeNodes.nodes.views.NodeWithCenterTextfield
+    PythonSource: class PythonSource extends ThreeNodes.nodes.views.NodeWithCenterTextarea
       getCenterField: () => @model.fields.getField("in")
 
 
