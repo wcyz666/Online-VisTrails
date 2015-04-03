@@ -12,7 +12,7 @@ This will automatically compile coffescript files to javascript, sass to css and
     cd in ThreeNodes
     npm install -d
 
-<h2> To Run in Development environment <h2?
+<h2> To Run in Development environment </h2>
     cd in ThreeNodes (project folder)
     node server.js
     
@@ -21,3 +21,8 @@ This will automatically compile coffescript files to javascript, sass to css and
     node server.js build
     A "dist" folder is created including the index.html file
     Copy this folder to serve and deploy the index.html file
+
+##  Todos
+
+* clean up: follow github: console logs and coffee generated files
+* add submit button to replace return kepress event
