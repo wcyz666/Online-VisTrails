@@ -115,6 +115,8 @@ define [
         field_is_out = (direction != "inputs")
         if $.type(value) != "object"
           value = @getFieldValueObject(value)
+        console.log value
+        console.log ThreeNodes.fields[value.type]
         field = new ThreeNodes.fields[value.type]
           name: name
           value: value.val

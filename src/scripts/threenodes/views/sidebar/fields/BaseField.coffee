@@ -3,6 +3,7 @@ define [
   'Backbone',
   "text!templates/field_sidebar_container.tmpl.html",
   'cs!threenodes/views/sidebar/SidebarTextfield',
+  'cs!threenodes/views/sidebar/SidebarTextareaField'
 ], (_, Backbone, _view_field_sidebar_container) ->
   #"use strict"
 
@@ -37,6 +38,17 @@ define [
           link_to_val: link_to_val
 
         return textField
+
+      createTextareaField: ($target, type = "float", link_to_val = true) =>
+        console.log ThreeNodes.SidebarTextfield
+        console.log ThreeNodes.SidebarTextareaField
+        textareaField = new ThreeNodes.SidebarTextareaField
+          model: @model
+          el: $target
+          type: type
+          link_to_val: link_to_val
+
+        return textareaField
 
       createSubvalTextinput: (subval, type = "float") =>
         $target = @createSidebarContainer(subval)

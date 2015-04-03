@@ -523,7 +523,7 @@ define [
         base_fields = super
         fields =
           inputs:
-            "in": ""
+            "in": {type: "Code", val:@value}
           outputs:
             "out": {type: "Any", val: @value}
         return $.extend(true, base_fields, fields)

@@ -10,6 +10,7 @@ define [
   'cs!threenodes/views/sidebar/fields/StringConcatenateField',
   'cs!threenodes/views/sidebar/fields/FileSinkField',
   'cs!threenodes/views/sidebar/fields/WriteFileField',
+  'cs!threenodes/views/sidebar/fields/CodeField'
 ], (_, Backbone) ->
   #"use strict"
 
@@ -25,10 +26,12 @@ define [
         @$el.html("<h2>#{@model.get('name')}</h2>")
         for f of @model.fields.inputs
           field = @model.fields.inputs[f]
+          console.log field
           view_class = switch field.constructor
             when ThreeNodes.fields.Bool then ThreeNodes.views.fields.BoolField
             when ThreeNodes.fields.String then ThreeNodes.views.fields.StringField
             when ThreeNodes.fields.Float then ThreeNodes.views.fields.FloatField
+            when ThreeNodes.fields.Code then ThreeNodes.views.fields.CodeField
             # Add concatenation, Write File, File,
             when ThreeNodes.fields.WriteFile then ThreeNodes.views.fields.WriteFileField
             when ThreeNodes.fields.StringConcatenate then ThreeNodes.views.fields.StringConcatenateField

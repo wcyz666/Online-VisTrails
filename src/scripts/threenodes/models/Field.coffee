@@ -223,6 +223,15 @@ define [
       onValueChanged : (val) =>
         return val
 
+    Code: class Code extends NodeField
+      computeValue : (val) =>
+        switch $.type(val)
+          when "array" then return val
+          when "number" then return val.toString
+          when "string" then return val
+        return null
+
+
     Array: class Array extends NodeField
       computeValue : (val) =>
         if !val || val == false
