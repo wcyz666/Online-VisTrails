@@ -17,18 +17,24 @@ define [
         @container = $(_.template(_view_field_textfield, @options))
         @$el.append(@container)
         @$input = $("textarea", @container)
+        @$save = $("button",@container)
 
         if @options.type == "float" && @options.link_to_val == true
           @$input.val(@model.getValue())
           @addTextfieldSlider()
         return @
 
-      linkTextfieldToVal: (f_input, type = "float") =>
+      linkTextfieldToVal: (f_input, f_save, type = "float") =>
         on_value_changed = (v) ->
           f_input.val(v)
         @model.on "value_updated", on_value_changed
 
         f_input.val(@model.getValue())
+
+        f_save.click (e) =>
+          @model.setValue(f_input.val())
+          f_save.blur()
+        ###  change this part
         f_input.keypress (e) =>
           if e.which == 13
             if type == "float"
@@ -36,7 +42,12 @@ define [
             else
               @model.setValue(f_input.val())
             f_input.blur()
+        ### 
+
         return f_input
+
+
+
 
       # TODO: maybe remove f_input param
       linkTextfieldToSubval: (f_input, subval, type = "float") =>

@@ -11,5 +11,5 @@ define [
       render: () =>
         $target = @createSidebarContainer()
         @textfield = @createTextareaField($target, "string")
-        @textfield.linkTextfieldToVal(@textfield.$input, "string")
+        @textfield.linkTextfieldToVal(@textfield.$input, @textfield.$save, "string")
         return this
