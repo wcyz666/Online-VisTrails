@@ -40,8 +40,6 @@ define [
         return textField
 
       createTextareaField: ($target, type = "float", link_to_val = true) =>
-        console.log ThreeNodes.SidebarTextfield
-        console.log ThreeNodes.SidebarTextareaField
         textareaField = new ThreeNodes.SidebarTextareaField
           model: @model
           el: $target

@@ -26,7 +26,6 @@ define [
         @$el.html("<h2>#{@model.get('name')}</h2>")
         for f of @model.fields.inputs
           field = @model.fields.inputs[f]
-          console.log field
           view_class = switch field.constructor
             when ThreeNodes.fields.Bool then ThreeNodes.views.fields.BoolField
             when ThreeNodes.fields.String then ThreeNodes.views.fields.StringField
