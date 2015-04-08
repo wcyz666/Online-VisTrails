@@ -526,6 +526,7 @@ define [
             "in": {type: "Code", val:@value}
           outputs:
             "out": {type: "Any", val: @value}
+            "self": {type: "Any", val: @value}
         return $.extend(true, base_fields, fields)
 
 
