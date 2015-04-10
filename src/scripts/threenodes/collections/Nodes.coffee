@@ -4,6 +4,7 @@ define [
   'cs!threenodes/utils/Indexer',
   'cs!threenodes/models/Node',
   'cs!threenodes/nodes/Base',
+  'cs!threenodes/nodes/Code',
   'cs!threenodes/nodes/Conditional',
   'cs!threenodes/nodes/Geometry',
   'cs!threenodes/nodes/Lights',

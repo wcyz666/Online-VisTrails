@@ -24,5 +24,11 @@ This will automatically compile coffescript files to javascript, sass to css and
 
 ##  Todos
 
-* clean up: follow github: console logs and coffee generated files
-* add submit button to replace return kepress event
+* ~~clean up: follow github: console logs and coffee generated files~~
+* ~~add submit button to replace return kepress event~~
+* add filter for user defined field
+* refactor the NodeSidebarView: extract the add input port form out as 
+	a stand alone view
+* clean up the nodeWithCentralTextfield tmpl
+* onCodeUpdate is useful? Maybe a better way to determine
+* add type informatin to the json result
