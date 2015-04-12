@@ -67,7 +67,6 @@ define [
           @.$el.append(addFieldView.$el)
         return @
 
-
       
 
 
