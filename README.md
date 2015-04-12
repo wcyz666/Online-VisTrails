@@ -1,8 +1,9 @@
 CMUOnlineWorkflow
 =================
 
-Online VisTrails UI
-<h2>Development setup</h2>
+# Online VisTrails UI
+
+## Development setup
 
 This will automatically compile coffescript files to javascript, sass to css and haml to html.
 
@@ -12,11 +13,11 @@ This will automatically compile coffescript files to javascript, sass to css and
     cd in ThreeNodes
     npm install -d
 
-<h2> To Run in Development environment </h2>
+## To Run in Development environment 
     cd in ThreeNodes (project folder)
     node server.js
     
-<h2>To deploy on server </h2>
+## To deploy on server
     cd in ThreeNodes
     node server.js build
     A "dist" folder is created including the index.html file
@@ -27,8 +28,9 @@ This will automatically compile coffescript files to javascript, sass to css and
 * ~~clean up: follow github: console logs and coffee generated files~~
 * ~~add submit button to replace return kepress event~~
 * add filter for user defined field
-* refactor the NodeSidebarView: extract the add input port form out as 
-	a stand alone view
-* clean up the nodeWithCentralTextfield tmpl
+* ~~refactor the NodeSidebarView: extract the add input port form out as 
+	a stand alone view~~
+* ~~clean up the nodeWithCentralTextfield tmpl~~
 * onCodeUpdate is useful? Maybe a better way to determine
-* add type informatin to the json result
+* add type informatin to the json result(custom fields already have this
+	informatin, add for normal fields if needed in the future)

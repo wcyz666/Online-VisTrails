@@ -68,30 +68,6 @@ define [
         return @
 
 
-        #   @$el.append("<h2>Add custom fields</h2>")
-        #   $inputs_form = $('<form class="dynamic-fields__form"></form>')
-        #   $inputs_form.append('<input type="text" name="key" placeholder="key" />')
-        #   $inputs_form.append('<input type="text" name="type" placeholder="type" />')
-        #   $inputs_form.append('<input type="submit" value="Add input field" />')
-        #   @$el.append($inputs_form)
-
-        #   $inputs_form.on 'submit', (e) ->
-        #     e.preventDefault()
-        #     $form = $(this)
-        #     $key = $(this).find('[name="key"]')
-        #     $type = $(this).find('[name="type"]')
-        #     key = $.trim($key.val())
-        #     type = $.trim($type.val())
-        #     if key != ''
-        #       # add this to the model custom fields definition and rerender the view.
-        #       self.model.addCustomField(key, type, 'inputs')
-
-        #       # Simply rerender the sidebar.
-        #       # todo: maybe do something like remove the render.
-        #       self.render()
-
-        # return @
-
       
 
 
