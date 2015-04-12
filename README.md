@@ -27,7 +27,7 @@ This will automatically compile coffescript files to javascript, sass to css and
 
 * ~~clean up: follow github: console logs and coffee generated files~~
 * ~~add submit button to replace return kepress event~~
-* add filter for user defined field
+* ~~add filter for user defined field~~
 * ~~refactor the NodeSidebarView: extract the add input port form out as 
 	a stand alone view~~
 * ~~clean up the nodeWithCentralTextfield tmpl~~
