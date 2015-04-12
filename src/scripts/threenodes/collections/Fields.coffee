@@ -115,24 +115,26 @@ define [
         field_is_out = (direction != "inputs")
         if $.type(value) != "object"
           value = @getFieldValueObject(value)
-        field = new ThreeNodes.fields[value.type]
-          name: name
-          value: value.val
-          possibilities: value.values
-          node: @node
-          is_output: field_is_out
-          default: value.default
-          subfield: value.subfield
-          indexer: @indexer
+        field = {}
+        if ThreeNodes.fields[value.type]
+          field = new ThreeNodes.fields[value.type]
+            name: name
+            value: value.val
+            possibilities: value.values
+            node: @node
+            is_output: field_is_out
+            default: value.default
+            subfield: value.subfield
+            indexer: @indexer
 
-        target = if field.get("is_output") == false then "inputs" else "outputs"
-        field_index = field.get("name")
-        if field.subfield
-          # In group nodes we want to have a unique field index
-          field_index += "-" + field.subfield.node.get("nid")
-        @[target][field_index] = field
-        @add(field)
-        field
+          target = if field.get("is_output") == false then "inputs" else "outputs"
+          field_index = field.get("name")
+          if field.subfield
+            # In group nodes we want to have a unique field index
+            field_index += "-" + field.subfield.node.get("nid")
+          @[target][field_index] = field
+          @add(field)
+        return field
 
       addFields: (fields_array) =>
         for dir of fields_array
