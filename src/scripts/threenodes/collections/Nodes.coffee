@@ -142,7 +142,7 @@ define [
             if invalidNodes[upnode.attributes["nid"]] && !upnode.delays_output
               evaluateSubGraph(upnode)
           if node.dirty || node.auto_evaluate
-            node.compute()
+            node.compute&&node.compute()
             node.dirty = false
             node.fields.setFieldInputUnchanged()
 

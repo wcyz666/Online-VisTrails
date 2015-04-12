@@ -13,8 +13,8 @@ define [
     Integer: class Integer extends ThreeNodes.nodes.views.NodeWithCenterTextfield
       getCenterField: () => @model.fields.getField("in")
 
-    PythonSource: class PythonSource extends ThreeNodes.nodes.views.NodeWithCenterTextarea
-      getCenterField: () => @model.fields.getField("in")
+    # PythonSource: class PythonSource extends ThreeNodes.nodes.views.NodeWithCenterTextarea
+    #   getCenterField: () => @model.fields.getField("in")
 
 
     String: class String extends ThreeNodes.nodes.views.NodeWithCenterTextfield
@@ -511,13 +511,13 @@ define [
         return $.extend(true, base_fields, fields)
 
         
-    PythonSource: class PythonSource extends ThreeNodes.NodeBase
-      @node_name = 'PythonSource'
-      @group_name = 'BasicModules'
+    # PythonSource: class PythonSource extends ThreeNodes.NodeBase
+    #   @node_name = 'PythonSource'
+    #   @group_name = 'BasicModules'
 
-      initialize: (options) =>
-        super
-        @value = ""
+    #   initialize: (options) =>
+    #     super
+    #     @value = ""
 		
       getFields: =>
         base_fields = super
