@@ -62,8 +62,13 @@ define [
           addFieldView = new ThreeNodes.AddFieldFormView() 
           addFieldView.on "addField", (obj)=>
             if obj.key != ''
-              this.model.addCustomField(obj.key, obj.type, 'inputs')
-              this.render()
+              flag = 1
+              if obj.portType == 'input' then obj.portType = 'inputs'
+              else if obj.portType == 'output' then obj.portType = 'outputs'
+              else flag = 0
+              if flag
+                this.model.addCustomField(obj.key, obj.type, obj.portType)
+                this.render()
           @.$el.append(addFieldView.$el)
         return @
 

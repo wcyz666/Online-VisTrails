@@ -34,3 +34,4 @@ This will automatically compile coffescript files to javascript, sass to css and
 * onCodeUpdate is useful? Maybe a better way to determine
 * add type informatin to the json result(custom fields already have this
 	informatin, add for normal fields if needed in the future)
+* what is the fieldButton doing?
