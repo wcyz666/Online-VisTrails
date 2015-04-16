@@ -1446,6 +1446,24 @@ body > header h1 {
 #sidebar input:hover {
   border: 1px solid #3a3a3a;
 }
+#sidebar input[type="radio"] {
+  padding: 4px 7px;
+  width: 10px;
+  border: 1px solid #333;
+  background: #fff;
+  -webkit-box-shadow: #222 0 1px 14px false inset;
+  box-shadow: #222 0 1px 14px false inset;
+}
+#sidebar input[type="radio"]:focus {
+  outline: 0;
+  border: 1px solid #444;
+  -webkit-box-shadow: #222 0 1px 6px false inset;
+  box-shadow: #222 0 1px 6px false inset;
+  background: #222;
+}
+#sidebar input[type="radio"]:hover {
+  border: 1px solid #3a3a3a;
+}
 #sidebar .slider-container {
   position: relative;
   width: 202px;

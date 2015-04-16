@@ -27,7 +27,7 @@ define [
         $form = @.$el
         $key = $form.find('[name="name"]')
         $type = $form.find('[name="type"]')
-        $portType = $form.find('[name="in_out"]')
+        $portType = $form.find('[name="portType"]:checked')
         key = $.trim($key.val())
         type = $.trim($type.val())
         portType = $.trim($portType.val())
