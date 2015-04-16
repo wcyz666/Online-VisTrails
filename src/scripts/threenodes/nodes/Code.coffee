@@ -10,13 +10,17 @@ define [
   #"use strict"
 
   namespace "ThreeNodes.nodes.views",
-    PythonSource: class PythonSource extends ThreeNodes.nodes.views.NodeWithCenterTextarea
+    CodeBase: class CodeBase extends ThreeNodes.nodes.views.NodeWithCenterTextarea
       getCenterField: () => @model.fields.getField("in")
 
+    PythonSource: class PythonSource extends CodeBase
+
+    MatlabSource: class MatlabSource extends CodeBase
+
   namespace "ThreeNodes.nodes.models",
-    PythonSource: class PythonSource extends ThreeNodes.NodeBase
-      @node_name = 'PythonSource'
-      @group_name = 'BasicModules'
+    CodeBase: class CodeBase extends ThreeNodes.NodeBase
+      @node_name = ''
+      @group_name = ''
 
       initialize: (options) =>
         @custom_fields = {inputs: {}, outputs: {}}
@@ -65,6 +69,20 @@ define [
         fields = $.extend(true, fields, @custom_fields)
         return $.extend(true, base_fields, fields)
 
+    PythonSource: class PythonSource extends CodeBase
+      @node_name = 'PythonSource'
+      @group_name = 'BasicModules'
+
+      initialize: (options) =>
+        super
+
+
+    MatlabSource: class MatlabSource extends CodeBase
+      @node_name = 'MatlabSource'
+      @group_name = 'BasicModules'
+
+      initialize: (options) =>
+        super
 
 
       
