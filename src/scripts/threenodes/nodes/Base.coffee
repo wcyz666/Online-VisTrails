@@ -519,15 +519,15 @@ define [
     #     super
     #     @value = ""
 		
-      getFields: =>
-        base_fields = super
-        fields =
-          inputs:
-            "in": {type: "Code", val:@value}
-          outputs:
-            "out": {type: "Any", val: @value}
-            "self": {type: "Any", val: @value}
-        return $.extend(true, base_fields, fields)
+      # getFields: =>
+      #   base_fields = super
+      #   fields =
+      #     inputs:
+      #       "in": {type: "Code", val:@value}
+      #     outputs:
+      #       "out": {type: "Any", val: @value}
+      #       "self": {type: "Any", val: @value}
+      #   return $.extend(true, base_fields, fields)
 
 
     SmartSource: class SmartSource extends ThreeNodes.NodeBase

@@ -36,8 +36,9 @@ This will automatically compile coffescript files to javascript, sass to css and
 	informatin, add for normal fields if needed in the future)
 * what is the fieldButton doing?
 * ~~refactor the add port form, input output option might be a radio button~~
-* add matlab source module
-* mod: refactor the python source port name to script
+* ~~add matlab source module~~
+* ~~mod: refactor the python source port name to script~~
+* add: text input to file module
 
 
 

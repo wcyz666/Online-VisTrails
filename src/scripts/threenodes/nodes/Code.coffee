@@ -11,7 +11,7 @@ define [
 
   namespace "ThreeNodes.nodes.views",
     CodeBase: class CodeBase extends ThreeNodes.nodes.views.NodeWithCenterTextarea
-      getCenterField: () => @model.fields.getField("in")
+      getCenterField: () => @model.fields.getField("code")
 
     PythonSource: class PythonSource extends CodeBase
 
@@ -30,7 +30,7 @@ define [
         @value = ""
 
         @onCodeUpdate()
-        field = @fields.getField("in")
+        field = @fields.getField("code")
         field.on "value_updated", @onCodeUpdate
 
       loadCustomFields: (options) =>
@@ -62,7 +62,7 @@ define [
         base_fields = super
         fields =
           inputs:
-            "in" : {type: "Code", val:@value}
+            "code" : {type: "Code", val:@value}
           outputs:
             "out" : {type: "Any", val:@value}
         # merge with custom fields
