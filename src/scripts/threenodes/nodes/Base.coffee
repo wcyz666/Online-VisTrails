@@ -22,6 +22,9 @@ define [
       
     Service: class Service extends ThreeNodes.nodes.views.NodeWithCenterTextfield
       getCenterField: () => @model.fields.getField("in")
+
+    File: class File extends ThreeNodes.nodes.views.NodeWithCenterTextfield
+      getCenterField: () => @model.fields.getField("in")
    
   namespace "ThreeNodes.nodes.models",
     Integer: class Integer extends ThreeNodes.NodeNumberSimple
