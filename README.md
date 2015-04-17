@@ -38,7 +38,10 @@ This will automatically compile coffescript files to javascript, sass to css and
 * ~~refactor the add port form, input output option might be a radio button~~
 * ~~add matlab source module~~
 * ~~mod: refactor the python source port name to script~~
-* add: text input to file module
+* ~~add: text input to file module~~
 
+## sync with backend
 
+* File module: in
+* Code module: in: {name: code, type: Code}, out: {name: out, type: Any}
 
