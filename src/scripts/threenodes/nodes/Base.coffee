@@ -23,8 +23,8 @@ define [
     Service: class Service extends ThreeNodes.nodes.views.NodeWithCenterTextfield
       getCenterField: () => @model.fields.getField("in")
 
-    File: class File extends ThreeNodes.nodes.views.NodeWithCenterTextfield
-      getCenterField: () => @model.fields.getField("in")
+    # File: class File extends ThreeNodes.nodes.views.NodeWithCenterTextfield
+    #   getCenterField: () => @model.fields.getField("in")
    
   namespace "ThreeNodes.nodes.models",
     Integer: class Integer extends ThreeNodes.NodeNumberSimple
@@ -206,11 +206,9 @@ define [
       getFields: =>
         base_fields = super
         fields =
-          inputs:
-            "in": ""
+          inputs: {}
           outputs:
-            "out0": {type: "Any", val: @value}
-            "out1": {type: "Any", val: @value}
+            "fileName": {type: "String", val: @value}
         return $.extend(true, base_fields, fields)
 
 
