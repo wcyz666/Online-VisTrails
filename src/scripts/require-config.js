@@ -24,7 +24,8 @@ require.config({
     DotScreenPass: 'libs/three-extras/js/postprocessing/DotScreenPass',
     ShaderExtras: 'libs/three-extras/js/ShaderExtras',
     timeline: "libs/timeline.js/timeline",
-    'timeline-gui': "libs/timeline.js/timeline-gui"
+    'timeline-gui': "libs/timeline.js/timeline-gui",
+    'jqueryForm':'libs/jquery.form.min'
   },
   shim: {
     'Three':{
@@ -55,6 +56,10 @@ require.config({
       deps: ['jquery'],
       exports: "jquery"
     },
+    'jqueryForm':{
+      deps: ['jquery'],
+      exports: "jqueryForm"
+    },
     'timeline-gui': {
       deps: ['timeline'],
     },
@@ -68,6 +73,6 @@ require.config({
     'ShaderPass': ['Three'],
     'MaskPass': ['Three'],
     'DotScreenPass': ['Three'],
-    'ShaderExtras': ['Three']
+    'ShaderExtras': ['Three'],
   }
 });

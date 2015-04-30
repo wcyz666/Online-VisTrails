@@ -5,7 +5,8 @@ define [
   #"libs/Three",
   'cs!threenodes/utils/Utils',
   'cs!threenodes/nodes/views/NodeWithCenterTextfield',
-  'cs!threenodes/nodes/views/NodeWithCenterTextarea'
+  'cs!threenodes/nodes/views/NodeWithCenterTextarea',
+  'cs!threenodes/nodes/views/NodeWithUpload'
 ], (_, Backbone) ->
   #"use strict"
 
@@ -25,6 +26,8 @@ define [
 
     # File: class File extends ThreeNodes.nodes.views.NodeWithCenterTextfield
     #   getCenterField: () => @model.fields.getField("in")
+
+    File: class File extends ThreeNodes.nodes.views.NodeWithUpload
    
   namespace "ThreeNodes.nodes.models",
     Integer: class Integer extends ThreeNodes.NodeNumberSimple
