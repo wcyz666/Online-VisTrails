@@ -1277,12 +1277,18 @@ body > header {
   margin-top: -107px;
   height: 184px;
   width: 394px;
-  background: url("../assets/images/logo.png") 0 0 no-repeat;
   position: absolute;
+  background-color: #333;
 }
 body > header h1 {
-  text-indent: -9999px;
-  font-size: 0;
+  font-size: 1.8em;
+  text-align: center;
+  padding-top: 3.5em;
+  color: #d0d0d0;
+}
+body > header h2 {
+  font-size: 1em;
+  text-align: center;
 }
 #sidebar {
   overflow: hidden;

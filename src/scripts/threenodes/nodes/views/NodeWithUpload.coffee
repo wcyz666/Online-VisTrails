@@ -27,6 +27,7 @@ define [
         # $form.appendTo($(".center", @$el))
         # console.log _template
         # console.log $(_.template(_template)())
+        console.log @model.constructor
         $form = $(_.template(_template)())
         $form.submit ->
           $form.ajaxSubmit {
