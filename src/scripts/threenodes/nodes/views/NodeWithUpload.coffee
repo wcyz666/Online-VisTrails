@@ -10,24 +10,9 @@ define [
 
   namespace "ThreeNodes.nodes.views",
     NodeWithUpload: class NodeWithUpload extends ThreeNodes.NodeView
-      # note that what you extend is not directly Backbone.View, this might 
-      # be why the template dosen't override the super class's
-      # and the extend you use is from coffeescript, not backbone, might also be
-      # the problem?
+
       initialize: (options) =>
         super
-        # todo: finish this one
-        # console.log _template
-        # console.log _.template(_template)
-        # console.log @template
-        # console.log @el
-        # console.log "the form"
-        # $form = $(_.template(_template))
-        # console.log $form
-        # $form.appendTo($(".center", @$el))
-        # console.log _template
-        # console.log $(_.template(_template)())
-        console.log @model.constructor
         $form = $(_.template(_template)())
         $form.submit ->
           $form.ajaxSubmit {
