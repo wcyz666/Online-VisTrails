@@ -103,7 +103,7 @@ define [
 				console.log "sending to server"
 				$.ajax
 					type: "POST"
-					url: "http://0.0.0.0:9018/vistrails"
+					url: "/vistrails"
 					data: data
 					crossDomain: true
 					dataType: "json"
