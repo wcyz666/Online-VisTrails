@@ -25,6 +25,12 @@ This will automatically compile coffescript files to javascript, sass to css and
 
 ##  Todos
 
+* abstract module
+
+* file module button style should change according to state
+* add path module -- need backend 
+* file module save file name
+
 * ~~clean up: follow github: console logs and coffee generated files~~
 * ~~add submit button to replace return kepress event~~
 * ~~add filter for user defined field~~

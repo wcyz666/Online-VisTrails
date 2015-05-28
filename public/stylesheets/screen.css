@@ -1779,6 +1779,9 @@ body > header h2 {
   margin-top: 6px;
   margin-left: 2px;
 }
+#uploadForm {
+  width: 150px;
+}
 body {
   background: #6d6d6d;
 }
