@@ -101,12 +101,14 @@ define [
 		# Send Data to the server
 			sendToServer: (data) =>
 				console.log "sending to server"
+				console.log JSON.stringify(data)
 				$.ajax
 					type: "POST"
-					url: "http://0.0.0.0:9018/vistrails"
+					url: "/vistrails"#"http://einstein.sv.cmu.edu:9018/vistrails"
 					data: data
-					crossDomain: true
-					dataType: "json"
+					contentType: 'application/json'
+					# crossDomain: true
+					# dataType: "json"
 					cache: false
 					async: false
 					success: (xml) ->
