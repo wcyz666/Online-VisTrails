@@ -1273,22 +1273,24 @@ body.player-mode #webgl-window canvas {
 body > header {
   left: 50%;
   top: 50%;
-  margin-left: -197px;
-  margin-top: -107px;
-  height: 184px;
-  width: 394px;
+  margin-left: -240px;
+  margin-top: -172.8px;
+  height: 345.6px;
+  width: 480px;
+  background: url("../assets/images/logo.png") 0 0 no-repeat;
   position: absolute;
-  background-color: #333;
 }
 body > header h1 {
   font-size: 1.8em;
   text-align: center;
   padding-top: 3.5em;
   color: #d0d0d0;
+  text-indent: -9999px;
 }
 body > header h2 {
   font-size: 1em;
   text-align: center;
+  text-indent: -9999px;
 }
 #sidebar {
   overflow: hidden;
