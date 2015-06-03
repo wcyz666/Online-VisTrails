@@ -71,7 +71,7 @@ define [
 
     PythonSource: class PythonSource extends CodeBase
       @node_name = 'PythonSource'
-      @group_name = 'BasicModules'
+      @group_name = 'Code'
 
       initialize: (options) =>
         super
@@ -79,7 +79,7 @@ define [
 
     MatlabSource: class MatlabSource extends CodeBase
       @node_name = 'MatlabSource'
-      @group_name = 'BasicModules'
+      @group_name = 'Code'
 
       initialize: (options) =>
         super
