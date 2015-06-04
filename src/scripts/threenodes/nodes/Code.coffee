@@ -25,6 +25,7 @@ define [
       initialize: (options) =>
         @custom_fields = {inputs: {}, outputs: {}}
         @loadCustomFields(options)
+        @add_filed = true
 
         super
         @value = ""

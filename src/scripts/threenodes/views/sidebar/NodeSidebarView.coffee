@@ -57,9 +57,10 @@ define [
         # if @model.custom_fields then @displayFields(@model.custom_fields.inputs)
 
         ### 
-          special case for python source: add the add_custom_field_form to the sidebar
+          special case for nodes whose ports can 
+          be configured: add the add_custom_field_form to the sidebar
         ###
-        if @model.onCodeUpdate
+        if @model.add_filed
           addFieldView = new ThreeNodes.AddFieldFormView() 
           addFieldView.on "addField", (obj)=>
             if obj.key != ''

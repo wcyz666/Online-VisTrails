@@ -26,6 +26,7 @@ This will automatically compile coffescript files to javascript, sass to css and
 ##  Todos
 
 * abstract module
+* fix connect port: after one port is connected to a port that is not supposed to be connected, it behaves weirdly
 
 * file module button style should change according to state
 * add path module -- need backend 
