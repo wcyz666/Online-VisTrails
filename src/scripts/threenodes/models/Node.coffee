@@ -261,3 +261,54 @@ define [
         @v_out.setValue res
         true
 
+    NodeCustom: class NodeCustom extends NodeBase
+      initialize: (options) =>
+        @custom_fields = {inputs: {}, outputs: {}}
+        @loadCustomFields(options)
+
+        super
+        @value = ""
+
+        # @onCodeUpdate()
+        # field = @fields.getField("code")
+        # field.on "value_updated", @onCodeUpdate
+
+      loadCustomFields: (options) =>
+        if !options.custom_fields then return
+        @custom_fields = $.extend(true, @custom_fields, options.custom_fields)
+
+      # onCodeUpdate: (code = "") =>
+      #   console.log code
+      #   # try
+      #   #   @function = new Function(code)
+      #   # catch error
+      #   #   console.warn error
+      #   #   @function = false
+
+      addCustomField: (key, type, direction = 'inputs') =>
+        field = {key: key, type: type}
+        # Add the field to the a variable for saving.
+        @custom_fields[direction][key] = field
+
+        value = false
+        @fields.addField(key, {value: value, type: type, default: false}, direction)
+
+      toJSON: () =>
+        res = super
+        res.custom_fields = @custom_fields
+        return res
+
+      getFields: =>
+        base_fields = super
+        # to override based on this
+        fields = {}
+        # merge with custom fields
+        fields = $.extend(true, fields, @custom_fields)
+        return $.extend(true, base_fields, fields)
+
+
+
+
+
+      
+

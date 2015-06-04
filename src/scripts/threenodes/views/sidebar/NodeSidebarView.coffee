@@ -52,7 +52,8 @@ define [
 
         # the custom_fields are not real fields; just objects wrapping the type 
         # and name property; their constructors are Object. So calling displayFields
-        # on them won't achieve anything. 
+        # on them won't achieve anything. BTW, fields itself already includes custom 
+        # fields.
         # if @model.custom_fields then @displayFields(@model.custom_fields.inputs)
 
         ### 

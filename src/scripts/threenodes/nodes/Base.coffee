@@ -45,6 +45,17 @@ define [
           outputs:
             "out0": {type: "Any", val: @value}
         return $.extend(true, base_fields, fields)
+        
+    Abstract: class Abstract extends ThreeNodes.NodeCustom
+      @node_name = 'Abstract'
+      @group_name = 'BasicModules'
+
+      initialize: (options) =>
+        super
+        @value=""
+
+
+
 
     Service: class Service extends ThreeNodes.NodeBase
       @node_name = 'Service'
