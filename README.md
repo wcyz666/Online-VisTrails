@@ -26,6 +26,9 @@ This will automatically compile coffescript files to javascript, sass to css and
 ##  Todos
 
 * abstract module
+    * ~~change the style of the abstract module~~
+    * change the style when selected
+
 * fix connect port: after one port is connected to a port that is not supposed to be connected, it behaves weirdly
 
 * file module button style should change according to state
@@ -38,7 +41,7 @@ This will automatically compile coffescript files to javascript, sass to css and
 * ~~refactor the NodeSidebarView: extract the add input port form out as 
 	a stand alone view~~
 * ~~clean up the nodeWithCentralTextfield tmpl~~
-* onCodeUpdate is useful? Maybe a better way to determine
+* ~~onCodeUpdate --> add_filed~~
 * add type informatin to the json result(custom fields already have this
 	informatin, add for normal fields if needed in the future)
 * what is the fieldButton doing?
@@ -46,11 +49,8 @@ This will automatically compile coffescript files to javascript, sass to css and
 * ~~add matlab source module~~
 * ~~mod: refactor the python source port name to script~~
 * ~~add: text input to file module~~
-* add file module
-    - file class
 
 ## sync with backend
 
 * ~~File module: in~~
-* Code module: in: {name: code, type: Code}, out: {name: out, type: Any}
 

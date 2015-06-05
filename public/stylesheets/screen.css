@@ -1542,6 +1542,7 @@ body > header h2 {
 }
 .width-150,
 .node-Number,
+.node-Abstract,
 .node-String,
 .node-Random,
 .node-Timer,
@@ -1757,6 +1758,9 @@ body > header h2 {
 }
 .node-Group .outputs h3 {
   text-align: right;
+}
+.node-Abstract {
+  background: #bdbdde;
 }
 .node-WebGLRenderer .inputs {
   width: 100%;

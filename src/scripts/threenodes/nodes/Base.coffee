@@ -52,6 +52,7 @@ define [
 
       initialize: (options) =>
         super
+        # @abstract = true
         @value=""
 
 

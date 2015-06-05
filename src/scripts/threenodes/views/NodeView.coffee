@@ -54,6 +54,7 @@ define [
 
         # Add other dynamic classes
         @$el.addClass("node-" + @model.typename())
+        console.log("node-" + @model.typename())
 
       render: () =>
         @$el.css
