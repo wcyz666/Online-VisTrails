@@ -265,7 +265,8 @@ define [
       initialize: (options) =>
         @custom_fields = {inputs: {}, outputs: {}}
         @loadCustomFields(options)
-        @add_filed = true
+        #flag for the sidebar to load the add_field form
+        @add_field = true
         super
         @value = ""
 

@@ -26,12 +26,11 @@ This will automatically compile coffescript files to javascript, sass to css and
 ##  Todos
 
 * abstract module
-    * ~~change the style of the abstract module~~
-    * change the style when selected: refactor the node_width, consider adding
-        a similar variable for abstract module
-
+    * add description: as an input port that cannot be connected
 
 * fix connect port: after one port is connected to a port that is not supposed to be connected, it behaves weirdly
+
+* might refactor code to inherit from NodeCustom class
 
 * file module button style should change according to state
 * add path module -- need backend 

@@ -60,7 +60,7 @@ define [
           special case for nodes whose ports can 
           be configured: add the add_custom_field_form to the sidebar
         ###
-        if @model.add_filed
+        if @model.add_field
           addFieldView = new ThreeNodes.AddFieldFormView() 
           addFieldView.on "addField", (obj)=>
             if obj.key != ''
