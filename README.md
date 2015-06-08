@@ -27,7 +27,9 @@ This will automatically compile coffescript files to javascript, sass to css and
 
 * abstract module
     * ~~change the style of the abstract module~~
-    * change the style when selected
+    * change the style when selected: refactor the node_width, consider adding
+        a similar variable for abstract module
+
 
 * fix connect port: after one port is connected to a port that is not supposed to be connected, it behaves weirdly
 

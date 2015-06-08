@@ -161,8 +161,12 @@ animation_color = #f00
   @extend .ratio-25-50-25
   
 .node-Abstract
-  @extend .width-150
-  background: #BDBDDE
+  @extend .width-120
+  background: node_abstract_color
+
+  &.ui-selected
+    background: node_abstract_color + #050505
+    border: 2px solid #000
 
 
 

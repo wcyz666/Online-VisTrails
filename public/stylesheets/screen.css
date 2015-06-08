@@ -1534,6 +1534,7 @@ body > header h2 {
   width: 80px;
 }
 .width-120,
+.node-Abstract,
 .node-ThreeMesh,
 .node-Camera,
 .node.node-Texture,
@@ -1542,7 +1543,6 @@ body > header h2 {
 }
 .width-150,
 .node-Number,
-.node-Abstract,
 .node-String,
 .node-Random,
 .node-Timer,
@@ -1761,6 +1761,10 @@ body > header h2 {
 }
 .node-Abstract {
   background: #bdbdde;
+}
+.node-Abstract.ui-selected {
+  background: #c2c2e3;
+  border: 2px solid #000;
 }
 .node-WebGLRenderer .inputs {
   width: 100%;
