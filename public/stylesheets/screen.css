@@ -1534,7 +1534,6 @@ body > header h2 {
   width: 80px;
 }
 .width-120,
-.node-Abstract,
 .node-ThreeMesh,
 .node-Camera,
 .node.node-Texture,
@@ -1553,6 +1552,7 @@ body > header h2 {
 }
 .width-200,
 .node-Group,
+.node-Abstract,
 .node-LFO,
 .node-Mp3Input,
 .type-Three,
