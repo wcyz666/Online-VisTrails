@@ -28,6 +28,10 @@ define [
     #   getCenterField: () => @model.fields.getField("in")
 
     File: class File extends ThreeNodes.nodes.views.NodeWithUpload
+
+    # getField accepts the name of the port as param
+    Abstract: class Abstract extends ThreeNodes.nodes.views.NodeWithCenterTextarea
+      getCenterField: ()=> @model.fields.getField("description")
    
   namespace "ThreeNodes.nodes.models",
     Integer: class Integer extends ThreeNodes.NodeNumberSimple
@@ -54,6 +58,13 @@ define [
         super
         # @abstract = true
         @value=""
+
+      getFields: =>
+        base_fields = super
+        fields =
+          inputs:
+            "description": ""
+        return $.extend(true, base_fields, fields)
 
 
 

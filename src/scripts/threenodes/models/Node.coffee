@@ -270,21 +270,11 @@ define [
         super
         @value = ""
 
-        # @onCodeUpdate()
-        # field = @fields.getField("code")
-        # field.on "value_updated", @onCodeUpdate
 
       loadCustomFields: (options) =>
         if !options.custom_fields then return
         @custom_fields = $.extend(true, @custom_fields, options.custom_fields)
 
-      # onCodeUpdate: (code = "") =>
-      #   console.log code
-      #   # try
-      #   #   @function = new Function(code)
-      #   # catch error
-      #   #   console.warn error
-      #   #   @function = false
 
       addCustomField: (key, type, direction = 'inputs') =>
         field = {key: key, type: type}

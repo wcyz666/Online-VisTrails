@@ -29,4 +29,5 @@ define [
         @
 
       # View class can override this. Possibility to reuse this class
+      # accept the name of the field as param
       getCenterField: () => @model.fields.getField("in")
