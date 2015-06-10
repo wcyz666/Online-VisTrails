@@ -1766,6 +1766,12 @@ body > header h2 {
   background: #c2c2e3;
   border: 2px solid #000;
 }
+.node-Abstract input,
+.node-Abstract button {
+  background: #bdbdde;
+  border: 1px solid #bdbdde;
+  color: #aaa;
+}
 .node-WebGLRenderer .inputs {
   width: 100%;
 }
