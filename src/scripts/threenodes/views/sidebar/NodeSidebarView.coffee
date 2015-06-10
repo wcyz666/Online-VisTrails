@@ -11,6 +11,7 @@ define [
   'cs!threenodes/views/sidebar/fields/FileSinkField',
   'cs!threenodes/views/sidebar/fields/WriteFileField',
   'cs!threenodes/views/sidebar/fields/CodeField',
+  'cs!threenodes/views/sidebar/fields/LongTextField',
   'cs!threenodes/views/sidebar/AddFieldFormView'
 ], (_, Backbone) ->
   #"use strict"
@@ -28,6 +29,7 @@ define [
           view_class = switch field.constructor
             when ThreeNodes.fields.Bool then ThreeNodes.views.fields.BoolField
             when ThreeNodes.fields.String then ThreeNodes.views.fields.StringField
+            when ThreeNodes.fields.LongText then ThreeNodes.views.fields.LongTextField
             when ThreeNodes.fields.Float then ThreeNodes.views.fields.FloatField
             when ThreeNodes.fields.Code then ThreeNodes.views.fields.CodeField
             # Add concatenation, Write File, File,
@@ -42,6 +44,7 @@ define [
             else false
 
           if view_class != false
+            console.log(view_class)
             view = new view_class
               model: field
             @$el.append(view.el)

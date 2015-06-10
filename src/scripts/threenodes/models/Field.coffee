@@ -231,7 +231,6 @@ define [
           when "string" then return val
         return null
 
-
     Array: class Array extends NodeField
       computeValue : (val) =>
         if !val || val == false
@@ -266,6 +265,8 @@ define [
           when "number" then return val.toString
           when "string" then return val
         return null
+
+    LongText: class String extends String
         
     Service: class Service extends NodeField
       computeValue : (val) =>

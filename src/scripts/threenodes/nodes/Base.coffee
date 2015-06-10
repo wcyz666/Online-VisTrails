@@ -63,7 +63,7 @@ define [
         base_fields = super
         fields =
           inputs:
-            "description": ""
+            "description": {type:"LongText", val: @value}
         return $.extend(true, base_fields, fields)
 
 
