@@ -17,11 +17,12 @@ define [
 
         @$el.html("")
         self = this
+        # @j: use the timeline lib, create an instance
         @timeline = new Timeline
           element: @el
           displayOnlySelected: true
           colorBackground: "#333"
-          colorButtonBackground: "#222222"
+          colorButtonBackground: "#FF0000"
           colorButtonStroke: "#777"
           colorScrollbar: "#373737"
           colorScrollbarThumb: "#555"
@@ -32,6 +33,7 @@ define [
           colorTimeTicker: "#f00"
           colorTrackBottomLine: "#555"
           colorPropertyLabel: "#999"
+          # @j: override some of the event handlers
           onGuiSave: () =>
             self.trigger "OnUIResize"
           setPropertyValue: (propertyAnim, t) ->
@@ -61,6 +63,7 @@ define [
 
         @trigger("OnUIResize")
 
+      # @j: a wrapper method for the selectAnims in tiemline lib,
       selectAnims: (nodes) =>
         if @timeline
           @timeline.selectAnims(nodes)
