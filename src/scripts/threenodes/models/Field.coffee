@@ -51,6 +51,7 @@ define [
       initialize: (options) =>
         self = this
         # Keep reference to some variables
+        # the node that owns the field
         @node = options.node
         @subfield = options.subfield
         indexer = options.indexer || ThreeNodes.NodeField.STATIC_INDEXER

@@ -31,6 +31,7 @@ define [
 
         # Define some utility variables, used internally
         @is_animated = false
+        # connections starting out from this node
         @out_connections = []
 
         # Keep reference of some variables
@@ -178,6 +179,9 @@ define [
           x: @get('x')
           y: @get('y')
           fields: @fields.toJSON()
+        #@del
+        console.log @constructor
+        console.log @out_connections
         res
 
       applyFieldsToVal: (afields, target, exceptions = [], index) =>
