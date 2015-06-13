@@ -163,9 +163,18 @@ define [
         # Bind events to it
         @nodes.bindTimelineEvents(@timelineView)
         @nodes.on("remove", @timelineView.onNodeRemove)
+        @timelineView.on("runWorkflow", @runWorkflow)
         if @ui then @ui.onUiWindowResize()
 
+        # @j this is App, not timelineview, why return this?
         return this
+
+      runWorkflow: () =>
+        console.log @nodes
+        startNodes = @nodes.findStartNodes()
+        console.log "start nodes are"
+        console.log startNodes
+
 
       setDisplayMode: (is_player = false) =>
         if @ui then @ui.setDisplayMode(is_player)

@@ -48,7 +48,9 @@ define [
               return val[0]
           onTrackRebuild: () => @trigger("trackRebuild")
           onStop: () => @trigger("stopSound")
-          onPlay: (time) => @trigger("startSound", time)
+          onPlay: (time) => 
+            @trigger("startSound", time)
+            @trigger("runWorkflow")
 
         Timeline.globalInstance = @timeline
 

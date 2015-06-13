@@ -73,6 +73,12 @@ define [
         @showNodeAnimation()
         return this
 
+      # there is a problem though, nodes like code do have input fields, but can be the start
+      # should check if the node has field that is the from_field, or the node is a from_node
+      # might consider add a is_from_field: boolean to each field model
+      isStartNode: =>
+        !@fields.hasToFields()
+ 
       typename: => String(@constructor.name)
 
       onFieldsCreated: () =>

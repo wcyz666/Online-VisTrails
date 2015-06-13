@@ -83,6 +83,11 @@ define [
             res[res.length] = c.to_field.node
         res
 
+      hasToFields: =>
+        @.find (field)=>
+          return field.isToField()
+
+
       hasUnconnectedInputs: () =>
         for fname, f of @inputs
           if f.connections.length == 0
