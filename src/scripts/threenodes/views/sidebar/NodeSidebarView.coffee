@@ -44,7 +44,7 @@ define [
             else false
 
           if view_class != false
-            console.log(view_class)
+            #console.log(view_class)
             view = new view_class
               model: field
             @$el.append(view.el)

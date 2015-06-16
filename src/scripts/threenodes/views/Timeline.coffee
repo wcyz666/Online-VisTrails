@@ -22,7 +22,7 @@ define [
           element: @el
           displayOnlySelected: true
           colorBackground: "#333"
-          colorButtonBackground: "#FF0000"
+          colorButtonBackground: "#222222"
           colorButtonStroke: "#777"
           colorScrollbar: "#373737"
           colorScrollbarThumb: "#555"

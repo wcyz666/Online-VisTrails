@@ -66,7 +66,7 @@ define [
             from_field: field1
             to_field: field2
 
-
+      #j @return: [] of start node models
       findStartNodes: ()=>
         #j workaroud of declaring variables in coffeescript
         startNodes = []

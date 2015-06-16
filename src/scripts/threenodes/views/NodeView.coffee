@@ -38,11 +38,21 @@ define [
         @model.on("node:renderConnections", @renderConnections)
         @model.on("node:showAnimations", @highlighAnimations)
         @model.on("node:addSelectedClass", @addSelectedClass)
+        @model.on("run", @run)
+        @model.on("stop", @stop)
 
         # Render the node and "post init" the model
         @render()
 
         #@model.postInit()
+
+      #j add css class to indicate this node run
+      run: =>
+        @$el.addClass("state-run")
+
+      #j remove css class of running
+      stop: =>
+        @$el.removeClass("state-run")
 
       makeElement: () =>
         # Compile the template file
@@ -54,7 +64,6 @@ define [
 
         # Add other dynamic classes
         @$el.addClass("node-" + @model.typename())
-        console.log("node-" + @model.typename())
 
       render: () =>
         @$el.css

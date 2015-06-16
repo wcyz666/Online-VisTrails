@@ -26,6 +26,11 @@ define [
           test: false
           player_mode: false
         @settings = $.extend(settings, options)
+        #j some other properties
+        # boolean: true for running, false for not running, may add other states in the future
+        @workflow_state = false
+        # []: nodes that are currently running
+        @running_nodes = []
 
         # Define renderer mouseX/Y for use in utils.Mouse node for instance
         ThreeNodes.renderer =
@@ -166,14 +171,40 @@ define [
         @timelineView.on("runWorkflow", @runWorkflow)
         if @ui then @ui.onUiWindowResize()
 
-        # @j this is App, not timelineview, why return this?
+        #j this is App, not timelineview, why return this?
         return this
 
-      runWorkflow: () =>
-        console.log @nodes
-        startNodes = @nodes.findStartNodes()
-        console.log "start nodes are"
-        console.log startNodes
+      #j start running the workflow if it is not running, 
+      # run next node if it is
+      runWorkflow: =>
+        if !@workflow_state
+          @startRunningWorkflow()
+        else
+          @runNext()
+
+
+      startRunningWorkflow: =>
+        # start_nodes: [] of node models
+        start_nodes = @nodes.findStartNodes()
+        for node in start_nodes
+          node.run()
+        @workflow_state = true
+        @running_nodes = start_nodes
+
+      runNext: =>
+        nodes_to_run = []
+        for node in @running_nodes
+          # get nodes to run next
+          nodes_to_run = nodes_to_run.concat node.next()
+          # stop current running
+          node.stop()
+
+        # run nodes_to_run
+        for node in nodes_to_run
+          node.run()
+        # update running nodes
+        @running_nodes = nodes_to_run
+
 
 
       setDisplayMode: (is_player = false) =>
