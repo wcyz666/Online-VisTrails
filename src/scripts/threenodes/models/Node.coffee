@@ -73,6 +73,31 @@ define [
         @showNodeAnimation()
         return this
 
+      #j run this node module, which is part of the whole workflow
+      run: =>
+        @trigger("run")
+
+      #j stop running
+      stop: =>
+        @trigger("stop")
+
+
+      #j @return: true if is start node
+      isStartNode: =>
+        !@fields.hasToFields()
+
+      #j return: [] of nodes to run next
+      next: =>
+        # local []
+        to_nodes = []
+        for c in @out_connections
+          to_nodes.push c.to_field.node
+        return to_nodes
+
+
+
+
+ 
       typename: => String(@constructor.name)
 
       onFieldsCreated: () =>
@@ -179,9 +204,6 @@ define [
           x: @get('x')
           y: @get('y')
           fields: @fields.toJSON()
-        #@del
-        console.log @constructor
-        console.log @out_connections
         res
 
       applyFieldsToVal: (afields, target, exceptions = [], index) =>

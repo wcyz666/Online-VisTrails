@@ -31,7 +31,7 @@ define [
 
     # getField accepts the name of the port as param
     Abstract: class Abstract extends ThreeNodes.nodes.views.NodeWithCenterTextarea
-      getCenterField: ()=> @model.fields.getField("context")
+      getCenterField: ()=> @model.fields.getField("author")
    
   namespace "ThreeNodes.nodes.models",
     Integer: class Integer extends ThreeNodes.NodeNumberSimple
@@ -63,7 +63,7 @@ define [
         base_fields = super
         fields =
           inputs:
-            "context": {type:"LongText", val: @value}
+            "author": {type:"LongText", val: @value}
         return $.extend(true, base_fields, fields)
 
 

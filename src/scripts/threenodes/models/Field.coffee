@@ -76,6 +76,10 @@ define [
         if @get("fid") == -1
           @set("fid", indexer.getUID())
 
+      isToField: =>
+        for c in @connections
+          if c.to_field is @ then return true
+
       remove: () =>
         delete @on_value_update_hooks
         delete @node

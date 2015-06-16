@@ -17,6 +17,7 @@ define [
 
         @$el.html("")
         self = this
+        # @j: use the timeline lib, create an instance
         @timeline = new Timeline
           element: @el
           displayOnlySelected: true
@@ -32,6 +33,7 @@ define [
           colorTimeTicker: "#f00"
           colorTrackBottomLine: "#555"
           colorPropertyLabel: "#999"
+          # @j: override some of the event handlers
           onGuiSave: () =>
             self.trigger "OnUIResize"
           setPropertyValue: (propertyAnim, t) ->
@@ -46,7 +48,9 @@ define [
               return val[0]
           onTrackRebuild: () => @trigger("trackRebuild")
           onStop: () => @trigger("stopSound")
-          onPlay: (time) => @trigger("startSound", time)
+          onPlay: (time) => 
+            @trigger("startSound", time)
+            @trigger("runWorkflow")
 
         Timeline.globalInstance = @timeline
 
@@ -61,6 +65,7 @@ define [
 
         @trigger("OnUIResize")
 
+      # @j: a wrapper method for the selectAnims in tiemline lib,
       selectAnims: (nodes) =>
         if @timeline
           @timeline.selectAnims(nodes)

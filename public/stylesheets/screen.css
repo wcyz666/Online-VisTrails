@@ -1793,6 +1793,18 @@ body > header h2 {
   margin-top: 6px;
   margin-left: 2px;
 }
+.state-run {
+  background: #a3e6c4;
+}
+.state-run.ui-selected {
+  background: #a8ebc9;
+}
+.state-run input,
+.state-run button {
+  background: #a3e6c4;
+  border: 1px solid #a3e6c4;
+  color: #aaa;
+}
 #uploadForm {
   width: 150px;
 }
