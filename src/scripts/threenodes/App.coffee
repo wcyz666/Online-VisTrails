@@ -198,12 +198,18 @@ define [
           nodes_to_run = nodes_to_run.concat node.next()
           # stop current running
           node.stop()
+        # if the end of workflow, change the workflow_state
+        if !nodes_to_run.length
+          @workflow_state = false
+        # else continue running
+        else
+          # run nodes_to_run
+          for node in nodes_to_run
+            node.run()
+          # update running nodes
+          @running_nodes = nodes_to_run
 
-        # run nodes_to_run
-        for node in nodes_to_run
-          node.run()
-        # update running nodes
-        @running_nodes = nodes_to_run
+
 
 
 
