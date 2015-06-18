@@ -29,9 +29,6 @@ define [
 
     File: class File extends ThreeNodes.nodes.views.NodeWithUpload
 
-    # getField accepts the name of the port as param
-    Abstract: class Abstract extends ThreeNodes.nodes.views.NodeWithCenterTextarea
-      getCenterField: ()=> @model.fields.getField("author")
    
   namespace "ThreeNodes.nodes.models",
     Integer: class Integer extends ThreeNodes.NodeNumberSimple
@@ -68,12 +65,6 @@ define [
 
         @value = ""
 
-      getFields: =>
-        base_fields = super
-        fields =
-          inputs:
-            "author": {type:"LongText", val: @value}
-        return $.extend(true, base_fields, fields)
 
       setContext: (obj)=>
         @context = obj

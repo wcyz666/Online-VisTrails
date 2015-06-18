@@ -1438,7 +1438,7 @@ body > header h2 {
 }
 #sidebar input {
   padding: 4px 7px;
-  width: 188px;
+  width: 90%;
   border: 1px solid #333;
   background: #fff;
   -webkit-box-shadow: #222 0 1px 14px false inset;
@@ -1761,6 +1761,7 @@ body > header h2 {
 }
 .node-Abstract {
   background: #bdbdde;
+  min-height: 50px;
 }
 .node-Abstract.ui-selected {
   background: #c2c2e3;
