@@ -24,6 +24,7 @@ define [
         
       onSubmit: (e) =>
         e.preventDefault()
+        @$el.find("[type='submit']").blur()
         $form = @.$el
         $key = $form.find('[name="name"]')
         $type = $form.find('[name="type"]')

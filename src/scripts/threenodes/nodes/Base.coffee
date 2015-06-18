@@ -56,8 +56,17 @@ define [
 
       initialize: (options) =>
         super
-        # @abstract = true
-        @value=""
+        #j it's an object, not primitive; so we don't put it in
+        # defaults. Should fire events for each of them mannually
+        # @todo: inherit context from workflow context
+        @context = 
+          author: ""
+          affiliation: ""
+          purpose: ""
+          description: ""
+          keywords: ""
+
+        @value = ""
 
       getFields: =>
         base_fields = super
@@ -66,6 +75,15 @@ define [
             "author": {type:"LongText", val: @value}
         return $.extend(true, base_fields, fields)
 
+      setContext: (obj)=>
+        @context = obj
+        console.log @context
+        # fire change events mannually if needed
+
+      toJSON: ()=>
+        res = super
+        res.context = @context
+        return res
 
 
 

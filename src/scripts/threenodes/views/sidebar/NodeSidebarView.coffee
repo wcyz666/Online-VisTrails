@@ -12,7 +12,10 @@ define [
   'cs!threenodes/views/sidebar/fields/WriteFileField',
   'cs!threenodes/views/sidebar/fields/CodeField',
   'cs!threenodes/views/sidebar/fields/LongTextField',
-  'cs!threenodes/views/sidebar/AddFieldFormView'
+  'cs!threenodes/views/sidebar/AddFieldFormView',
+  'cs!threenodes/views/sidebar/ContextFormView',
+  # 'cs!threenodes/nodes/Base'
+
 ], (_, Backbone) ->
   #"use strict"
 
@@ -59,6 +62,7 @@ define [
         # fields.
         # if @model.custom_fields then @displayFields(@model.custom_fields.inputs)
 
+
         ### 
           special case for nodes whose ports can 
           be configured: add the add_custom_field_form to the sidebar
@@ -71,7 +75,17 @@ define [
                 this.model.addCustomField(obj.key, obj.type, obj.portType)
                 this.render()
           @.$el.append(addFieldView.$el)
+
+        # add context form for abstract nodes
+        if @model instanceof ThreeNodes.nodes.models.Abstract
+          contextFormView = new ThreeNodes.ContextFormView()
+          contextFormView.on "setContext", (obj)=>
+            @model.setContext obj
+          @.$el.append contextFormView.$el
         return @
+
+
+
 
       
 

@@ -21,6 +21,8 @@ define [
         y: 0
         name: ""
 
+
+
       initialize: (options) =>
         super
 
