@@ -9,7 +9,7 @@ define [
   ### AddFieldFormView ###
   namespace "ThreeNodes",
     AddFieldFormView: class AddFieldFormView extends Backbone.View
-      tagName: "form"
+      tagName: "fieldset"
       template: _.template(_template)
       initialize: (options) ->
         super
@@ -23,9 +23,10 @@ define [
         return @
         
       onSubmit: (e) =>
+        console.log "triggered"
         e.preventDefault()
         @$el.find("[type='submit']").blur()
-        $form = @.$el
+        $form = @.$el.find("form")
         $key = $form.find('[name="name"]')
         $type = $form.find('[name="type"]')
         $portType = $form.find('[name="portType"]:checked')

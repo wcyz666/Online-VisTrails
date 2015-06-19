@@ -1395,7 +1395,6 @@ body > header h2 {
   font-weight: bold;
   border-bottom: 1px solid #444;
   padding-bottom: 3px;
-  color: #eee;
 }
 #tab-attribute h3 {
   margin-left: 0;
@@ -1471,6 +1470,11 @@ body > header h2 {
 }
 #sidebar input[type="radio"]:hover {
   border: 1px solid #3a3a3a;
+}
+#sidebar fieldset {
+  margin: 10px 0px;
+  padding: 4px;
+  border: 1px solid #444;
 }
 #sidebar .slider-container {
   position: relative;

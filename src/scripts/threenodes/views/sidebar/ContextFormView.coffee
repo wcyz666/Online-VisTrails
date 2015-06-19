@@ -8,7 +8,7 @@ define [
 
   namespace "ThreeNodes",
     ContextFormView: class ContextFormView extends Backbone.View
-      tagName: "form"
+      tagName: "fieldset"
       template: _.template(_template)
       initialize: (options) ->
         super
@@ -23,9 +23,9 @@ define [
         
       onSubmit: (e) =>
         e.preventDefault()
-        @$el.find("button").blur();
+        @$el.find("button").blur()
         # gather form data
-        $form = @.$el
+        $form = @.$el.find("form")
         $inputs = $form.find('input')
         formData = {}
         $inputs.each ()->
