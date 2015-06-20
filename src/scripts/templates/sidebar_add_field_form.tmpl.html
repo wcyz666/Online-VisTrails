@@ -1,9 +1,17 @@
 <legend>Add Port</legend>
 <form>
-	<input type="text" name="name" placeholder="key" />
-	<input type="text" name="type" placeholder="type" />
-	<input type="radio" name="portType" value="inputs" /> Input
-	<input type="radio" name="portType" value="outputs" /> Output
-	<input type="submit" value="Add Port" />
+	<div>
+		<input type="radio" name="portType" value="inputs" /> Input
+		<input type="radio" name="portType" value="outputs" /> Output
+	</div>
+	<div>
+		<label for="name">Port Name</label>
+		<input type="text" name="name" id="name" placeholder="name" />
+	</div>
+	<div>
+		<label for="type">Port Type</label>
+		<input type="text" name="type" id="type" placeholder="type" />
+	</div>
+	<button type="submit">Add</button>
 </form>
 

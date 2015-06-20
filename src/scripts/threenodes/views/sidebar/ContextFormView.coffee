@@ -30,6 +30,8 @@ define [
         formData = {}
         $inputs.each ()->
           formData[this.name] = this.value
+        $textarea = $form.find("textarea")
+        formData[$textarea.prop("name")] = $textarea.val()
         # trigger event and send form data
         @.trigger("setContext", formData);
 

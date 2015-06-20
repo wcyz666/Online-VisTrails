@@ -120,6 +120,13 @@ audio:not([controls]),
 [hidden] {
   display: none;
 }
+textarea {
+  font-weight: inherit;
+  font-style: inherit;
+  font-family: inherit;
+  font-size: 100%;
+  vertical-align: baseline;
+}
 body {
   font-size: 11px;
   font-family: "Helvetica Neue", Arial, Helvetica, sans-serif;
@@ -350,7 +357,8 @@ body h3 {
   text-align: right;
 }
 input,
-button {
+button,
+textarea {
   width: 100%;
   border: 1px solid #fff;
   background: #fff;
@@ -1432,26 +1440,38 @@ body > header h2 {
   position: relative;
   overflow: visible;
 }
-.input-container > textarea {
-  width: 95%;
-}
-#sidebar input {
+#sidebar input,
+#sidebar textarea {
+  margin: 4px 0px;
   padding: 4px 7px;
-  width: 90%;
   border: 1px solid #333;
   background: #fff;
   -webkit-box-shadow: #222 0 1px 14px false inset;
   box-shadow: #222 0 1px 14px false inset;
 }
-#sidebar input:focus {
+#sidebar input:focus,
+#sidebar textarea:focus {
   outline: 0;
   border: 1px solid #444;
   -webkit-box-shadow: #222 0 1px 6px false inset;
   box-shadow: #222 0 1px 6px false inset;
   background: #222;
 }
-#sidebar input:hover {
+#sidebar input:hover,
+#sidebar textarea:hover {
   border: 1px solid #3a3a3a;
+}
+#sidebar input {
+  width: 10em;
+}
+#sidebar textarea {
+  width: 90%;
+}
+#sidebar label {
+  padding: 5px;
+  float: left;
+  width: 6em;
+  cursor: pointer;
 }
 #sidebar input[type="radio"] {
   padding: 4px 7px;
@@ -1470,6 +1490,9 @@ body > header h2 {
 }
 #sidebar input[type="radio"]:hover {
   border: 1px solid #3a3a3a;
+}
+#sidebar input[type="submit"] {
+  width: 60px;
 }
 #sidebar fieldset {
   margin: 10px 0px;
