@@ -23,7 +23,6 @@ define [
         return @
         
       onSubmit: (e) =>
-        console.log "triggered"
         e.preventDefault()
         @$el.find("[type='submit']").blur()
         $form = @.$el.find("form")

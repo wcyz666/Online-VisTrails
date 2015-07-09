@@ -32,6 +32,8 @@ define [
           this.attributes[key] = value
           return this
 
+        #j if setting attrs other than value, call super
+        # we have a seperate method setValue that will call this one
         super
 
       load: (data) =>
@@ -217,7 +219,6 @@ define [
         self = this
         if $.type(val) == "array"
           return _.map(val, (n) -> self.computeValue(n))
-
         return @computeValue(val)
 
   namespace "ThreeNodes.fields",
@@ -228,11 +229,15 @@ define [
       onValueChanged : (val) =>
         return val
 
+
+
     Code: class Code extends NodeField
+      #j might be to normalize the value passed in
+      # can read array, number and string as input value of code
       computeValue : (val) =>
         switch $.type(val)
           when "array" then return val
-          when "number" then return val.toString
+          when "number" then return val.toString()
           when "string" then return val
         return null
 
@@ -267,7 +272,7 @@ define [
       computeValue : (val) =>
         switch $.type(val)
           when "array" then return val
-          when "number" then return val.toString
+          when "number" then return val.toString()
           when "string" then return val
         return null
 
@@ -310,12 +315,6 @@ define [
         #return null
         return val
         
-    Integer: class Integer extends NodeField
-      computeValue : (val) =>
-        if $.type(val) == "number"
-          if val.contructor == THREE.Integer
-            return val
-        return val
 
     Vector2: class Vector2 extends NodeField
       computeValue : (val) =>

@@ -29,6 +29,7 @@ define [
       displayFields: (fields) =>
         for f of fields
           field = fields[f]
+          #j check the constructor for class type
           view_class = switch field.constructor
             when ThreeNodes.fields.Bool then ThreeNodes.views.fields.BoolField
             when ThreeNodes.fields.String then ThreeNodes.views.fields.StringField
@@ -71,6 +72,7 @@ define [
           addFieldView = new ThreeNodes.AddFieldFormView() 
           addFieldView.on "addField", (obj)=>
             if obj.key != ''
+              # this port type is not the port type in the page
               if obj.portType == 'inputs' || obj.portType == 'outputs'
                 this.model.addCustomField(obj.key, obj.type, obj.portType)
                 this.render()

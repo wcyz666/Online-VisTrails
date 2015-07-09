@@ -59,6 +59,7 @@ define [
         # Create the fields collections
         @fields = new ThreeNodes.FieldsCollection(false, {node: this, indexer: @indexer})
 
+
         # Call onFieldsCreated so that nodes can alias fields
         @onFieldsCreated()
 
@@ -73,6 +74,7 @@ define [
           @loadAnimation()
 
         @showNodeAnimation()
+
         return this
 
       #j run this node module, which is part of the whole workflow
@@ -306,7 +308,7 @@ define [
 
       addCustomField: (key, type, direction = 'inputs') =>
         field = {key: key, type: type}
-        # Add the field to the a variable for saving.
+        # Add the field to a variable for saving.
         @custom_fields[direction][key] = field
 
         value = false

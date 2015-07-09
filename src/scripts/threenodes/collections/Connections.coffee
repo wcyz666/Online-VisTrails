@@ -28,6 +28,8 @@ define [
       # turn the object into a model if it isn't(it calls _isModel() internally to 
       # decide if this is a model)
 
+      #j it might call the connection model constructor to construct the model 
+
       create: (model, options) =>
         if !options then options = {}
         model.indexer = @indexer
