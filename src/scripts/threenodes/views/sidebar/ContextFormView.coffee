@@ -27,11 +27,12 @@ define [
         # gather form data
         $form = @.$el.find("form")
         $inputs = $form.find('input')
+        $textareas = $form.find('textarea')
         formData = {}
         $inputs.each ()->
           formData[this.name] = this.value
-        $textarea = $form.find("textarea")
-        formData[$textarea.prop("name")] = $textarea.val()
+        $textareas.each ()->
+          formData[this.name] = this.value
         # trigger event and send form data
         @.trigger("setContext", formData);
 
