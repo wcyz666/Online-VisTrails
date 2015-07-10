@@ -358,7 +358,8 @@ body h3 {
 }
 input,
 button,
-textarea {
+textarea,
+select {
   width: 100%;
   border: 1px solid #fff;
   background: #fff;
@@ -1441,7 +1442,8 @@ body > header h2 {
   overflow: visible;
 }
 #sidebar input,
-#sidebar textarea {
+#sidebar textarea,
+#sidebar select {
   margin: 4px 0px;
   padding: 4px 7px;
   border: 1px solid #333;
@@ -1450,7 +1452,8 @@ body > header h2 {
   box-shadow: #222 0 1px 14px false inset;
 }
 #sidebar input:focus,
-#sidebar textarea:focus {
+#sidebar textarea:focus,
+#sidebar select:focus {
   outline: 0;
   border: 1px solid #444;
   -webkit-box-shadow: #222 0 1px 6px false inset;
@@ -1458,10 +1461,12 @@ body > header h2 {
   background: #222;
 }
 #sidebar input:hover,
-#sidebar textarea:hover {
+#sidebar textarea:hover,
+#sidebar select:hover {
   border: 1px solid #3a3a3a;
 }
-#sidebar input {
+#sidebar input,
+#sidebar select {
   width: 10em;
 }
 #sidebar textarea {
