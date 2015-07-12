@@ -173,6 +173,8 @@ define [
         if @subfield
           res.nid = @subfield.node.get("nid")
 
+        
+
         # Help avoid cyclic value
         val = @get("value")
         val_type = jQuery.type(val)
@@ -185,8 +187,13 @@ define [
             res.val = val
 
         # add props if any
-        if @has("props")
-          res.props = @get("props")
+        if @has("data")
+          res.data = @get "data"
+        if @has("dataset")
+          res.dataset  = @get "dataset"
+        if @has("datatype")
+          res.datatype = @get "datatype"
+
 
         return res
 

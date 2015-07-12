@@ -141,7 +141,7 @@ define [
             default: value.default
             subfield: value.subfield
             indexer: @indexer
-          #j props is optional
+          #j props is optional; keep models flat!
           if props then field.set(props)
 
           target = if field.get("is_output") == false then "inputs" else "outputs"
@@ -149,6 +149,7 @@ define [
           if field.subfield
             # In group nodes we want to have a unique field index
             field_index += "-" + field.subfield.node.get("nid")
+          #j keep a shallow copy of the fields in this collection
           @[target][field_index] = field
           #j backbone add
           @add(field)

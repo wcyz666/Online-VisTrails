@@ -314,6 +314,7 @@ define [
         value = null
         @fields.addField(name, {type: type, val: value, default: false}, direction, props)
 
+      #j convert to JSON object, not json string
       toJSON: () =>
         res = super
         res.custom_fields = @custom_fields
