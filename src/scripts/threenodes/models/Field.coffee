@@ -169,11 +169,13 @@ define [
         res =
           name: @get("name")
 
+        #j should add type?
+        res.type = @get("type")
+
         # Add the node nid for fields that are part of subnodes (group)
         if @subfield
           res.nid = @subfield.node.get("nid")
 
-        
 
         # Help avoid cyclic value
         val = @get("value")
@@ -193,7 +195,6 @@ define [
           res.dataset  = @get "dataset"
         if @has("datatype")
           res.datatype = @get "datatype"
-
 
         return res
 

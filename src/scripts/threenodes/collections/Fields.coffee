@@ -133,6 +133,7 @@ define [
           field = new ThreeNodes.fields[value.type]
             #j pass initial values of attrs, which will be called set on
             name: name
+            type: value.type
             value: value.val
             # props: props
             possibilities: value.values
