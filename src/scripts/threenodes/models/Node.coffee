@@ -306,17 +306,18 @@ define [
         @custom_fields = $.extend(true, @custom_fields, options.custom_fields)
 
 
-      addCustomField: (key, type, direction = 'inputs') =>
-        field = {key: key, type: type}
+      addCustomField: (key, type, direction = 'inputs', props) =>
+        field = {key: key, type: type, props: props}
         # Add the field to a variable for saving.
         @custom_fields[direction][key] = field
 
-        value = false
-        @fields.addField(key, {value: value, type: type, default: false}, direction)
+        value = null
+        @fields.addField(key, {type: type, val: value, default: false}, direction, props)
 
       toJSON: () =>
         res = super
         res.custom_fields = @custom_fields
+        console.log @custom_fields.inputs.test.props
         return res
 
       getFields: =>

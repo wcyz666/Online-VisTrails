@@ -117,7 +117,8 @@ define [
         @invoke "removeConnections"
 
 
-      addField: (name, value, direction = "inputs") =>
+      #j props is optional
+      addField: (name, value, direction = "inputs", props) =>
         #j out0, {type: "Any", val: 0}, "inputs"
         f = false
         field_is_out = (direction != "inputs")
@@ -133,12 +134,15 @@ define [
             #j pass initial values of attrs, which will be called set on
             name: name
             value: value.val
+            # props: props
             possibilities: value.values
             node: @node
             is_output: field_is_out
             default: value.default
             subfield: value.subfield
             indexer: @indexer
+          #j props is optional
+          if props then field.set(props)
 
           target = if field.get("is_output") == false then "inputs" else "outputs"
           field_index = field.get("name")

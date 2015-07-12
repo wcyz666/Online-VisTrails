@@ -184,6 +184,10 @@ define [
           if val.constructor == THREE.StringConcatenate val.constructor == THREE.Vector2 || val.constructor == THREE.Vector3 || val.constructor == THREE.Vector4 || val.constructor == THREE.Color
             res.val = val
 
+        # add props if any
+        if @has("props")
+          res.props = @get("props")
+
         return res
 
       renderConnections: () =>

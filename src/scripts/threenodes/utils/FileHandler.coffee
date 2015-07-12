@@ -32,9 +32,6 @@ define [
 				fileSaver = saveAs(bb.getBlob("text/plain;charset=utf-8"), "nodes.js")
 
 			getLocalJson: (stringify = true) =>
-				#@del
-				console.log "@nodes.models"
-				console.log(@nodes.models)
 				res =
 					uid: @nodes.indexer.getUID(false)
 					nodes: jQuery.map(@nodes.models, (n, i) -> n.toJSON())

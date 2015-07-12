@@ -74,8 +74,12 @@ define [
             if obj.key != ''
               # this port type is not the port type in the page
               if obj.portType == 'inputs' || obj.portType == 'outputs'
-                this.model.addCustomField(obj.key, obj.type, obj.portType)
-                this.render()
+                props = 
+                  "data": obj.data
+                  "datatype": obj.datatype
+                  "dataset": obj.dataset
+                this.model.addCustomField(obj.name, obj.type, obj.portType, props)
+                this.render()                
           @.$el.append(addFieldView.$el)
 
         # add context form for abstract nodes
