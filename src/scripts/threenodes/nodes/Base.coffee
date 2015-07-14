@@ -65,12 +65,8 @@ define [
         #j it's an object, not primitive; so we don't put it in
         # defaults. Should fire events for each of them mannually
         # @todo: inherit context from workflow context
-        @context = 
-          author: ""
-          affiliation: ""
-          purpose: ""
-          description: ""
-          keywords: ""
+        @context = options.context
+        @toJSON()
 
 
 

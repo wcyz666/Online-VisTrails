@@ -7,6 +7,7 @@ define [
   'cs!threenodes/views/sidebar/Sidebar',
   'cs!threenodes/views/MenuBar',
   'cs!threenodes/views/Breadcrumb',
+  'cs!threenodes/views/DialogView',
   "RequestAnimationFrame",
   "Raphael",
   "libs/jquery.contextMenu",
@@ -29,6 +30,7 @@ define [
 
         @settings = options.settings
         @is_grabbing = false
+        @appContext = options.appContext
 
         # Bind events
         $(window).resize(@onUiWindowResize)
@@ -52,6 +54,8 @@ define [
         # Setup the sidebar and menu subviews
         @sidebar = new ThreeNodes.Sidebar({el: $("#sidebar")})
         @initMenubar()
+        @dialogView = new ThreeNodes.DialogView()
+        @dialogView.setElement(this.$("#dialog")).render()
 
         # Set the layout and show application
         @initLayout()
@@ -95,7 +99,7 @@ define [
             dx = ui.position.left + $("#container-wrapper").scrollLeft() - offset.left - 10
             dy = ui.position.top + $("#container-wrapper").scrollTop() - container.scrollTop() - offset.top
             #debugger
-            self.trigger("CreateNode", {type: nodename, x: dx, y: dy, definition: definition})
+            self.trigger("CreateNode", {type: nodename, x: dx, y: dy, definition: definition, context: self.appContext})
             $("#sidebar").show()
 
         return this

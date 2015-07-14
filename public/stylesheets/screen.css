@@ -1527,6 +1527,45 @@ body > header h2 {
 #sidebar .slider-container a.ui-slider-handle:focus {
   outline: 0;
 }
+.ui-dialog input,
+.ui-dialog textarea {
+  margin: 4px 0px;
+  padding: 4px 7px;
+  border: 1px solid #333;
+  background: #6d6d6d;
+  -webkit-box-shadow: #222 0 1px 14px false inset;
+  box-shadow: #222 0 1px 14px false inset;
+}
+.ui-dialog input:focus,
+.ui-dialog textarea:focus {
+  outline: 0;
+  border: 1px solid #444;
+  -webkit-box-shadow: #222 0 1px 6px false inset;
+  box-shadow: #222 0 1px 6px false inset;
+  background: #222;
+}
+.ui-dialog input:hover,
+.ui-dialog textarea:hover {
+  border: 1px solid #3a3a3a;
+}
+.ui-dialog input,
+.ui-dialog select {
+  width: 10em;
+}
+.ui-dialog textarea {
+  width: 90%;
+}
+.ui-dialog button {
+  background: #474747;
+  border: 1px solid #474747;
+  color: #fff;
+}
+.ui-dialog label {
+  padding: 5px;
+  float: left;
+  width: 6em;
+  cursor: pointer;
+}
 .definition {
   zoom: 1;
   padding: 3px 10px;

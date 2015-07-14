@@ -32,6 +32,13 @@ define [
         # []: nodes that are currently running
         @running_nodes = []
 
+        @context =
+          author: ""
+          affiliation: ""
+          keywords: ""
+          purpose: ""
+          description: ""
+
         # Define renderer mouseX/Y for use in utils.Mouse node for instance
         ThreeNodes.renderer =
           mouseX: 0
@@ -120,6 +127,7 @@ define [
           @ui = new ThreeNodes.UI
             el: $("body")
             settings: @settings
+            appContext: @context
 
           # Link UI to render events
           @ui.on("render", @nodes.render)
@@ -144,10 +152,16 @@ define [
 
           #breadcrumb
           @ui.breadcrumb.on("click", @setWorkspaceFromDefinition)
+
+          #j dialog events
+          @ui.dialogView.on("setContext", @setContext)
         else
           # If the application is in test mode add a css class to the body
           $("body").addClass "test-mode"
+
+
         return this
+
 
       initTimeline: () =>
         # Remove old timeline DOM elements
@@ -216,7 +230,17 @@ define [
       setDisplayMode: (is_player = false) =>
         if @ui then @ui.setDisplayMode(is_player)
 
+      setWorkflowContext: =>
+        @ui.dialogView.openDialog()
+
+      setContext: (formData)=>
+        @context = formData
+        console.log @context
+
+
+
       clearWorkspace: () =>
+        @setWorkflowContext()
         @nodes.clearWorkspace()
         @group_definitions.removeAll()
         if @ui then @ui.clearWorkspace()
