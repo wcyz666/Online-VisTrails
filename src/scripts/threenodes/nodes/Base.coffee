@@ -2,7 +2,8 @@ define [
   'Underscore',
   'Backbone',
   'cs!threenodes/models/Node',
-  #"libs/Three",
+  'cs!threenodes/models/Context',
+  # "libs/Three",    #this will cause circular require?
   'cs!threenodes/utils/Utils',
   'cs!threenodes/nodes/views/NodeWithCenterTextfield',
   'cs!threenodes/nodes/views/NodeWithCenterTextarea',
@@ -62,14 +63,17 @@ define [
       initialize: (options) =>
         @value = ""
         super
-        #j it's an object, not primitive; so we don't put it in
-        # defaults. Should fire events for each of them mannually
-        # @todo: inherit context from workflow context
-        @context = options.context
+
+        #@del
+        console.log "3"
+        console.log options.context
+        # nested model
+        @context = new ThreeNodes.Context options.context
+        # @todo: del
         @toJSON()
 
 
-
+      # @todo: del
       setContext: (obj)=>
         @context = obj
         # fire change events mannually if needed

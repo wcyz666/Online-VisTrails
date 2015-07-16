@@ -235,6 +235,10 @@ define [
 
       setContext: (formData)=>
         @context = formData
+        #@todo: cleaner way to do it? events?
+        @ui.appContext = @context
+        #@del
+        console.log "2"
         console.log @context
 
 

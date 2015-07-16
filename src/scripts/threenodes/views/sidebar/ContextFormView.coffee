@@ -12,13 +12,22 @@ define [
       template: _.template(_template)
       initialize: (options) ->
         super
+        # @todo
+        console.log "so memory leak"
+
+        #j A.listenTo(B, event, callback), will bind this to A, but here 0.9.2 no 
+        # listenTo
+        # on: default context is the object on is called on, here model, should pass the 
+        # third arg @ normally, though with coffeescript => it's not needed here, and 
+        # backbone view will always bind this in the first layer?
+        @model.on("change", @render, @)
         @render()
 
       events: 
         "submit": "onSubmit"
 
       render: () =>
-        @$el.html(@template())
+        @$el.html(@template(@model.toJSON()))
         return @
         
       onSubmit: (e) =>
@@ -33,6 +42,26 @@ define [
           formData[this.name] = this.value
         $textareas.each ()->
           formData[this.name] = this.value
+
+        @model.set formData
+
+
+
+
+
+
+
+
         # trigger event and send form data
-        @.trigger("setContext", formData);
+        # @.trigger("setContext", formData);
+
+
+
+
+
+
+
+
+
+
 

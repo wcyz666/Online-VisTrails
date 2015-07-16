@@ -50,6 +50,9 @@ define [
         $inputs.each ->
           formData[@name] = @value
         @dialog.dialog 'close'
+        #@del
+        console.log "1"
+        console.log formData
         @.trigger("setContext", formData)
 
 

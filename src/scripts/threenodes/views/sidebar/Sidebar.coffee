@@ -55,6 +55,7 @@ define [
 
       # Display fields attributes in sidebar when nodes are selected
       renderNodesAttributes: (nodes) =>
+        # @todo: clean up old views here: stop listening events
         removeExistingNodes = () =>
           if @node_views.length > 0
             _.each @node_views, (view) -> view.remove()

@@ -82,11 +82,16 @@ define [
                 this.render()                
           @.$el.append(addFieldView.$el)
 
+        # @todo: memory leak
+        # when you click other place than the node, you should clean yourself up
         # add context form for abstract nodes
         if @model instanceof ThreeNodes.nodes.models.Abstract
-          contextFormView = new ThreeNodes.ContextFormView()
-          contextFormView.on "setContext", (obj)=>
-            @model.setContext obj
+          contextFormView = new ThreeNodes.ContextFormView
+            model: @model.context
+
+          # @todo: move this to contextFormview
+          # contextFormView.on "setContext", (obj)=>
+          #   @model.setContext obj
           @.$el.append contextFormView.$el
         return @
 
