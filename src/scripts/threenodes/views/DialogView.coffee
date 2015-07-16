@@ -50,10 +50,14 @@ define [
         $inputs.each ->
           formData[@name] = @value
         @dialog.dialog 'close'
-        #@del
-        console.log "1"
-        console.log formData
-        @.trigger("setContext", formData)
+        @model.set formData
+
+
+        # haha, maybe next time
+        # use Backbone itself as the central event bus. Note that require js will 
+        # load the cached obj if you have required it from file before
+        # Backbone.trigger("workflow:contextChange", formData)
+        # @.trigger("setContext", formData)
 
 
 

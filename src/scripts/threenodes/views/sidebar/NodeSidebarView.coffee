@@ -89,9 +89,6 @@ define [
           contextFormView = new ThreeNodes.ContextFormView
             model: @model.context
 
-          # @todo: move this to contextFormview
-          # contextFormView.on "setContext", (obj)=>
-          #   @model.setContext obj
           @.$el.append contextFormView.$el
         return @
 

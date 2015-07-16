@@ -6,6 +6,7 @@ define [
 ], ($, _, Backbone, _template) ->
   #"use strict"
 
+  ### Context form for each individual node ###
   namespace "ThreeNodes",
     ContextFormView: class ContextFormView extends Backbone.View
       tagName: "fieldset"
@@ -42,18 +43,8 @@ define [
           formData[this.name] = this.value
         $textareas.each ()->
           formData[this.name] = this.value
-
         @model.set formData
 
-
-
-
-
-
-
-
-        # trigger event and send form data
-        # @.trigger("setContext", formData);
 
 
 

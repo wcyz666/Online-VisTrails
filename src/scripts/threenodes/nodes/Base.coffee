@@ -63,20 +63,10 @@ define [
       initialize: (options) =>
         @value = ""
         super
-
-        #@del
-        console.log "3"
-        console.log options.context
-        # nested model
+        # nested model, inherit initial context from the workflow
+        # the same model instance for contextFormView
         @context = new ThreeNodes.Context options.context
-        # @todo: del
-        @toJSON()
 
-
-      # @todo: del
-      setContext: (obj)=>
-        @context = obj
-        # fire change events mannually if needed
 
       toJSON: ()=>
         res = super
