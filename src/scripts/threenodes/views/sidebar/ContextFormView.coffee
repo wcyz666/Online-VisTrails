@@ -13,8 +13,6 @@ define [
       template: _.template(_template)
       initialize: (options) ->
         super
-        # @todo
-        console.log "so memory leak"
 
         #j A.listenTo(B, event, callback), will bind this to A, but here 0.9.2 no 
         # listenTo
@@ -45,6 +43,10 @@ define [
           formData[this.name] = this.value
         @model.set formData
 
+      remove: =>
+        super
+        @off()
+        @model.off null, null, @ 
 
 
 

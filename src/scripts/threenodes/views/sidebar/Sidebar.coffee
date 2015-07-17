@@ -55,10 +55,14 @@ define [
 
       # Display fields attributes in sidebar when nodes are selected
       renderNodesAttributes: (nodes) =>
-        # @todo: clean up old views here: stop listening events
         removeExistingNodes = () =>
           if @node_views.length > 0
+            #j override remove of NodeSidebarView to:
+            # 1. unregister events on its model or anything else
+            # 2. destroy nested views if any
+            # 3. detach from the DOM(jquery will unregister events for you)
             _.each @node_views, (view) -> view.remove()
+            #j remove references to the detached views
             @node_views = []
 
         removeExistingNodes()

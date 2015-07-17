@@ -23,6 +23,7 @@ define [
   namespace "ThreeNodes",
     NodeSidebarView: class NodeSidebarView extends Backbone.View
       initialize: (options) ->
+        @subviews = []
         super
         @render()
 
@@ -51,6 +52,7 @@ define [
             #console.log(view_class)
             view = new view_class
               model: field
+            @subviews.push view
             @$el.append(view.el)
       render: () =>
         # Compile the template file
@@ -70,6 +72,7 @@ define [
         ###
         if @model.add_field
           addFieldView = new ThreeNodes.AddFieldFormView() 
+          @subviews.push addFieldView
           addFieldView.on "addField", (obj)=>
             if obj.key != ''
               # this port type is not the port type in the page
@@ -82,15 +85,30 @@ define [
                 this.render()                
           @.$el.append(addFieldView.$el)
 
-        # @todo: memory leak
-        # when you click other place than the node, you should clean yourself up
-        # add context form for abstract nodes
+
         if @model instanceof ThreeNodes.nodes.models.Abstract
           contextFormView = new ThreeNodes.ContextFormView
             model: @model.context
+          @subviews.push contextFormView
 
           @.$el.append contextFormView.$el
         return @
+
+
+      #j should: 
+      # 1. unregister all events(on DOM, on itself, and on its nested objs)
+      # 2. tear down subviews
+      # 3. detach from DOM
+      remove: =>
+        for view in @subviews
+          view.off()
+          view.remove()
+        @off()
+        super
+
+
+
+
 
 
 
