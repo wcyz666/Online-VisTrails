@@ -59,3 +59,8 @@ define [
       createSidebarFieldTitle: (name = @model.get("name")) =>
         @$el.append("<h3>#{name}</h3>")
         return @$el
+
+      remove: =>
+        super
+        @off()
+        @model.off null, null, @
