@@ -46,6 +46,12 @@ define [
         else
           $generics.show()
 
+      remove: =>
+        super
+        @off()
+        if @model
+          @model.off null, null, @
+
 
 
         

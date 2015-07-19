@@ -97,12 +97,14 @@ define [
 
       #j should: 
       # 1. unregister all events(on DOM, on itself, and on its nested objs)
-      # 2. tear down subviews
-      # 3. detach from DOM
+      # 2. tear down subviews and remove references to subviews
+      # 3. detach self from DOM
       remove: =>
         for view in @subviews
           view.off()
           view.remove()
+        # this is also important
+        @subViews = []
         @off()
         super
 

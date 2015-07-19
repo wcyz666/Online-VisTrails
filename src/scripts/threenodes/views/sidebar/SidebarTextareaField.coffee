@@ -102,3 +102,8 @@ define [
           create_slider()
         # create first slider
         create_slider()
+
+      remove: =>
+        super
+        @off
+        @model null, null, @

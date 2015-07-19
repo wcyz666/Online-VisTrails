@@ -11,8 +11,12 @@ define [
   namespace "ThreeNodes.views.fields",
     BaseField: class BaseField extends Backbone.View
       initialize: (options) ->
+        @subviews = []
         super
-        @model.on "value_updated", @on_value_updated
+        # source of memory leak， should explicitly pass @ as the context
+        # if you want to unbind all events from this view to the model, even
+        # if the event handler uses fat arrow
+        @model.on "value_updated", @on_value_updated, @
         @render()
 
       on_value_updated: (new_val) => return @
@@ -37,6 +41,7 @@ define [
           type: type
           link_to_val: link_to_val
 
+        @subviews.push textField
         return textField
 
       createTextareaField: ($target, type = "float", link_to_val = true) =>
@@ -46,6 +51,7 @@ define [
           type: type
           link_to_val: link_to_val
 
+        @subviews.push textareaField
         return textareaField
 
       createSubvalTextinput: (subval, type = "float") =>
@@ -61,6 +67,10 @@ define [
         return @$el
 
       remove: =>
+        for view in @subviews
+          view.remove()
+          view.off()
+        @subViews =[]
         super
         @off()
         @model.off null, null, @
