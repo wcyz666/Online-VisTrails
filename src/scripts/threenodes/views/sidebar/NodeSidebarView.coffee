@@ -57,7 +57,7 @@ define [
       render: () =>
         # Compile the template file
         @$el.html("<h2>#{@model.get('name')}</h2>")
-        @displayFields(@model.fields.inputs)
+        # @displayFields(@model.fields.inputs)
 
         # the custom_fields are not real fields; just objects wrapping the type 
         # and name property; their constructors are Object. So calling displayFields
@@ -85,7 +85,7 @@ define [
                 this.render()                
           @.$el.append(addFieldView.$el)
 
-
+        # context form for abstract model
         if @model instanceof ThreeNodes.nodes.models.Abstract
           contextFormView = new ThreeNodes.ContextFormView
             model: @model.context

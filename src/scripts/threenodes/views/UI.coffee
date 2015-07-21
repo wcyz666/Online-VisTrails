@@ -188,8 +188,8 @@ define [
               ob.anim.objectTrack.name = ob.get("name")
               anims.push(ob.anim)
               nodes.push(ob)
-            # Display the selected nodes attributes in the sidebar
-            @sidebar.renderNodesAttributes(nodes)
+            # Display the selected nodes in the sidebar
+            @sidebar.renderNodes(nodes)
             # Display the selected nodes in the timeline
             @trigger("selectAnims", anims)
         return @
