@@ -35,6 +35,7 @@ define [
           center:
             size: "100%"
 
+
       initTreeView: () =>
         @treeview = new ThreeNodes.TreeView
           el: $("#tab-list")

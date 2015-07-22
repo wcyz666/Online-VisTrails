@@ -22,10 +22,21 @@ define [
   ### NodeSidebarView ###
   namespace "ThreeNodes",
     NodeSidebarView: class NodeSidebarView extends Backbone.View
+      @counter = 0
       initialize: (options) ->
+        NodeSidebarView.counter++
+        @counter = NodeSidebarView.counter
         @subviews = []
         super
         @render()
+        console.log @$el
+        Backbone.Events.on "showFieldDetail", =>
+          console.log "detail"
+          console.log "and more"
+          console.log @counter
+        , @
+
+
 
       displayFields: (fields) =>
         for f of fields
@@ -54,10 +65,12 @@ define [
               model: field
             @subviews.push view
             @$el.append(view.el)
+
       render: () =>
         # Compile the template file
         @$el.html("<h2>#{@model.get('name')}</h2>")
         # @displayFields(@model.fields.inputs)
+
 
         # the custom_fields are not real fields; just objects wrapping the type 
         # and name property; their constructors are Object. So calling displayFields
@@ -100,10 +113,12 @@ define [
       # 2. tear down subviews and remove references to subviews
       # 3. detach self from DOM
       remove: =>
+        console.log "called"
         for view in @subviews
           view.off()
           view.remove()
         # this is also important
+        Backbone.Events.off null, null, @
         @subViews = []
         @off()
         super

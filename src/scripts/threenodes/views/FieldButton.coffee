@@ -20,6 +20,12 @@ define [
         @makeElement()
         @render()
 
+      # events: 
+      #   "click" : "showFieldDetail"
+
+      # showFieldDetail: ->
+      #   Backbone.Events.trigger "showFieldDetail", @model
+
       remove: () =>
         $inner = $(".inner-field", @$el)
         # Remove drag & drop events

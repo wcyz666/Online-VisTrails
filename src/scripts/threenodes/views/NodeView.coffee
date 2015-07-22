@@ -125,8 +125,15 @@ define [
               $(this).addClass("ui-selecting")
           selectable = $("#container").data("selectable")
           selectable.refresh()
+          #j will fire the selectablestop event
           selectable._mouseStop(null)
           self.model.fields.renderSidebar()
+          #j fire the showFieldDetail event. The selectablestop event
+          # above is fired first, so its handler will be executed before
+          # the handler of showFieldDetail. So nodesidebar and related event
+          # listener will have been properly set up when this event fires
+          if $(e.target).is('.inner-field')
+            Backbone.Events.trigger "showFieldDetail"
         return @
 
       initTitleClick: () ->
