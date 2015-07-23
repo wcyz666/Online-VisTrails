@@ -22,19 +22,12 @@ define [
   ### NodeSidebarView ###
   namespace "ThreeNodes",
     NodeSidebarView: class NodeSidebarView extends Backbone.View
-      @counter = 0
       initialize: (options) ->
         NodeSidebarView.counter++
-        @counter = NodeSidebarView.counter
         @subviews = []
         super
         @render()
-        console.log @$el
-        Backbone.Events.on "showFieldDetail", =>
-          console.log "detail"
-          console.log "and more"
-          console.log @counter
-        , @
+        Backbone.Events.on "showFieldsDetail", @displayFields, @
 
 
 
@@ -113,7 +106,6 @@ define [
       # 2. tear down subviews and remove references to subviews
       # 3. detach self from DOM
       remove: =>
-        console.log "called"
         for view in @subviews
           view.off()
           view.remove()

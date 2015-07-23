@@ -18,6 +18,8 @@ define [
         # Setup the view DOM element
         @makeElement()
 
+        @selectedField = null
+
         # Initialize mouse events
         if !options.isSubNode
           @makeDraggable()
@@ -40,11 +42,16 @@ define [
         @model.on("node:addSelectedClass", @addSelectedClass)
         @model.on("run", @run)
         @model.on("stop", @stop)
+        #j indirect events
+        Backbone.Events.on "selectField", @selectField, @
 
         # Render the node and "post init" the model
         @render()
 
         #@model.postInit()
+
+      selectField: (field)=>
+        @selectedField = field
 
       #j add css class to indicate this node run
       run: =>
@@ -104,6 +111,7 @@ define [
           y: pos.top + $("#container-wrapper").scrollTop()
 
       remove: () =>
+        Backbone.Events.off null, null, @
         $(".field", this.el).destroyContextMenu()
         if @$el.data("draggable") then @$el.draggable("destroy")
         $(this.el).unbind()
@@ -112,6 +120,8 @@ define [
         delete @fields_view
         super
 
+      #j refresh the nodesidebarview on every click, continuous selection
+      # or not
       initNodeClick: () ->
         self = this
         $(@el).click (e) ->
@@ -128,13 +138,19 @@ define [
           #j will fire the selectablestop event
           selectable._mouseStop(null)
           self.model.fields.renderSidebar()
-          #j fire the showFieldDetail event. The selectablestop event
+          # UPDATE: thanks to event bubbling mechanism, @selectedField can
+          # be set before the click event bubbles up from the fieldButton to
+          # nodeView
+          # fire the showFieldDetail event. The selectablestop event
           # above is fired first, so its handler will be executed before
           # the handler of showFieldDetail. So nodesidebar and related event
           # listener will have been properly set up when this event fires
-          if $(e.target).is('.inner-field')
-            Backbone.Events.trigger "showFieldDetail"
+          if self.selectedField
+            Backbone.Events.trigger "showFieldsDetail", [self.selectedField]
         return @
+
+
+
 
       initTitleClick: () ->
         self = this

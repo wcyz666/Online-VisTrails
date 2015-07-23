@@ -1,4 +1,3 @@
-
 define [
   'Underscore',
   'Backbone',
@@ -20,11 +19,11 @@ define [
         @makeElement()
         @render()
 
-      # events: 
-      #   "click" : "showFieldDetail"
+      events:
+        "click" : "onClick"
 
-      # showFieldDetail: ->
-      #   Backbone.Events.trigger "showFieldDetail", @model
+      onClick: ->
+        Backbone.Events.trigger "selectField", @model
 
       remove: () =>
         $inner = $(".inner-field", @$el)
