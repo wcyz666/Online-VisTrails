@@ -10,6 +10,7 @@ define [
   ### BaseField View ###
   namespace "ThreeNodes.views.fields",
     BaseField: class BaseField extends Backbone.View
+      #j the el would be an empty div, and not connected to the page yet
       initialize: (options) ->
         @subviews = []
         super
@@ -22,6 +23,7 @@ define [
       on_value_updated: (new_val) => return @
 
       render: () =>
+        $target = @createSidebarContainer()
         return @
 
       createSidebarContainer: (name = @model.get("name")) =>

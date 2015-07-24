@@ -12,6 +12,7 @@ define [
   'cs!threenodes/views/sidebar/fields/WriteFileField',
   'cs!threenodes/views/sidebar/fields/CodeField',
   'cs!threenodes/views/sidebar/fields/LongTextField',
+  'cs!threenodes/views/sidebar/fields/AnyField',
   'cs!threenodes/views/sidebar/AddFieldFormView',
   'cs!threenodes/views/sidebar/ContextFormView',
   # 'cs!threenodes/nodes/Base'
@@ -50,6 +51,7 @@ define [
             when ThreeNodes.fields.Vector2 then ThreeNodes.views.fields.Vector2Field
             when ThreeNodes.fields.Vector3 then ThreeNodes.views.fields.Vector3Field
             when ThreeNodes.fields.Vector4 then ThreeNodes.views.fields.Vector4Field
+            when ThreeNodes.fields.Any then ThreeNodes.views.fields.AnyField
             else false
 
           if view_class != false

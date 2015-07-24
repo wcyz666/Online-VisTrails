@@ -235,6 +235,12 @@ define [
 
   namespace "ThreeNodes.fields",
     Any: class Any extends NodeField
+      defaults: ->
+        _.extend super, 
+          data: ""
+          datatype: ""
+          dataset: ""
+
       computeValue : (val) =>
         val
 
