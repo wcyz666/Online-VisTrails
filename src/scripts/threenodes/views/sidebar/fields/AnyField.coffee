@@ -11,8 +11,20 @@ define [
     AnyField: class AnyField extends ThreeNodes.views.fields.BaseField
       template: _.template _template
       render: =>
+        @$el.html ''
+        #j super will create the container and append it to el
         super
-        # @todo: del
-        @model.set "data", "aya"
         @container.append @template(@.model.toJSON())
         @
+
+      events:
+        'submit': 'onSubmit'
+
+      onSubmit: (e)->
+        e.preventDefault()
+        formData = {}
+        @$('[name]').each ->
+          formData[@name] = @value
+        @model.set formData
+        @render()
+
