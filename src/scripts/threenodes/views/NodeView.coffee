@@ -147,6 +147,7 @@ define [
           # listener will have been properly set up when this event fires
           if self.selectedField
             Backbone.Events.trigger "showFieldsDetail", [self.selectedField]
+            self.selectedField = null
         return @
 
 
