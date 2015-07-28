@@ -176,22 +176,28 @@ define [
 
       # Handle the nodes selection
       makeSelectable: () ->
-        $("#container").selectable
-          filter: ".node"
-          stop: (event, ui) =>
-            $selected = $(".node.ui-selected")
-            nodes = []
-            anims = []
-            # Add the nodes and their anims container to some arrays
-            $selected.each () ->
-              ob = $(this).data("object")
-              ob.anim.objectTrack.name = ob.get("name")
-              anims.push(ob.anim)
-              nodes.push(ob)
-            # Display the selected nodes in the sidebar
-            @sidebar.renderNodes(nodes)
-            # Display the selected nodes in the timeline
-            @trigger("selectAnims", anims)
+        $("#container")
+          .selectable
+            filter: ".node"
+            stop: (event, ui) =>
+              $selected = $(".node.ui-selected")
+              nodes = []
+              anims = []
+              # Add the nodes and their anims container to some arrays
+              $selected.each () ->
+                ob = $(this).data("object")
+                ob.anim.objectTrack.name = ob.get("name")
+                anims.push(ob.anim)
+                nodes.push(ob)
+              # Display the selected nodes in the sidebar
+              @sidebar.renderNodes(nodes)
+              # Display the selected nodes in the timeline
+              @trigger("selectAnims", anims)
+            unselected: (event, ui)->
+              $(ui.unselected).find('*').blur()
+
+          .click (e) ->
+            $(@).find("*").not(e.target).blur()
         return @
 
       # Switch between player/editor mode
