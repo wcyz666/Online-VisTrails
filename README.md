@@ -17,41 +17,11 @@ This will automatically compile coffescript files to javascript, sass to css and
     cd in ThreeNodes (project folder)
     node server.js
     
-## To deploy on server
+## To build and deploy
     cd in ThreeNodes
     node server.js build
     A "dist" folder is created including the index.html file
     Copy this folder to serve and deploy the index.html file
 
-##  Todos
 
-* abstract module
-    * add description: as an input port that cannot be connected
-
-* fix connect port: after one port is connected to a port that is not supposed to be connected, it behaves weirdly
-
-* might refactor code to inherit from NodeCustom class
-
-* file module button style should change according to state
-* add path module -- need backend 
-* file module save file name
-
-* ~~clean up: follow github: console logs and coffee generated files~~
-* ~~add submit button to replace return kepress event~~
-* ~~add filter for user defined field~~
-* ~~refactor the NodeSidebarView: extract the add input port form out as 
-	a stand alone view~~
-* ~~clean up the nodeWithCentralTextfield tmpl~~
-* ~~onCodeUpdate --> add_filed~~
-* add type informatin to the json result(custom fields already have this
-	informatin, add for normal fields if needed in the future)
-* what is the fieldButton doing?
-* ~~refactor the add port form, input output option might be a radio button~~
-* ~~add matlab source module~~
-* ~~mod: refactor the python source port name to script~~
-* ~~add: text input to file module~~
-
-## sync with backend
-
-* ~~File module: in~~
 
