@@ -26,7 +26,10 @@ define [
       linkTextfieldToVal: (f_input, type = "float") =>
         on_value_changed = (v) ->
           f_input.val(v)
-        @model.on "value_updated", on_value_changed
+        #j the source of memory leak
+        # add @ as context so we can remove reference to the handler when we 
+        # destroy the view
+        @model.on "value_updated", on_value_changed, @
 
         f_input.val(@model.getValue())
         f_input.keypress (e) =>
@@ -91,3 +94,15 @@ define [
           create_slider()
         # create first slider
         create_slider()
+
+      remove: =>
+        super
+        @off()
+        @model.off null, null, @
+
+
+
+
+
+
+

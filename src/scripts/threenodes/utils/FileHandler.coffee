@@ -19,7 +19,7 @@ define [
 				result_string = @getLocalJson()
 				bb.append(result_string)
 				fileSaver = saveAs(bb.getBlob("application/json;charset=utf-8"), "nodes.json")
-				console.log fileSaver
+				# console.log fileSaver
 
 			exportCode: () =>
 				# get the json export and convert it to code

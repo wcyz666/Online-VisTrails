@@ -18,6 +18,8 @@ define [
         # Setup the view DOM element
         @makeElement()
 
+        @selectedField = null
+
         # Initialize mouse events
         if !options.isSubNode
           @makeDraggable()
@@ -38,11 +40,26 @@ define [
         @model.on("node:renderConnections", @renderConnections)
         @model.on("node:showAnimations", @highlighAnimations)
         @model.on("node:addSelectedClass", @addSelectedClass)
+        @model.on("run", @run)
+        @model.on("stop", @stop)
+        #j the FieldsView class seems to be an unnecessary layer
+        @fields_view.collection.on "select", @onFieldSelected, @
 
         # Render the node and "post init" the model
         @render()
 
         #@model.postInit()
+
+      onFieldSelected: (field) ->
+        @selectedField = field
+
+      #j add css class to indicate this node run
+      run: =>
+        @$el.addClass("state-run")
+
+      #j remove css class of running
+      stop: =>
+        @$el.removeClass("state-run")
 
       makeElement: () =>
         # Compile the template file
@@ -94,6 +111,7 @@ define [
           y: pos.top + $("#container-wrapper").scrollTop()
 
       remove: () =>
+        Backbone.Events.off null, null, @
         $(".field", this.el).destroyContextMenu()
         if @$el.data("draggable") then @$el.draggable("destroy")
         $(this.el).unbind()
@@ -102,6 +120,8 @@ define [
         delete @fields_view
         super
 
+      #j refresh the nodesidebarview on every click, continuous selection
+      # or not
       initNodeClick: () ->
         self = this
         $(@el).click (e) ->
@@ -115,9 +135,22 @@ define [
               $(this).addClass("ui-selecting")
           selectable = $("#container").data("selectable")
           selectable.refresh()
+          #j will fire the selectablestop event, initializing NodeSidebarView
           selectable._mouseStop(null)
           self.model.fields.renderSidebar()
+          #j fire event to render NodeSidebarView
+          # 1. thanks to event bubbling mechanism, @selectedField can
+          # be set before the click event bubbles up from the fieldButton to
+          # nodeView
+          # 2. the selectablestop event fires first, so its handler will
+          # be executed first than that of renderSiedebar. Thus the view will
+          # be initialized before we call render on it
+          Backbone.Events.trigger "renderSidebar", self.selectedField
+          self.selectedField = null
         return @
+
+
+
 
       initTitleClick: () ->
         self = this

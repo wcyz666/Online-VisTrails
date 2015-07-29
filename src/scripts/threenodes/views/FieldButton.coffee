@@ -1,4 +1,3 @@
-
 define [
   'Underscore',
   'Backbone',
@@ -19,6 +18,12 @@ define [
         super
         @makeElement()
         @render()
+
+      events:
+        "click" : "onClick"
+
+      onClick: ->
+        @model.trigger "select", @model
 
       remove: () =>
         $inner = $(".inner-field", @$el)

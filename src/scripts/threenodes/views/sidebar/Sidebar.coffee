@@ -35,6 +35,7 @@ define [
           center:
             size: "100%"
 
+
       initTreeView: () =>
         @treeview = new ThreeNodes.TreeView
           el: $("#tab-list")
@@ -51,20 +52,26 @@ define [
           fx:
             opacity: 'toggle'
             duration: 100
+
         return this
 
-      # Display fields attributes in sidebar when nodes are selected
-      renderNodesAttributes: (nodes) =>
+      # Display nodes in sidebar when nodes are selected
+      renderNodes: (nodes) =>
         removeExistingNodes = () =>
           if @node_views.length > 0
+            #j override remove of NodeSidebarView to:
+            # 1. unregister events on its model or anything else
+            # 2. destroy nested views if any
+            # 3. detach from the DOM(jquery will unregister events for you)
             _.each @node_views, (view) -> view.remove()
+            #j remove references to the detached views
             @node_views = []
 
         removeExistingNodes()
 
         # Always start with an empty element
         $target = $("#tab-attribute")
-        $target.html("");
+        $target.html("")
 
         # If there is no nodes to show abort now
         if !nodes || nodes.length < 1
@@ -77,6 +84,8 @@ define [
           $target.append(view.el)
           @node_views.push view
 
+        # toggle the tabs  
+        @$el.tabs('option', 'active', 1)
         return this
 
       filterListItem: ($item, value) =>

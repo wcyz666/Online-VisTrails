@@ -13,7 +13,7 @@ define [
 
       render: () =>
         $target = @createSidebarContainer()
-        console.log @model
+        # console.log @model
         if @model.attributes.possibilities
           @create_sidebar_select($target)
         else
@@ -38,3 +38,8 @@ define [
       create_sidebar_input: ($target) =>
         @textfield = @createTextfield($target)
         @textfield.linkTextfieldToVal(@textfield.$input)
+
+
+
+
+

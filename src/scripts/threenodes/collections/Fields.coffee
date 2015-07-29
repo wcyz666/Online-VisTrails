@@ -16,7 +16,9 @@ define [
         @outputs = {}
         @special_elements = {left: [], center: [], right: []}
 
+
         @addFields(@node.getFields())
+
 
       # Remove connections, fields and delete variables
       destroy: () =>
@@ -83,6 +85,11 @@ define [
             res[res.length] = c.to_field.node
         res
 
+      hasToFields: =>
+        @.find (field)=>
+          return field.isToField()
+
+
       hasUnconnectedInputs: () =>
         for fname, f of @inputs
           if f.connections.length == 0
@@ -110,33 +117,49 @@ define [
         @invoke "removeConnections"
 
 
-      addField: (name, value, direction = "inputs") =>
+      #j props is optional
+      addField: (name, value, direction = "inputs", props) =>
+        #j out0, {type: "Any", val: 0}, "inputs"
         f = false
         field_is_out = (direction != "inputs")
+        #j if primitives: number, string, boolean
+        #  change to   Float,  String, Bool
         if $.type(value) != "object"
           value = @getFieldValueObject(value)
+        #j declare variable
         field = {}
+        #j create field model and add it to the collection
         if ThreeNodes.fields[value.type]
           field = new ThreeNodes.fields[value.type]
+            #j pass initial values of attrs, which will be called set on
             name: name
+            type: value.type
             value: value.val
+            # props: props
             possibilities: value.values
             node: @node
             is_output: field_is_out
             default: value.default
             subfield: value.subfield
             indexer: @indexer
+          #j props is optional; keep models flat!
+          if props then field.set(props)
 
           target = if field.get("is_output") == false then "inputs" else "outputs"
           field_index = field.get("name")
           if field.subfield
             # In group nodes we want to have a unique field index
             field_index += "-" + field.subfield.node.get("nid")
+          #j keep a shallow copy of the fields in this collection
           @[target][field_index] = field
+          #j backbone add
           @add(field)
+
+
         return field
 
       addFields: (fields_array) =>
+        #j dir is short for directory
         for dir of fields_array
           # dir = inputs / outputs
           for fname of fields_array[dir]

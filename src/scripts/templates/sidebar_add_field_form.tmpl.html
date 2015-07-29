@@ -1,6 +1,34 @@
-<input type="text" name="name" placeholder="key" />
-<input type="text" name="type" placeholder="type" />
-<input type="radio" name="portType" value="inputs" /> Input
-<input type="radio" name="portType" value="outputs" /> Output
-<input type="submit" value="Add Port" />
+<legend>Add Port</legend>
+<form>
+	<div>
+		<input type="radio" name="portType" value="inputs" /> Input
+		<input type="radio" name="portType" value="outputs" /> Output
+	</div>
+	<div>
+		<label for="name">Port Name</label>
+		<input type="text" name="name" id="name" placeholder="name" />
+	</div>
+	<div>
+		<label for="type">Port Type</label>
+		<select name = "type" id = "type">
+			<option value = "Any">Generic</option>
+			<option value = "String">String</option>
+			<option value = "Float">Float</option>
+			<option value = "Bool">Boolean</option>
+		</select>
+	</div>
+	<div class = "generic">
+		<label for = "data">Data</label>
+		<input type = "text" name = "data" id = "data"  />
+	</div>
+	<div class = "generic">
+		<label for = "datatype">Data Type</label>
+		<input type = "text" name = "datatype" id = "datatype"  />
+	</div>
+	<div class = "generic">
+		<label for = "dataset">Dataset</label>
+		<input type = "text" name = "dataset" id = "dataset"  />
+	</div>
+	<button type="submit">Add</button>
+</form>
 

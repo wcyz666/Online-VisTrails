@@ -1,0 +1,29 @@
+<div id="dialog-form" title="Set Workflow Context">
+   <form>
+    <fieldset>
+      <div>
+        <label for="d_author">Author</label>
+        <input type="text" name="author" id="d_author" class="text ui-widget-content ui-corner-all">
+      </div>
+      <div>
+        <label for="d_affiliation">Affiliation</label>
+        <input type="text" name="affiliation" id="d_affiliation" class="text ui-widget-content ui-corner-all">
+      </div>
+      <div>
+        <label for="d_keywords">Keywords</label>
+        <input type="text" name="keywords" id="d_keywords" class="text ui-widget-content ui-corner-all">
+      </div>
+      <div>
+        <label for="d_purpose">Purpose</label>
+        <textarea rows = "3" cols = "3" name = "purpose" id = "d_purpose" placeholder = "purpose"></textarea>
+      </div>
+      <div>
+        <label for="d_description">description</label>
+        <textarea rows="3" cols="3" name="description" id="d_description" placeholder="description"></textarea>
+      </div>
+
+      <!-- Allow form submission with keyboard without duplicating the dialog button -->
+      <input type="submit" tabindex="-1" style="position:absolute; top:-1000px">
+    </fieldset>
+  </form>
+</div>

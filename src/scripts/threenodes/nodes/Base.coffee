@@ -2,7 +2,8 @@ define [
   'Underscore',
   'Backbone',
   'cs!threenodes/models/Node',
-  #"libs/Three",
+  'cs!threenodes/models/Context',
+  # "libs/Three",    #this will cause circular require?
   'cs!threenodes/utils/Utils',
   'cs!threenodes/nodes/views/NodeWithCenterTextfield',
   'cs!threenodes/nodes/views/NodeWithCenterTextarea',
@@ -28,31 +29,59 @@ define [
     #   getCenterField: () => @model.fields.getField("in")
 
     File: class File extends ThreeNodes.nodes.views.NodeWithUpload
+
    
   namespace "ThreeNodes.nodes.models",
     Integer: class Integer extends ThreeNodes.NodeNumberSimple
       @node_name = 'Integer'
       @group_name = 'BasicModules'
       
+      #j the lib author calls a overidden method in the super constructor, 
+      # which is discouraged and is the source of the undefined bug.
+      # One way to fix it is to move all @value before super call, since
+      # coffeescript doesn't have the rule of super being the first call. 
+      # But it is better to avoid the whole thing.
       initialize: (options) =>
+        @value = 0
         super
 
       getFields: =>
         base_fields = super
+        #j inherit an out port from NodeNumberSimple
         fields =
+          #j in will overide the original in field
           inputs:
-            "in": ""
+            "in": 0
           outputs:
             "out0": {type: "Any", val: @value}
         return $.extend(true, base_fields, fields)
+        
+    Abstract: class Abstract extends ThreeNodes.NodeCustom
+      @node_name = 'Abstract'
+      @group_name = 'BasicModules'
+
+      initialize: (options) =>
+        @value = ""
+        super
+        # nested model, inherit initial context from the workflow
+        # the same model instance for contextFormView
+        @context = new ThreeNodes.Context options.context
+
+
+      toJSON: ()=>
+        res = super
+        res.context = @context
+        return res
+
+
 
     Service: class Service extends ThreeNodes.NodeBase
       @node_name = 'Service'
       @group_name = 'BasicModules'
       
       initialize: (options) =>
-        super
         @value = ""
+        super
       
       getFields: =>
         base_fields = super
@@ -68,8 +97,8 @@ define [
       @group_name = 'BasicModules'
       
       initialize: (options) =>
-        super
         @value = ""
+        super
         
       getFields: =>
         base_fields = super
@@ -87,8 +116,8 @@ define [
       @group_name = 'BasicModules'
 
       initialize: (options) =>
-        super
         @value = true
+        super
 
       getFields: =>
         base_fields = super
@@ -109,8 +138,8 @@ define [
       @group_name = 'BasicModules'
 
       initialize: (options) =>
-        super
         @value = ""
+        super
 		
       getFields: =>
         base_fields = super
@@ -124,8 +153,8 @@ define [
       @group_name = 'BasicModules'
 
       initialize: (options) =>
-        super
         @value = ""
+        super
 		
       getFields: =>
         base_fields = super
@@ -141,8 +170,8 @@ define [
       @group_name = 'BasicModules'
 
       initialize: (options) =>
-        super
         @value = ""
+        super
 		
       getFields: =>
         base_fields = super
@@ -166,8 +195,8 @@ define [
       @group_name = 'BasicModules'
 
       initialize: (options) =>
-        super
         @value = ""
+        super
 		
       getFields: =>
         base_fields = super
@@ -186,8 +215,8 @@ define [
       @group_name = 'BasicModules'
 
       initialize: (options) =>
-        super
         @value = ""
+        super
 		
       getFields: =>
         base_fields = super
@@ -203,8 +232,8 @@ define [
       @group_name = 'BasicModules'
 
       initialize: (options) =>
-        super
         @value = ""
+        super
 		
       getFields: =>
         base_fields = super
@@ -220,8 +249,8 @@ define [
       @group_name = 'BasicModules'
 
       initialize: (options) =>
-        super
         @value = ""
+        super
 		
       getFields: =>
         base_fields = super
@@ -239,8 +268,8 @@ define [
       @group_name = 'BasicModules'
 
       initialize: (options) =>
-        super
         @value = ""
+        super
 		
       getFields: =>
         base_fields = super
@@ -258,8 +287,8 @@ define [
       @group_name = 'BasicModules'
 
       initialize: (options) =>
-        super
         @value = ""
+        super
 		
       getFields: =>
         base_fields = super
@@ -275,8 +304,8 @@ define [
       @group_name = 'BasicModules'
 
       initialize: (options) =>
-        super
         @value = ""
+        super
 		
       getFields: =>
         base_fields = super
@@ -294,8 +323,8 @@ define [
       @group_name = 'BasicModules'
 
       initialize: (options) =>
-        super
         @value = ""
+        super
 		
       getFields: =>
         base_fields = super
@@ -315,8 +344,8 @@ define [
       @group_name = 'BasicModules'
 
       initialize: (options) =>
-        super
         @value = ""
+        super
 		
       getFields: =>
         base_fields = super
@@ -337,8 +366,8 @@ define [
       @group_name = 'BasicModules'
 
       initialize: (options) =>
-        super
         @value = ""
+        super
 		
       getFields: =>
         base_fields = super
@@ -390,8 +419,8 @@ define [
       @group_name = 'BasicModules'
 
       initialize: (options) =>
-        super
         @value = ""
+        super
 
       getFields: =>
         base_fields = super
@@ -410,8 +439,8 @@ define [
       @group_name = 'BasicModules'
 
       initialize: (options) =>
-        super
         @value = ""
+        super
 
       getFields: =>
         base_fields = super
@@ -539,8 +568,8 @@ define [
       @group_name = 'BasicModules'
 
       initialize: (options) =>
-        super
         @value = ""
+        super
 		
       getFields: =>
         base_fields = super
@@ -553,8 +582,8 @@ define [
       @group_name = 'BasicModules'
 
       initialize: (options) =>
-        super
         @value = ""
+        super
 		
       getFields: =>
         base_fields = super
@@ -564,25 +593,7 @@ define [
         return $.extend(true, base_fields, fields)
 
 
-    StringFormat: class StringFormat extends ThreeNodes.NodeBase
-      @node_name = 'StringFormat'
-      @group_name = 'BasicModules'
 
-      initialize: (options) =>
-        super
-        @value = ""
-		
-      getFields: =>
-        base_fields = super
-        fields =
-          inputs:
-            "in": ""
-          outputs:
-            "out": {type: "Any", val: @value}
-        return $.extend(true, base_fields, fields)
-
-      compute: =>
-        @fields.setField("out", @fields.getField("in").getValue())
         
 
     Tuple: class Tuple extends ThreeNodes.NodeBase

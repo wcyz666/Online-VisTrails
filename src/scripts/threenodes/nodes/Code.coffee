@@ -25,9 +25,11 @@ define [
       initialize: (options) =>
         @custom_fields = {inputs: {}, outputs: {}}
         @loadCustomFields(options)
+        # flag for the side bar to render the add_field form
+        @add_field= true
 
-        super
         @value = ""
+        super
 
         @onCodeUpdate()
         field = @fields.getField("code")

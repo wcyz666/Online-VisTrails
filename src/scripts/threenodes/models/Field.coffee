@@ -32,6 +32,8 @@ define [
           this.attributes[key] = value
           return this
 
+        #j if setting attrs other than value, call super
+        # we have a seperate method setValue that will call this one
         super
 
       load: (data) =>
@@ -51,6 +53,7 @@ define [
       initialize: (options) =>
         self = this
         # Keep reference to some variables
+        # the node that owns the field
         @node = options.node
         @subfield = options.subfield
         indexer = options.indexer || ThreeNodes.NodeField.STATIC_INDEXER
@@ -74,6 +77,10 @@ define [
           @set("machine_name", @get("name") + "-" + @subfield.node.get("nid"))
         if @get("fid") == -1
           @set("fid", indexer.getUID())
+
+      isToField: =>
+        for c in @connections
+          if c.to_field is @ then return true
 
       remove: () =>
         delete @on_value_update_hooks
@@ -162,9 +169,13 @@ define [
         res =
           name: @get("name")
 
+        #j should add type?
+        res.type = @get("type")
+
         # Add the node nid for fields that are part of subnodes (group)
         if @subfield
           res.nid = @subfield.node.get("nid")
+
 
         # Help avoid cyclic value
         val = @get("value")
@@ -176,6 +187,14 @@ define [
         if val_type == "object"
           if val.constructor == THREE.StringConcatenate val.constructor == THREE.Vector2 || val.constructor == THREE.Vector3 || val.constructor == THREE.Vector4 || val.constructor == THREE.Color
             res.val = val
+
+        # add props if any
+        if @has("data")
+          res.data = @get "data"
+        if @has("dataset")
+          res.dataset  = @get "dataset"
+        if @has("datatype")
+          res.datatype = @get "datatype"
 
         return res
 
@@ -212,25 +231,33 @@ define [
         self = this
         if $.type(val) == "array"
           return _.map(val, (n) -> self.computeValue(n))
-
         return @computeValue(val)
 
   namespace "ThreeNodes.fields",
     Any: class Any extends NodeField
+      defaults: ->
+        _.extend super, 
+          data: ""
+          datatype: ""
+          dataset: ""
+
       computeValue : (val) =>
         val
 
       onValueChanged : (val) =>
         return val
 
+
+
     Code: class Code extends NodeField
+      #j might be to normalize the value passed in
+      # can read array, number and string as input value of code
       computeValue : (val) =>
         switch $.type(val)
           when "array" then return val
-          when "number" then return val.toString
+          when "number" then return val.toString()
           when "string" then return val
         return null
-
 
     Array: class Array extends NodeField
       computeValue : (val) =>
@@ -263,9 +290,11 @@ define [
       computeValue : (val) =>
         switch $.type(val)
           when "array" then return val
-          when "number" then return val.toString
+          when "number" then return val.toString()
           when "string" then return val
         return null
+
+    LongText: class String extends String
         
     Service: class Service extends NodeField
       computeValue : (val) =>
@@ -304,12 +333,6 @@ define [
         #return null
         return val
         
-    Integer: class Integer extends NodeField
-      computeValue : (val) =>
-        if $.type(val) == "number"
-          if val.contructor == THREE.Integer
-            return val
-        return val
 
     Vector2: class Vector2 extends NodeField
       computeValue : (val) =>

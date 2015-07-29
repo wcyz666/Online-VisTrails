@@ -6,6 +6,8 @@ define [
 ], (_, Backbone) ->
   #"use strict"
 
+  #j treeview corresponds to the list tab on the left
+  # list of nodes selected
   namespace "ThreeNodes",
     TreeView: class TreeView extends Backbone.View
       initialize: (options) ->

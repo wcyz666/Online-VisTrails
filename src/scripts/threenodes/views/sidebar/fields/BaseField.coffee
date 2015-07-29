@@ -10,14 +10,20 @@ define [
   ### BaseField View ###
   namespace "ThreeNodes.views.fields",
     BaseField: class BaseField extends Backbone.View
+      #j the el would be an empty div, and not connected to the page yet
       initialize: (options) ->
+        @subviews = []
         super
-        @model.on "value_updated", @on_value_updated
+        # source of memory leak， should explicitly pass @ as the context
+        # if you want to unbind all events from this view to the model, even
+        # if the event handler uses fat arrow
+        @model.on "value_updated", @on_value_updated, @
         @render()
 
       on_value_updated: (new_val) => return @
 
       render: () =>
+        $target = @createSidebarContainer()
         return @
 
       createSidebarContainer: (name = @model.get("name")) =>
@@ -37,6 +43,7 @@ define [
           type: type
           link_to_val: link_to_val
 
+        @subviews.push textField
         return textField
 
       createTextareaField: ($target, type = "float", link_to_val = true) =>
@@ -46,6 +53,7 @@ define [
           type: type
           link_to_val: link_to_val
 
+        @subviews.push textareaField
         return textareaField
 
       createSubvalTextinput: (subval, type = "float") =>
@@ -59,3 +67,12 @@ define [
       createSidebarFieldTitle: (name = @model.get("name")) =>
         @$el.append("<h3>#{name}</h3>")
         return @$el
+
+      remove: =>
+        for view in @subviews
+          view.remove()
+          view.off()
+        @subViews =[]
+        super
+        @off()
+        @model.off null, null, @

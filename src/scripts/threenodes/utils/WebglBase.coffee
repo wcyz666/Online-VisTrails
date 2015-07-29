@@ -28,7 +28,7 @@ define [
         @current_renderer = false
         if window.WebGLRenderingContext
           @current_renderer = new THREE.WebGLRenderer
-            clearColor: 0x000000
+            clearColor: 0xFF0000
             preserveDrawingBuffer: true
         @current_renderer.autoClear = false
         @effectScreen = new THREE.ShaderPass( THREE.ShaderExtras[ "screen" ] )

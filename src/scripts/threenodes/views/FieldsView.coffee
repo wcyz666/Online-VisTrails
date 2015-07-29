@@ -15,10 +15,12 @@ define [
         super
         @node = options.node
         @subviews = []
-        @collection.on("add", @onFieldCreated)
+        @collection.on "add", @onFieldCreated, @
 
         # create already existing fields
         @collection.each(@onFieldCreated)
+
+
 
       # Create the field dom element and add events to it
       onFieldCreated: (field) =>

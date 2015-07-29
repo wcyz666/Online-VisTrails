@@ -21,6 +21,8 @@ define [
         y: 0
         name: ""
 
+
+
       initialize: (options) =>
         super
 
@@ -31,6 +33,7 @@ define [
 
         # Define some utility variables, used internally
         @is_animated = false
+        # connections starting out from this node
         @out_connections = []
 
         # Keep reference of some variables
@@ -56,6 +59,7 @@ define [
         # Create the fields collections
         @fields = new ThreeNodes.FieldsCollection(false, {node: this, indexer: @indexer})
 
+
         # Call onFieldsCreated so that nodes can alias fields
         @onFieldsCreated()
 
@@ -70,8 +74,34 @@ define [
           @loadAnimation()
 
         @showNodeAnimation()
+
         return this
 
+      #j run this node module, which is part of the whole workflow
+      run: =>
+        @trigger("run")
+
+      #j stop running
+      stop: =>
+        @trigger("stop")
+
+
+      #j @return: true if is start node
+      isStartNode: =>
+        !@fields.hasToFields()
+
+      #j return: [] of nodes to run next
+      next: =>
+        # local []
+        to_nodes = []
+        for c in @out_connections
+          to_nodes.push c.to_field.node
+        return to_nodes
+
+
+
+
+ 
       typename: => String(@constructor.name)
 
       onFieldsCreated: () =>
@@ -260,4 +290,47 @@ define [
                   res[i].z = @process_val(ref.z, i)
         @v_out.setValue res
         true
+
+    NodeCustom: class NodeCustom extends NodeBase
+      initialize: (options) =>
+        @custom_fields = {inputs: {}, outputs: {}}
+        @loadCustomFields(options)
+        #flag for the sidebar to load the add_field form
+        @add_field = true
+        super
+        @value = ""
+
+
+      loadCustomFields: (options) =>
+        if !options.custom_fields then return
+        @custom_fields = $.extend(true, @custom_fields, options.custom_fields)
+
+
+      addCustomField: (name, type, direction = 'inputs', props) =>
+        field = {name: name, type: type, props: props}
+        # Add the field to a variable for saving.
+        @custom_fields[direction][name] = field
+
+        value = null
+        @fields.addField(name, {type: type, val: value, default: false}, direction, props)
+
+      #j convert to JSON object, not json string
+      toJSON: () =>
+        res = super
+        res.custom_fields = @custom_fields
+        return res
+
+      getFields: =>
+        base_fields = super
+        # to override based on this
+        fields = {}
+        # merge with custom fields
+        fields = $.extend(true, fields, @custom_fields)
+        return $.extend(true, base_fields, fields)
+
+
+
+
+
+      
 

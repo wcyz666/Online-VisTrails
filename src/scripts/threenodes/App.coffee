@@ -26,6 +26,11 @@ define [
           test: false
           player_mode: false
         @settings = $.extend(settings, options)
+        #j some other properties
+        # boolean: true for running, false for not running, may add other states in the future
+        @workflow_state = false
+        # []: nodes that are currently running
+        @running_nodes = []
 
         # Define renderer mouseX/Y for use in utils.Mouse node for instance
         ThreeNodes.renderer =
@@ -116,6 +121,7 @@ define [
             el: $("body")
             settings: @settings
 
+
           # Link UI to render events
           @ui.on("render", @nodes.render)
           @ui.on("renderConnections", @nodes.renderAllConnections)
@@ -139,10 +145,15 @@ define [
 
           #breadcrumb
           @ui.breadcrumb.on("click", @setWorkspaceFromDefinition)
+
+
         else
           # If the application is in test mode add a css class to the body
           $("body").addClass "test-mode"
+
+
         return this
+
 
       initTimeline: () =>
         # Remove old timeline DOM elements
@@ -163,14 +174,61 @@ define [
         # Bind events to it
         @nodes.bindTimelineEvents(@timelineView)
         @nodes.on("remove", @timelineView.onNodeRemove)
+        @timelineView.on("runWorkflow", @runWorkflow)
         if @ui then @ui.onUiWindowResize()
 
+        #j this is App, not timelineview, why return this?
         return this
+
+      #j start running the workflow if it is not running, 
+      # run next node if it is
+      runWorkflow: =>
+        if !@workflow_state
+          @startRunningWorkflow()
+        else
+          @runNext()
+
+
+      startRunningWorkflow: =>
+        # start_nodes: [] of node models
+        start_nodes = @nodes.findStartNodes()
+        for node in start_nodes
+          node.run()
+        @workflow_state = true
+        @running_nodes = start_nodes
+
+      runNext: =>
+        nodes_to_run = []
+        for node in @running_nodes
+          # get nodes to run next
+          nodes_to_run = nodes_to_run.concat node.next()
+          # stop current running
+          node.stop()
+        # if the end of workflow, change the workflow_state
+        if !nodes_to_run.length
+          @workflow_state = false
+        # else continue running
+        else
+          # run nodes_to_run
+          for node in nodes_to_run
+            node.run()
+          # update running nodes
+          @running_nodes = nodes_to_run
+
+
+
+
 
       setDisplayMode: (is_player = false) =>
         if @ui then @ui.setDisplayMode(is_player)
 
+      setWorkflowContext: =>
+        @ui.dialogView.openDialog()
+
+
+
       clearWorkspace: () =>
+        @setWorkflowContext()
         @nodes.clearWorkspace()
         @group_definitions.removeAll()
         if @ui then @ui.clearWorkspace()

@@ -7,6 +7,8 @@ define [
   'cs!threenodes/views/sidebar/Sidebar',
   'cs!threenodes/views/MenuBar',
   'cs!threenodes/views/Breadcrumb',
+  'cs!threenodes/views/DialogView',
+  'cs!threenodes/models/Context',
   "RequestAnimationFrame",
   "Raphael",
   "libs/jquery.contextMenu",
@@ -30,6 +32,10 @@ define [
         @settings = options.settings
         @is_grabbing = false
 
+        # model, the workflow context, shared with dialogView
+        @context = new ThreeNodes.Context
+
+
         # Bind events
         $(window).resize(@onUiWindowResize)
 
@@ -52,6 +58,8 @@ define [
         # Setup the sidebar and menu subviews
         @sidebar = new ThreeNodes.Sidebar({el: $("#sidebar")})
         @initMenubar()
+        @dialogView = new ThreeNodes.DialogView(model: @context)
+        @dialogView.setElement(this.$("#dialog")).render()
 
         # Set the layout and show application
         @initLayout()
@@ -95,7 +103,7 @@ define [
             dx = ui.position.left + $("#container-wrapper").scrollLeft() - offset.left - 10
             dy = ui.position.top + $("#container-wrapper").scrollTop() - container.scrollTop() - offset.top
             #debugger
-            self.trigger("CreateNode", {type: nodename, x: dx, y: dy, definition: definition})
+            self.trigger("CreateNode", {type: nodename, x: dx, y: dy, definition: definition, context: self.context.toJSON()})
             $("#sidebar").show()
 
         return this
@@ -168,22 +176,28 @@ define [
 
       # Handle the nodes selection
       makeSelectable: () ->
-        $("#container").selectable
-          filter: ".node"
-          stop: (event, ui) =>
-            $selected = $(".node.ui-selected")
-            nodes = []
-            anims = []
-            # Add the nodes and their anims container to some arrays
-            $selected.each () ->
-              ob = $(this).data("object")
-              ob.anim.objectTrack.name = ob.get("name")
-              anims.push(ob.anim)
-              nodes.push(ob)
-            # Display the selected nodes attributes in the sidebar
-            @sidebar.renderNodesAttributes(nodes)
-            # Display the selected nodes in the timeline
-            @trigger("selectAnims", anims)
+        $("#container")
+          .selectable
+            filter: ".node"
+            stop: (event, ui) =>
+              $selected = $(".node.ui-selected")
+              nodes = []
+              anims = []
+              # Add the nodes and their anims container to some arrays
+              $selected.each () ->
+                ob = $(this).data("object")
+                ob.anim.objectTrack.name = ob.get("name")
+                anims.push(ob.anim)
+                nodes.push(ob)
+              # Display the selected nodes in the sidebar
+              @sidebar.renderNodes(nodes)
+              # Display the selected nodes in the timeline
+              @trigger("selectAnims", anims)
+            unselected: (event, ui)->
+              $(ui.unselected).find('*').blur()
+
+          .click (e) ->
+            $(@).find("*").not(e.target).blur()
         return @
 
       # Switch between player/editor mode

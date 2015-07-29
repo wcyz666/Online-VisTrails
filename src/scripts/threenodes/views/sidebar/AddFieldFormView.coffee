@@ -9,7 +9,7 @@ define [
   ### AddFieldFormView ###
   namespace "ThreeNodes",
     AddFieldFormView: class AddFieldFormView extends Backbone.View
-      tagName: "form"
+      tagName: "fieldset"
       template: _.template(_template)
       initialize: (options) ->
         super
@@ -17,6 +17,7 @@ define [
 
       events: 
         "submit": "onSubmit"
+        "change select": "onSelectChange"
 
       render: () =>
         @$el.html(@template())
@@ -24,15 +25,34 @@ define [
         
       onSubmit: (e) =>
         e.preventDefault()
-        $form = @.$el
-        $key = $form.find('[name="name"]')
-        $type = $form.find('[name="type"]')
-        $portType = $form.find('[name="portType"]:checked')
-        key = $.trim($key.val())
-        type = $.trim($type.val())
-        portType = $.trim($portType.val())
-        @.trigger("addField", {
-          key: key
-          ,type: type
-          ,portType: portType
-          })
+        @$el.find("[type='submit']").blur()
+        $form = @.$el.find("form")
+        formData = {}
+        # radio button:
+        $portType = $form.find("[name = 'portType']:checked")
+        formData.portType = $portType.val()
+        # other elements:
+        $formEls = $form.find("[id]")
+        $formEls.each ()->
+          formData[this.name] = this.value
+        @trigger("addField", formData)
+        @render()
+        
+
+      onSelectChange: (e) =>
+        $generics = @.$el.find(".generic")
+        #j 'generic' is the alias of 'Any'
+        if e.target.value isnt "Any"
+          $generics.hide()
+        else
+          $generics.show()
+
+      remove: =>
+        super
+        @off()
+        if @model
+          @model.off null, null, @
+
+
+
+        

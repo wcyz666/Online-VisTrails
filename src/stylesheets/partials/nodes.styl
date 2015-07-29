@@ -6,7 +6,7 @@ _c = 100
   stroke: rgb(_c, _c, _c)
   stroke-width: 1
 
-// utility classes
+//******** utility classes
 .width-80
   width: 80px
 
@@ -118,7 +118,7 @@ _c = 100
   .outputs .inner-field span
     margin-left: field-label-padding
 
-// nodes inside a group node
+//******** nodes inside a group node
 .node .node
   position: relative !important
   padding: 0
@@ -152,19 +152,35 @@ animation_color = #f00
   .outputs h3
     text-align: right
 
-// base
+//******** base
 .type-Base
   @extend .width-80
 
 .node-Number
   @extend .width-150
   @extend .ratio-25-50-25
+  
+.node-Abstract
+  @extend .width-200
+  background: node_abstract_color
+  min-height: 50px
+
+  &.ui-selected
+    background: node_abstract_color + #050505
+    border: 2px solid #000
+
+  input, button
+    background: node_abstract_color
+    border: 1px solid node_abstract_color
+    color: #aaa
+
+
 
 .node-String
   @extend .width-150
   @extend .ratio-25-50-25
 
-// utils
+//******** utils
 .type-Utils
   @extend .width-80
 
@@ -180,7 +196,7 @@ animation_color = #f00
   @extend .width-200
   @extend .ratio-50-50
 
-// three.js related nodes
+//******** three.js related nodes
 .type-Three, .type-Materials
   @extend .width-200
   @extend .ratio-80-20
@@ -193,17 +209,17 @@ animation_color = #f00
   @extend .width-150
   @extend .ratio-80-20
 
-// postprocessing
+//******** postprocessing
 .type-PostProcessing
   @extend .width-150
   @extend .ratio-80-20
 
-// particle
+//******** particle
 .node-SparksMove
   @extend .width-80
   @extend .no-inputs
 
-// special nodes
+//******** special nodes
 .node-WebGLRenderer
   @extend .width-120
   .inputs
@@ -230,7 +246,21 @@ animation_color = #f00
     border: 1px solid #444
     margin-top: 6px
     margin-left: 2px
+//j******** state of nodes
+.state-run
+  background: node_run_color
 
+  &.ui-selected
+    background: node_run_color + #050505
+
+  input, button
+    background: node_run_color
+    border: 1px solid node_run_color
+    color: #aaa
+
+
+
+//j should refactor this elsewhere
 #uploadForm
   width: 150px
 
