@@ -23,7 +23,7 @@ define [
         "click" : "onClick"
 
       onClick: ->
-        Backbone.Events.trigger "selectField", @model
+        @model.trigger "select", @model
 
       remove: () =>
         $inner = $(".inner-field", @$el)

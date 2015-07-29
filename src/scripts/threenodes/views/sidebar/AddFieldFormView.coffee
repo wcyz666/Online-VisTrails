@@ -36,6 +36,7 @@ define [
         $formEls.each ()->
           formData[this.name] = this.value
         @trigger("addField", formData)
+        @render()
         
 
       onSelectChange: (e) =>

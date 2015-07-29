@@ -42,15 +42,15 @@ define [
         @model.on("node:addSelectedClass", @addSelectedClass)
         @model.on("run", @run)
         @model.on("stop", @stop)
-        #j indirect events
-        Backbone.Events.on "selectField", @selectField, @
+        #j the FieldsView class seems to be an unnecessary layer
+        @fields_view.collection.on "select", @onFieldSelected, @
 
         # Render the node and "post init" the model
         @render()
 
         #@model.postInit()
 
-      selectField: (field)=>
+      onFieldSelected: (field) ->
         @selectedField = field
 
       #j add css class to indicate this node run
@@ -135,19 +135,18 @@ define [
               $(this).addClass("ui-selecting")
           selectable = $("#container").data("selectable")
           selectable.refresh()
-          #j will fire the selectablestop event
+          #j will fire the selectablestop event, initializing NodeSidebarView
           selectable._mouseStop(null)
           self.model.fields.renderSidebar()
-          # UPDATE: thanks to event bubbling mechanism, @selectedField can
+          #j fire event to render NodeSidebarView
+          # 1. thanks to event bubbling mechanism, @selectedField can
           # be set before the click event bubbles up from the fieldButton to
           # nodeView
-          # fire the showFieldDetail event. The selectablestop event
-          # above is fired first, so its handler will be executed before
-          # the handler of showFieldDetail. So nodesidebar and related event
-          # listener will have been properly set up when this event fires
-          if self.selectedField
-            Backbone.Events.trigger "showFieldsDetail", [self.selectedField]
-            self.selectedField = null
+          # 2. the selectablestop event fires first, so its handler will
+          # be executed first than that of renderSiedebar. Thus the view will
+          # be initialized before we call render on it
+          Backbone.Events.trigger "renderSidebar", self.selectedField
+          self.selectedField = null
         return @
 
 

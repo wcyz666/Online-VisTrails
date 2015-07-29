@@ -24,12 +24,9 @@ define [
   namespace "ThreeNodes",
     NodeSidebarView: class NodeSidebarView extends Backbone.View
       initialize: (options) ->
-        NodeSidebarView.counter++
         @subviews = []
         super
-        @render()
-        Backbone.Events.on "showFieldsDetail", @displayFields, @
-
+        Backbone.Events.on "renderSidebar", @render, @
 
 
       displayFields: (fields) =>
@@ -61,23 +58,24 @@ define [
             @subviews.push view
             @$el.append(view.el)
 
-      render: () =>
+      render: (field) =>
         # Compile the template file
         @$el.html("<h2>#{@model.get('name')}</h2>")
-        # @displayFields(@model.fields.inputs)
+        if field
+          @displayFields [field]
+        else
+          @displayNode()
+        @
 
 
+
+      displayNode: ->
         # the custom_fields are not real fields; just objects wrapping the type 
         # and name property; their constructors are Object. So calling displayFields
         # on them won't achieve anything. BTW, fields itself already includes custom 
         # fields.
-        # if @model.custom_fields then @displayFields(@model.custom_fields.inputs)
 
-
-        ### 
-          special case for nodes whose ports can 
-          be configured: add the add_custom_field_form to the sidebar
-        ###
+        # add field form for adding custom fields
         if @model.add_field
           addFieldView = new ThreeNodes.AddFieldFormView() 
           @subviews.push addFieldView
@@ -90,8 +88,9 @@ define [
                   "datatype": obj.datatype
                   "dataset": obj.dataset
                 this.model.addCustomField(obj.name, obj.type, obj.portType, props)
-                this.render()                
           @.$el.append(addFieldView.$el)
+          # 1. only rerender the subview
+          # 2. rerendering of addFieldView should be taken care of by itself
 
         # context form for abstract model
         if @model instanceof ThreeNodes.nodes.models.Abstract
@@ -103,7 +102,7 @@ define [
         return @
 
 
-      #j should: 
+      # remove should: 
       # 1. unregister all events(on DOM, on itself, and on its nested objs)
       # 2. tear down subviews and remove references to subviews
       # 3. detach self from DOM
