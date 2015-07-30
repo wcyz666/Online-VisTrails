@@ -16,9 +16,9 @@ define [
 
         #j A.listenTo(B, event, callback), will bind this to A, but here 0.9.2 no 
         # listenTo
-        # on: default context is the object on is called on, here model, should pass the 
-        # third arg @ normally, though with coffeescript => it's not needed here, and 
-        # backbone view will always bind this in the first layer?
+        # on: default context is the object on is called on. But we pass @ as the context
+        # so we can call off all at once when removing the view. The fat arrow => will not
+        # give us the same benefit
         @model.on("change", @render, @)
         @render()
 
