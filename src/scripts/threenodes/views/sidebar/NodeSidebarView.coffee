@@ -92,8 +92,8 @@ define [
           # 1. only rerender the subview
           # 2. rerendering of addFieldView should be taken care of by itself
 
-        # context form for abstract model
-        if @model instanceof ThreeNodes.nodes.models.Abstract
+        # context form for abstractTask model
+        if @model instanceof ThreeNodes.nodes.models.AbstractTask
           contextFormView = new ThreeNodes.ContextFormView
             model: @model.context
           @subviews.push contextFormView

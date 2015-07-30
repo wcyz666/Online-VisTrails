@@ -1623,7 +1623,7 @@ body > header h2 {
 }
 .width-200,
 .node-Group,
-.node-Abstract,
+.node-AbstractTask,
 .node-LFO,
 .node-Mp3Input,
 .type-Three,
@@ -1830,16 +1830,16 @@ body > header h2 {
 .node-Group .outputs h3 {
   text-align: right;
 }
-.node-Abstract {
+.node-AbstractTask {
   background: #bdbdde;
   min-height: 50px;
 }
-.node-Abstract.ui-selected {
+.node-AbstractTask.ui-selected {
   background: #c2c2e3;
   border: 2px solid #000;
 }
-.node-Abstract input,
-.node-Abstract button {
+.node-AbstractTask input,
+.node-AbstractTask button {
   background: #bdbdde;
   border: 1px solid #bdbdde;
   color: #aaa;
