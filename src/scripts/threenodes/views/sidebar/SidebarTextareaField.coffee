@@ -42,7 +42,7 @@ define [
             else
               @model.setValue(f_input.val())
             f_input.blur()
-        ### 
+        ###
 
         return f_input
 

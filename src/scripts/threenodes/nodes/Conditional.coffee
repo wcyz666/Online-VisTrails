@@ -21,7 +21,7 @@ define [
             "out" : false
         return $.extend(true, base_fields, fields)
 
-	
+
     CartesianProduct: class CartesianProduct extends ThreeNodes.NodeBase
       @node_name = 'CartesianProduct'
       @group_name = 'ControlFlow'
@@ -138,7 +138,7 @@ define [
           outputs:
             "out": {type: "Any", val: @value}
         return $.extend(true, base_fields, fields)
-        
+
     If: class If extends ThreeNodes.NodeBase
       @node_name = 'If'
       @group_name = 'ControlFlow'
@@ -161,7 +161,7 @@ define [
         else
           res = @fields.getField("true").attributes.value
         @fields.setField("out", res)
-        
+
 
     Map: class Map extends ThreeNodes.NodeBase
       @node_name = 'Map'

@@ -9,7 +9,7 @@ define [
 
   namespace "ThreeNodes",
     Context: class Context extends Backbone.Model
-      defaults: 
+      defaults:
       	author: ""
       	affiliation: ""
       	keywords: ""

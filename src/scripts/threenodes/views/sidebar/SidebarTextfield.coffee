@@ -27,7 +27,7 @@ define [
         on_value_changed = (v) ->
           f_input.val(v)
         #j the source of memory leak
-        # add @ as context so we can remove reference to the handler when we 
+        # add @ as context so we can remove reference to the handler when we
         # destroy the view
         @model.on "value_updated", on_value_changed, @
 

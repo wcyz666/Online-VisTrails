@@ -33,4 +33,4 @@ define [
             "val1" : ""
           outputs:
             "out" : {type: "Any", val: @value}
-        return $.extend(true, base_fields, fields)        
+        return $.extend(true, base_fields, fields)

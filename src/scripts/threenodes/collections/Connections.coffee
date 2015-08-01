@@ -19,16 +19,16 @@ define [
         @each (c) -> c.render()
 
       # @override the backbone's collection.create
-      # model is not an actual model, it's just an object. It's better to name it 
+      # model is not an actual model, it's just an object. It's better to name it
       # attrs, like the way backbone exposes the api
-      # 
+      #
       # notes: Similar to the backbone source code:
-      # model is the attrs, but you can actually take a model. 
+      # model is the attrs, but you can actually take a model.
       # it will call _prepareModel(), the internal funciton of backbone, which will
-      # turn the object into a model if it isn't(it calls _isModel() internally to 
+      # turn the object into a model if it isn't(it calls _isModel() internally to
       # decide if this is a model)
 
-      #j it might call the connection model constructor to construct the model 
+      #j it might call the connection model constructor to construct the model
 
       create: (model, options) =>
         if !options then options = {}

@@ -19,8 +19,8 @@ define [
           outputs:
             "out" : {type: "Any", val: @value}
         return $.extend(true, base_fields, fields)
-        
-        
+
+
   namespace "ThreeNodes.nodes.models",
     HTTPFile: class HTTPFile extends ThreeNodes.NodeBase
       @node_name = 'HTTPFile'
@@ -34,8 +34,8 @@ define [
           outputs:
             "out" : {type: "Any", val: @value}
         return $.extend(true, base_fields, fields)
-        
-        
+
+
   namespace "ThreeNodes.nodes.models",
     RepoSynch: class RepoSynch extends ThreeNodes.NodeBase
       @node_name = 'RepoSynch'

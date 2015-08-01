@@ -48,7 +48,7 @@ define [
               return val[0]
           onTrackRebuild: () => @trigger("trackRebuild")
           onStop: () => @trigger("stopSound")
-          onPlay: (time) => 
+          onPlay: (time) =>
             @trigger("startSound", time)
             @trigger("runWorkflow")
 

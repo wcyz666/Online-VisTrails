@@ -13,10 +13,10 @@ This will automatically compile coffescript files to javascript, sass to css and
     cd in ThreeNodes
     npm install -d
 
-## To Run in Development environment 
+## To Run in Development environment
     cd in ThreeNodes (project folder)
     node server.js
-    
+
 ## To build and deploy
     cd in ThreeNodes
     node server.js build

@@ -236,7 +236,7 @@ define [
   namespace "ThreeNodes.fields",
     Any: class Any extends NodeField
       defaults: ->
-        _.extend super, 
+        _.extend super,
           data: ""
           datatype: ""
           dataset: ""
@@ -285,7 +285,7 @@ define [
           when "number" then return val != 0
           when "string" then return val == "1"
         return null
-        
+
     String: class String extends NodeField
       computeValue : (val) =>
         switch $.type(val)
@@ -295,21 +295,21 @@ define [
         return null
 
     LongText: class String extends String
-        
+
     Service: class Service extends NodeField
       computeValue : (val) =>
         return val
-        
+
     #Compute the value of write file
     WriteFile: class WriteFile extends NodeField
       computeValue : (val) =>
         return val
-        
+
     #Compute the value of write file
     FileSink: class FileSink extends NodeField
       computeValue : (val) =>
         return val
-        
+
 
     Float: class Float extends NodeField
       computeValue : (val) =>
@@ -324,7 +324,7 @@ define [
             else
               return 0
         return null
-        
+
     StringConcatenate: class StringConcatenate extends NodeField
       computeValue : (val) =>
         if $.type(val) == "object"
@@ -332,7 +332,7 @@ define [
             return val
         #return null
         return val
-        
+
 
     Vector2: class Vector2 extends NodeField
       computeValue : (val) =>

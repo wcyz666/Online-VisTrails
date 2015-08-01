@@ -43,7 +43,7 @@ define [
             when ThreeNodes.fields.WriteFile then ThreeNodes.views.fields.WriteFileField
             when ThreeNodes.fields.StringConcatenate then ThreeNodes.views.fields.StringConcatenateField
             when ThreeNodes.fields.FileSink then ThreeNodes.views.fields.FileSinkField
-            #Add ServiceField input text 
+            #Add ServiceField input text
             #when ThreeNodes.fields.Service then ThreeNodes.views.fields.ServiceField
             when ThreeNodes.fields.Vector2 then ThreeNodes.views.fields.Vector2Field
             when ThreeNodes.fields.Vector3 then ThreeNodes.views.fields.Vector3Field
@@ -70,20 +70,20 @@ define [
 
 
       displayNode: ->
-        # the custom_fields are not real fields; just objects wrapping the type 
+        # the custom_fields are not real fields; just objects wrapping the type
         # and name property; their constructors are Object. So calling displayFields
-        # on them won't achieve anything. BTW, fields itself already includes custom 
+        # on them won't achieve anything. BTW, fields itself already includes custom
         # fields.
 
         # add field form for adding custom fields
         if @model.add_field
-          addFieldView = new ThreeNodes.AddFieldFormView() 
+          addFieldView = new ThreeNodes.AddFieldFormView()
           @subviews.push addFieldView
           addFieldView.on "addField", (obj)=>
             if obj.key != ''
               # this port type is not the port type in the page
               if obj.portType == 'inputs' || obj.portType == 'outputs'
-                props = 
+                props =
                   "data": obj.data
                   "datatype": obj.datatype
                   "dataset": obj.dataset
@@ -102,7 +102,7 @@ define [
         return @
 
 
-      # remove should: 
+      # remove should:
       # 1. unregister all events(on DOM, on itself, and on its nested objs)
       # 2. tear down subviews and remove references to subviews
       # 3. detach self from DOM
@@ -123,6 +123,6 @@ define [
 
 
 
-      
+
 
 

@@ -87,7 +87,7 @@ define [
 					# Call loadFromJsonData when the file is loaded
 					self.loadFromJsonData(txt)
 				reader.readAsText(file, "UTF-8")
-        
+
 		# Execute event to give output
 			executeAndSave: () =>
 				#convert to JSON and send to Server
@@ -120,5 +120,5 @@ define [
 						return "Error from Server"
 
 
-				
-				
+
+

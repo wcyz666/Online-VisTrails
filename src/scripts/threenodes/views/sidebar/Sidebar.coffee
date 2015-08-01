@@ -84,7 +84,7 @@ define [
           $target.append(view.el)
           @node_views.push view
 
-        # toggle the tabs  
+        # toggle the tabs
         @$el.tabs('option', 'active', 1)
         return this
 

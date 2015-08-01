@@ -21,7 +21,7 @@ define [
 
     String: class String extends ThreeNodes.nodes.views.NodeWithCenterTextfield
       getCenterField: () => @model.fields.getField("string")
-      
+
     Service: class Service extends ThreeNodes.nodes.views.NodeWithCenterTextfield
       getCenterField: () => @model.fields.getField("in")
 
@@ -30,16 +30,16 @@ define [
 
     File: class File extends ThreeNodes.nodes.views.NodeWithUpload
 
-   
+
   namespace "ThreeNodes.nodes.models",
     Integer: class Integer extends ThreeNodes.NodeNumberSimple
       @node_name = 'Integer'
       @group_name = 'BasicModules'
-      
-      #j the lib author calls a overidden method in the super constructor, 
+
+      #j the lib author calls a overidden method in the super constructor,
       # which is discouraged and is the source of the undefined bug.
       # One way to fix it is to move all @value before super call, since
-      # coffeescript doesn't have the rule of super being the first call. 
+      # coffeescript doesn't have the rule of super being the first call.
       # But it is better to avoid the whole thing.
       initialize: (options) =>
         @value = 0
@@ -55,7 +55,7 @@ define [
           outputs:
             "out0": {type: "Any", val: @value}
         return $.extend(true, base_fields, fields)
-        
+
     AbstractTask: class AbstractTask extends ThreeNodes.NodeCustom
       @node_name = 'AbstractTask'
       @group_name = 'BasicModules'
@@ -93,14 +93,14 @@ define [
     Service: class Service extends ThreeNodes.NodeBase
       @node_name = 'Service'
       @group_name = 'BasicModules'
-      
+
       initialize: (options) =>
         @value = ""
         super
-      
+
       getFields: =>
         base_fields = super
-        fields = 
+        fields =
           inputs:
             "in": ""
           outputs:
@@ -110,14 +110,14 @@ define [
     Aggregation: class Aggregation extends ThreeNodes.NodeBase
       @node_name = 'Aggregation'
       @group_name = 'BasicModules'
-      
+
       initialize: (options) =>
         @value = ""
         super
-        
+
       getFields: =>
         base_fields = super
-        fields = 
+        fields =
           inputs:
             "in0": ""
             "in1": ""
@@ -147,7 +147,7 @@ define [
       compute: =>
         @fields.setField("out0", @fields.getField("bool").getValue())
         @fields.setField("out1", @fields.getField("bool").getValue())
-        
+
     Assert: class Assert extends ThreeNodes.NodeBase
       @node_name = 'Assert'
       @group_name = 'BasicModules'
@@ -155,7 +155,7 @@ define [
       initialize: (options) =>
         @value = ""
         super
-		
+
       getFields: =>
         base_fields = super
         fields =
@@ -170,7 +170,7 @@ define [
       initialize: (options) =>
         @value = ""
         super
-		
+
       getFields: =>
         base_fields = super
         fields =
@@ -187,7 +187,7 @@ define [
       initialize: (options) =>
         @value = ""
         super
-		
+
       getFields: =>
         base_fields = super
         fields =
@@ -204,7 +204,7 @@ define [
         @fields.setField("out0", @fields.getField("in0").getValue())
         @fields.setField("out1", @fields.getField("in1").getValue())
 
-        
+
     Directory: class Directory extends ThreeNodes.NodeBase
       @node_name = 'Directory'
       @group_name = 'BasicModules'
@@ -212,7 +212,7 @@ define [
       initialize: (options) =>
         @value = ""
         super
-		
+
       getFields: =>
         base_fields = super
         fields =
@@ -232,7 +232,7 @@ define [
       initialize: (options) =>
         @value = ""
         super
-		
+
       getFields: =>
         base_fields = super
         fields =
@@ -249,7 +249,7 @@ define [
       initialize: (options) =>
         @value = ""
         super
-		
+
       getFields: =>
         base_fields = super
         fields =
@@ -266,7 +266,7 @@ define [
       initialize: (options) =>
         @value = ""
         super
-		
+
       getFields: =>
         base_fields = super
         fields =
@@ -276,8 +276,8 @@ define [
             "out0": {type: "Any", val: @value}
             "out1": {type: "Any", val: @value}
         return $.extend(true, base_fields, fields)
-        
-        
+
+
     InputPort: class InputPort extends ThreeNodes.NodeBase
       @node_name = 'InputPort'
       @group_name = 'BasicModules'
@@ -285,7 +285,7 @@ define [
       initialize: (options) =>
         @value = ""
         super
-		
+
       getFields: =>
         base_fields = super
         fields =
@@ -295,7 +295,7 @@ define [
           outputs:
             "out": {type: "Any", val: @value}
         return $.extend(true, base_fields, fields)
-        
+
 
     OutputPort: class OutputPort extends ThreeNodes.NodeBase
       @node_name = 'OutputPort'
@@ -304,7 +304,7 @@ define [
       initialize: (options) =>
         @value = ""
         super
-		
+
       getFields: =>
         base_fields = super
         fields =
@@ -321,7 +321,7 @@ define [
       initialize: (options) =>
         @value = ""
         super
-		
+
       getFields: =>
         base_fields = super
         fields =
@@ -340,7 +340,7 @@ define [
       initialize: (options) =>
         @value = ""
         super
-		
+
       getFields: =>
         base_fields = super
         fields =
@@ -361,7 +361,7 @@ define [
       initialize: (options) =>
         @value = ""
         super
-		
+
       getFields: =>
         base_fields = super
         fields =
@@ -383,7 +383,7 @@ define [
       initialize: (options) =>
         @value = ""
         super
-		
+
       getFields: =>
         base_fields = super
         fields =
@@ -428,7 +428,7 @@ define [
           res[i] = res0[i] + res1[i] + res2[i] + res3[i]
 
         @fields.setField("out", res)
-        
+
     WriteFile: class WriteFile extends ThreeNodes.NodeBase
       @node_name = 'WriteFile'
       @group_name = 'BasicModules'
@@ -464,7 +464,7 @@ define [
             "in" : {type: "Any", val: @value}
             "in0" : {type: "Any", val: @value}
         return $.extend(true, base_fields, fields)
-        
+
 
     Vector3: class Vector3 extends ThreeNodes.NodeBase
       @node_name = 'Vector3'
@@ -501,8 +501,8 @@ define [
         @fields.setField("x", resx)
         @fields.setField("y", resy)
         @fields.setField("z", resz)
-        
-        
+
+
 
     Color: class Color extends ThreeNodes.NodeBase
       @node_name = 'Color'
@@ -539,7 +539,7 @@ define [
         @fields.setField("r", resr)
         @fields.setField("g", resg)
         @fields.setField("b", resb)
-        
+
     Path: class Path extends ThreeNodes.NodeBase
       @node_name = 'Path'
       @group_name = 'BasicModules'
@@ -547,7 +547,7 @@ define [
       initialize: (options) =>
         super
         @value = ""
-		
+
       getFields: =>
         base_fields = super
         fields =
@@ -558,7 +558,7 @@ define [
             "out1": {type: "Any", val: @value}
         return $.extend(true, base_fields, fields)
 
-        
+
     # PythonSource: class PythonSource extends ThreeNodes.NodeBase
     #   @node_name = 'PythonSource'
     #   @group_name = 'BasicModules'
@@ -566,7 +566,7 @@ define [
     #   initialize: (options) =>
     #     super
     #     @value = ""
-		
+
       # getFields: =>
       #   base_fields = super
       #   fields =
@@ -585,12 +585,12 @@ define [
       initialize: (options) =>
         @value = ""
         super
-		
+
       getFields: =>
         base_fields = super
         return $.extend(true, base_fields, fields)
 
-        
+
 
     StandardOutput: class StandardOutput extends ThreeNodes.NodeBase
       @node_name = 'StandardOutput'
@@ -599,7 +599,7 @@ define [
       initialize: (options) =>
         @value = ""
         super
-		
+
       getFields: =>
         base_fields = super
         fields =
@@ -609,7 +609,7 @@ define [
 
 
 
-        
+
 
     Tuple: class Tuple extends ThreeNodes.NodeBase
       @node_name = 'Tuple'
@@ -618,7 +618,7 @@ define [
       initialize: (options) =>
         super
         @value = ""
-		
+
       getFields: =>
         base_fields = super
         return $.extend(true, base_fields, fields)
@@ -631,7 +631,7 @@ define [
       initialize: (options) =>
         super
         @value = ""
-		
+
       getFields: =>
         base_fields = super
         return $.extend(true, base_fields, fields)
@@ -645,7 +645,7 @@ define [
       initialize: (options) =>
         super
         @value = ""
-		
+
       getFields: =>
         base_fields = super
         fields =
@@ -655,8 +655,8 @@ define [
           outputs:
             "out": {type: "Any", val: @value}
         return $.extend(true, base_fields, fields)
-        
-        
+
+
     UnzipDirectory: class UnzipDirectory extends ThreeNodes.NodeBase
       @node_name = 'UnzipDirectory'
       @group_name = 'BasicModules'
@@ -664,7 +664,7 @@ define [
       initialize: (options) =>
         super
         @value = ""
-		
+
       getFields: =>
         base_fields = super
         fields =

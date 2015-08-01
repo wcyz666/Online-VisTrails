@@ -15,14 +15,14 @@ define [
         super
         @render()
 
-      events: 
+      events:
         "submit": "onSubmit"
         "change select": "onSelectChange"
 
       render: () =>
         @$el.html(@template())
         return @
-        
+
       onSubmit: (e) =>
         e.preventDefault()
         @$el.find("[type='submit']").blur()
@@ -37,7 +37,7 @@ define [
           formData[this.name] = this.value
         @trigger("addField", formData)
         @render()
-        
+
 
       onSelectChange: (e) =>
         $generics = @.$el.find(".generic")
@@ -55,4 +55,4 @@ define [
 
 
 
-        
+

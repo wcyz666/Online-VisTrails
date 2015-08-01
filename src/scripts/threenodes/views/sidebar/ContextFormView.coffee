@@ -14,7 +14,7 @@ define [
       initialize: (options) ->
         super
 
-        #j A.listenTo(B, event, callback), will bind this to A, but here 0.9.2 no 
+        #j A.listenTo(B, event, callback), will bind this to A, but here 0.9.2 no
         # listenTo
         # on: default context is the object on is called on. But we pass @ as the context
         # so we can call off all at once when removing the view. The fat arrow => will not
@@ -22,13 +22,13 @@ define [
         @model.on("change", @render, @)
         @render()
 
-      events: 
+      events:
         "submit": "onSubmit"
 
       render: () =>
         @$el.html(@template(@model.toJSON()))
         return @
-        
+
       onSubmit: (e) =>
         e.preventDefault()
         @$el.find("button").blur()
@@ -46,7 +46,7 @@ define [
       remove: =>
         super
         @off()
-        @model.off null, null, @ 
+        @model.off null, null, @
 
 
 

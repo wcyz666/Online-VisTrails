@@ -101,7 +101,7 @@ define [
 
 
 
- 
+
       typename: => String(@constructor.name)
 
       onFieldsCreated: () =>
@@ -332,5 +332,5 @@ define [
 
 
 
-      
+
 

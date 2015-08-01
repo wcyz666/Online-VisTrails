@@ -72,7 +72,7 @@ define [
 
       compute: =>
         @fields.setField("out", value)
-        
+
 
     YesNoDialog: class YesNoDialog extends ThreeNodes.NodeBase
       @node_name = 'YesNoDialog'
@@ -91,5 +91,5 @@ define [
 
       compute: =>
         @fields.setField("out", value)
-        
+
 

@@ -54,7 +54,7 @@ define [
 
 
         # haha, maybe next time
-        # use Backbone itself as the central event bus. Note that require js will 
+        # use Backbone itself as the central event bus. Note that require js will
         # load the cached obj if you have required it from file before
         # Backbone.trigger("workflow:contextChange", formData)
         # @.trigger("setContext", formData)

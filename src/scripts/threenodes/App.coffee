@@ -180,7 +180,7 @@ define [
         #j this is App, not timelineview, why return this?
         return this
 
-      #j start running the workflow if it is not running, 
+      #j start running the workflow if it is not running,
       # run next node if it is
       runWorkflow: =>
         if !@workflow_state
