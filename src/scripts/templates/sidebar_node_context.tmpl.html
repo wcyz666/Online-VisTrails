@@ -13,11 +13,16 @@
 		<input type="text" name="keywords" id="keywords" value = "<%= keywords %>" />
 	</div>
 	<div>
+		<label for="constraints">Constraints</label>
+		<button type='button' id='addConstraint'>+</button>
+		<div id='constraints'></div>
+	</div>
+	<div>
 		<label for="purpose">Purpose</label>
 		<textarea rows = "5" cols = "5" name = "purpose" id = "purpose" > <%= purpose %> </textarea>
  	</div>
 	<div>
-		<label for="description">description</label>
+		<label for="description">Description</label>
 		<textarea rows="5" cols="5" name="description" id="description" > <%= description %> </textarea>
 	</div>
 	<button type="submit">Save</button>

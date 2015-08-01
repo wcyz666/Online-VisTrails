@@ -1472,6 +1472,14 @@ body > header h2 {
 #sidebar textarea {
   width: 90%;
 }
+#sidebar form div {
+  clear: both;
+}
+#sidebar #addConstraint {
+  float: right;
+  font-size: 1em;
+  padding-top: 4px;
+}
 #sidebar label {
   padding: 5px;
   float: left;

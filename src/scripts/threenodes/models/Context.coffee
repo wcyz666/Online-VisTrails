@@ -9,9 +9,11 @@ define [
 
   namespace "ThreeNodes",
     Context: class Context extends Backbone.Model
-      defaults:
-      	author: ""
-      	affiliation: ""
-      	keywords: ""
-      	purpose: ""
-      	description: ""
+      # define defaults as function because we have an array attr
+      defaults: ->
+        author: ""
+        affiliation: ""
+        keywords: ""
+        purpose: ""
+        description: ""
+        constraints: []
