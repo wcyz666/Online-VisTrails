@@ -241,6 +241,11 @@ define [
           datatype: ""
           dataset: ""
 
+      # initialize is called after the model is constructed
+      # order: get defaults --> _.extend defaults with provided args
+      # --> call initialize and pass on the provided args
+
+
       computeValue : (val) =>
         val
 
