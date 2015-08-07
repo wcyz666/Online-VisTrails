@@ -135,6 +135,9 @@ define [
             name: name
             type: value.type
             value: value.val
+            data: value.data
+            datatype: value.datatype
+            dataset: value.dataset
             # props: props
             possibilities: value.values
             node: @node
@@ -151,6 +154,7 @@ define [
             # In group nodes we want to have a unique field index
             field_index += "-" + field.subfield.node.get("nid")
           #j keep a shallow copy of the fields in this collection
+          # this.inputs.out1 = ...
           @[target][field_index] = field
           #j backbone add
           @add(field)
@@ -158,12 +162,13 @@ define [
 
         return field
 
-      addFields: (fields_array) =>
-        #j dir is short for directory
-        for dir of fields_array
+
+      addFields: (fields_obj) =>
+        #j dir is short for direction
+        for dir of fields_obj
           # dir = inputs / outputs
-          for fname of fields_array[dir]
-            value = fields_array[dir][fname]
+          for fname of fields_obj[dir]
+            value = fields_obj[dir][fname]
             @addField(fname, value, dir)
         @
 

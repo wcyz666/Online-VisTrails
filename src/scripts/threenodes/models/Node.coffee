@@ -167,9 +167,102 @@ define [
               return true
         false
 
+      # Compare with @loadFields, this serves as the default value
       getFields: =>
-        # to implement
-        return {}
+        fields = @loadFields()
+        fields
+
+
+      # **Purpose:** Compare with @getFields, this serves as the passed in options
+      #
+      # **Description:** If node is loaded from JSON, fields will be set on each node
+      # instance, so we can get it. This is dirty, but... a way to
+      # walk around the strange design decision of legacy code: the fields
+      # are boud to each node and dynamically, created by a method of the
+      # node instead of passing as options to the node(we create default
+      # collections of fields for this node and call set if we were passed
+      # new collections in the options).
+      # Be sure to use recursive merge: $.extend(true, dest, src), instead
+      # of shallow merge: _.extend(dest, src), if you use this method
+      #
+      # **The main problem here** is the load and save process are not reversible
+      # or symmetrical if you will. They don't load fields from the saved JSON,
+      # but generate them dynamically based on the module type. So when the
+      # fields and the node type are not directly coupled, problem occurs.
+      #
+      # **The author also got bitten** by the problem when adding the 'add custom field'
+      # feature, which removes the coupling between node type and fields. How to set
+      # the user configured input fields values is alse a similar problem to our problem.
+      #
+      # **How he walked around this:**
+      # *For 'add custom fields': he created another attr system, the
+      # custom_fields attr, and the save and load process of custom_fields attr are
+      # symmetrical/ reversible; the attrs set on the node has the exact same format
+      # as the saved data in JSON file. So the toJSON and loadFromJSON process are
+      # not complex: no extra transfomration of data needed.
+      # And then in the normal fields attr system, he again gets the custome fields
+      # from the custom_fields attr system and add all them in the normal fields attr
+      # system, hence a lot of repeated work and data, on the node or in local file.
+      # *For 'set user configured input fields values from saved file': after all fields
+      # are loaded, extract the input values from file, and set them on the already
+      # loaded input ports. Since the ports are stored as attrs of obj, getting them would
+      # be getting values from a hashtable using key, which is efficient.
+      #
+      #
+      # Since all data we need is already in the file, and we don't want to spend
+      # extra space just to store the repeated data in the right format, we then have
+      # to do some ETL(extract, transform and load) work. Not the first solutin.
+      # For the second solution, it's two passes: one for setting the fields, and one for
+      # setting values of fields if they have any. Wouldn't it be better if we can
+      # first prepare all data in the right format and set them all in one pass? So our
+      # plan is to ETL new data we need and merge them with the fields and still utilze
+      # the normal fields loading process. ~~Then we need to change all the getFields
+      # function to return the merged fields when needed(when the node has a 'Any'
+      # field)~~
+      # UPDATE: we don't actually need to change all of the getFields method, since
+      # $.extend(true, ...) is used, which does a deep merge, to merge old and new
+      # fields, we can actually prepare the fields we need in the super class getFields
+      # method. Thanks to the deep merge, the inner attrs of the fields won't be
+      # overridden.
+
+      loadFields: ->
+        fields = {}
+        if @has 'fields'
+          options = @get 'fields'
+          # fields =
+          #   in: [
+          #     {
+          #       name: 'name'
+          #       type: 'type'
+          #       val: 'val'
+          #     }
+          #     {...}
+          #   ]
+          #   out: [{...}, {...}, {...}]
+          # here we only deal with one type: any, and add suppor for
+          # other types later if needed
+
+          # filter: only translate field of type 'Any'
+          # inputs and outputs are []
+          inputs = (port for port in options.in when port.type == 'Any')
+          outputs = (port for port in options.out when port.type == 'Any')
+          # reduce:
+          reduce = (memo, cur) ->
+            memo[cur.name] =
+              type: cur.type
+              val: cur.val
+              data: cur.data
+              dataset: cur.dataset
+              datatype: cur.datatype
+            return memo
+
+          if inputs.length > 0
+            inputs = _.reduce inputs, reduce, {}
+            fields.inputs = inputs
+          if outputs.length > 0
+            outputs = _.reduce outputs, reduce, {}
+            fields.outputs = outputs
+        return fields
 
       hasOutConnection: () =>
         @out_connections.length != 0
@@ -320,6 +413,10 @@ define [
         res.custom_fields = @custom_fields
         return res
 
+      # return JSON info of fields, not real field model
+      # 1. default from super node class
+      # 2. default from this node
+      # 3. custom added fields from this node
       getFields: =>
         base_fields = super
         # to override based on this
