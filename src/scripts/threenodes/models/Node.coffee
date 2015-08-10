@@ -172,7 +172,6 @@ define [
         fields = @loadFields()
         fields
 
-
       # **Purpose:** Compare with @getFields, this serves as the passed in options
       #
       # **Description:** If node is loaded from JSON, fields will be set on each node
@@ -227,6 +226,8 @@ define [
 
       loadFields: ->
         fields = {}
+        # if we are loading from saved json file, we would have the
+        # fields attr already set
         if @has 'fields'
           options = @get 'fields'
           # fields =

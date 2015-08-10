@@ -126,18 +126,25 @@ define [
         #  change to   Float,  String, Bool
         if $.type(value) != "object"
           value = @getFieldValueObject(value)
-        #j declare variable
+        # We want to make use of the original 'value' obj(extend it and pass it to
+        # the model to set attrs) instead of build another obj(that is in the format
+        # of the model attrs) from it, which entails custom checking and transform
+        # for each new attribute possiblly added in the future
+        # Change value.val to value.value to be consistent with field model
+        # @todo: might use delete to do the work?
+        tmp = {}
+        for key of value
+          if key is 'val'
+            tmp.value = value[key]
+          else
+            tmp[key] = value[key]
+        value = tmp
         field = {}
-        #j create field model and add it to the collection
+        # value: {type: 'Any', val: 0}, it might also has data, dataset, datatype
+        # if we are loading from JSON file
         if ThreeNodes.fields[value.type]
-          field = new ThreeNodes.fields[value.type]
-            #j pass initial values of attrs, which will be called set on
+          field = new ThreeNodes.fields[value.type] _.extend value,
             name: name
-            type: value.type
-            value: value.val
-            data: value.data
-            datatype: value.datatype
-            dataset: value.dataset
             # props: props
             possibilities: value.values
             node: @node
