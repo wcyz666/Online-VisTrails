@@ -139,21 +139,20 @@ define [
           else
             tmp[key] = value[key]
         value = tmp
+        if props then _.extend value, props
+
         field = {}
         # value: {type: 'Any', val: 0}, it might also has data, dataset, datatype
         # if we are loading from JSON file
         if ThreeNodes.fields[value.type]
           field = new ThreeNodes.fields[value.type] _.extend value,
             name: name
-            # props: props
             possibilities: value.values
             node: @node
             is_output: field_is_out
             default: value.default
             subfield: value.subfield
             indexer: @indexer
-          #j props is optional; keep models flat!
-          if props then field.set(props)
 
           target = if field.get("is_output") == false then "inputs" else "outputs"
           field_index = field.get("name")
@@ -165,8 +164,6 @@ define [
           @[target][field_index] = field
           #j backbone add
           @add(field)
-
-
         return field
 
 

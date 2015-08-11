@@ -82,10 +82,12 @@ define [
             if obj.key != ''
               # this port type is not the port type in the page
               if obj.portType == 'inputs' || obj.portType == 'outputs'
-                props =
-                  "data": obj.data
-                  "datatype": obj.datatype
-                  "dataset": obj.dataset
+                props = {}
+                if obj.data
+                  _.extend props,
+                    "data": obj.data
+                    "datatype": obj.datatype
+                    "dataset": obj.dataset
                 this.model.addCustomField(obj.name, obj.type, obj.portType, props)
           @.$el.append(addFieldView.$el)
           # 1. only rerender the subview

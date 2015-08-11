@@ -31,8 +31,8 @@ define [
         # radio button:
         $portType = $form.find("[name = 'portType']:checked")
         formData.portType = $portType.val()
-        # other elements:
-        $formEls = $form.find("[id]")
+        # other elements: excluding hidden elements
+        $formEls = $form.find("[id]").filter(':visible')
         $formEls.each ()->
           formData[this.name] = this.value
         @trigger("addField", formData)

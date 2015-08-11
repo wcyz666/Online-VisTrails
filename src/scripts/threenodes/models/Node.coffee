@@ -401,7 +401,7 @@ define [
 
 
       addCustomField: (name, type, direction = 'inputs', props) =>
-        field = {name: name, type: type, props: props}
+        field = {name: name, type: type}
         # Add the field to a variable for saving.
         @custom_fields[direction][name] = field
 
