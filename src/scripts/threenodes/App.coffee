@@ -129,7 +129,7 @@ define [
 
           # Setup the main menu events
           @ui.menubar.on("RemoveSelectedNodes", @nodes.removeSelectedNodes)
-          @ui.menubar.on("ClearWorkspace", @clearWorkspace)
+          @ui.menubar.on("CreateNewWorkflow", @createNewWorkflow)
           @ui.menubar.on("SaveFile", @file_handler.saveLocalFile)
           @ui.menubar.on("ExportCode", @file_handler.exportCode)
           @ui.menubar.on("LoadJSON", @file_handler.loadFromJsonData)
@@ -232,13 +232,14 @@ define [
       setDisplayMode: (is_player = false) =>
         if @ui then @ui.setDisplayMode(is_player)
 
+      createNewWorkflow: =>
+        @clearWorkspace()
+        @setWorkflowContext()
+
       setWorkflowContext: =>
         @ui.dialogView.openDialog()
 
-
-
       clearWorkspace: () =>
-        @setWorkflowContext()
         @nodes.clearWorkspace()
         @group_definitions.removeAll()
         if @ui then @ui.clearWorkspace()
