@@ -33,6 +33,9 @@ define [
 
         # Define some utility variables, used internally
         @is_animated = false
+        # a node is ready to run if it is a start node or all ports are ready
+        # @ready is updated when checking for start nodes or checking all ports
+        @ready = false
         # connections starting out from this node
         @out_connections = []
 
@@ -77,13 +80,35 @@ define [
 
         return this
 
-      #j run this node module, which is part of the whole workflow
-      run: =>
-        @trigger("run")
+      # check input ports to see if this node is ready to run
+      # update @ready if is
+      checkPortsReadyAndUpdate: ->
+        for own key, field of @fields.inputs
+          if !field.ready then return false
+        @ready = true
+        true
 
-      #j stop running
+
+      # run self
+      run: =>
+        # run it self
+        @trigger("run")
+        null
+
+      # stop running, disable self ports, enable connecting ports
+      # update @ready
       stop: =>
         @trigger("stop")
+        @ready = false
+        # disable self ports
+        for key, field of @fields.inputs
+          field.ready = false
+        # enable connecting ports
+        for key, field of @fields.outputs
+          for connection in field.connections
+            connection.to_field.ready = true
+            connection.to_field.node.checkPortsReadyAndUpdate()
+        null
 
 
       #j @return: true if is start node

@@ -66,13 +66,15 @@ define [
             from_field: field1
             to_field: field2
 
-      #j @return: [] of start node models
-      findStartNodes: ()=>
-        #j workaroud of declaring variables in coffeescript
+      # @return: [] of start node models
+      # mark the nodes as ready to run
+      findStartNodesAndMarkReady: ()=>
         startNodes = []
         #j find the first one and stop, for now
         @.each (node)=>
-          if node.isStartNode() then startNodes.push node
+          if node.isStartNode()
+            startNodes.push node
+            node.ready = true
         startNodes
 
       clearWorkspace: () =>

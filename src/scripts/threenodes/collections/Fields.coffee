@@ -12,6 +12,8 @@ define [
         super
         @node = options.node
         @indexer = options.indexer
+        # @inputs and @outputs hold pointers to the same field models as in
+        # this collection
         @inputs = {}
         @outputs = {}
         @special_elements = {left: [], center: [], right: []}

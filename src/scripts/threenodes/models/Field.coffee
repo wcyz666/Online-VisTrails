@@ -50,7 +50,14 @@ define [
             @attributes.value[property] = data[property]
         return this
 
+
       initialize: (options) =>
+        # If dataflow reaches this port.
+        # A state of the field which only lives in the client side, and
+        # is not a data property in the presentation. Instead, it's a
+        # state which affects the style
+        @ready = false
+
         self = this
         # Keep reference to some variables
         # the node that owns the field
@@ -78,6 +85,7 @@ define [
         if @get("fid") == -1
           @set("fid", indexer.getUID())
 
+      # a to_field is a connected input field
       isToField: =>
         for c in @connections
           if c.to_field is @ then return true
