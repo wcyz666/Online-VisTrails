@@ -4,6 +4,7 @@ define [
   'jquery',
   'libs/namespace',
   "cs!threenodes/utils/Utils",
+  'cs!threenodes/models/Workflow',
   'cs!threenodes/collections/Nodes',
   'cs!threenodes/collections/GroupDefinitions',
   'cs!threenodes/views/UI',
@@ -26,12 +27,8 @@ define [
           test: false
           player_mode: false
         @settings = $.extend(settings, options)
-        #j some other properties
-        # boolean: true for running, false for not running, may add other states in the future
-        @workflow_state = false
-        # []: nodes that are currently running
-        @running_nodes = []
-        @waiting_nodes = []
+
+        @workflow = new ThreeNodes.Workflow()
 
         # Define renderer mouseX/Y for use in utils.Mouse node for instance
         ThreeNodes.renderer =
@@ -184,7 +181,7 @@ define [
       #j start running the workflow if it is not running,
       # run next node if it is
       runWorkflow: =>
-        if !@workflow_state
+        if !@workflow.workflow_state
           @startRunningWorkflow()
         else
           @runNext()
@@ -196,33 +193,33 @@ define [
         start_nodes = @nodes.findStartNodesAndMarkReady()
         for node in start_nodes
           node.run()
-        @workflow_state = true
-        @running_nodes = start_nodes
+        @workflow.workflow_state = true
+        @workflow.running_nodes = start_nodes
         null
 
       runNext: =>
         # get nodes to run
-        nodes_to_run = [].concat @waiting_nodes
-        @waiting_nodes = []
-        for node in @running_nodes
+        nodes_to_run = [].concat @workflow.waiting_nodes
+        @workflow.waiting_nodes = []
+        for node in @workflow.running_nodes
           # get nodes to run next
           nodes_to_run = nodes_to_run.concat node.next()
           # stop current running
           node.stop()
-        @running_nodes = []
+        @workflow.running_nodes = []
 
         # if the end of workflow, change the workflow_state
         if !nodes_to_run.length
-          @workflow_state = false
+          @workflow.workflow_state = false
         # else continue running
         else
           # run nodes_to_run
           for node in nodes_to_run
             if node.ready
               node.run()
-              @running_nodes.push node
+              @workflow.running_nodes.push node
             else
-              @waiting_nodes.push node
+              @workflow.waiting_nodes.push node
         null
 
 
@@ -240,6 +237,7 @@ define [
         @ui.dialogView.openDialog()
 
       clearWorkspace: () =>
+        @workflow = new ThreeNodes.Workflow()
         @nodes.clearWorkspace()
         @group_definitions.removeAll()
         if @ui then @ui.clearWorkspace()
