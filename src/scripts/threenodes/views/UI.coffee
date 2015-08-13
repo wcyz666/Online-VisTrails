@@ -32,8 +32,7 @@ define [
         @settings = options.settings
         @is_grabbing = false
 
-        # model, the workflow context, shared with dialogView
-        @context = new ThreeNodes.Context
+        @workflow = options.workflow
 
 
         # Bind events
@@ -58,7 +57,7 @@ define [
         # Setup the sidebar and menu subviews
         @sidebar = new ThreeNodes.Sidebar({el: $("#sidebar")})
         @initMenubar()
-        @dialogView = new ThreeNodes.DialogView(model: @context)
+        @dialogView = new ThreeNodes.DialogView(model: @workflow.context)
         @dialogView.setElement(this.$("#dialog")).render()
 
         # Set the layout and show application
@@ -103,7 +102,7 @@ define [
             dx = ui.position.left + $("#container-wrapper").scrollLeft() - offset.left - 10
             dy = ui.position.top + $("#container-wrapper").scrollTop() - container.scrollTop() - offset.top
             #debugger
-            self.trigger("CreateNode", {type: nodename, x: dx, y: dy, definition: definition, context: self.context.toJSON()})
+            self.trigger("CreateNode", {type: nodename, x: dx, y: dy, definition: definition, context: self.workflow.context.toJSON()})
             $("#sidebar").show()
 
         return this

@@ -2,6 +2,7 @@ define [
   'Underscore',
   'Backbone',
   'cs!threenodes/utils/Utils',
+  'cs!threenodes/models/Context',
   'cs!threenodes/collections/Fields',
 ], (_, Backbone, Utils) ->
   #"use strict"
@@ -16,3 +17,7 @@ define [
         @workflow_state = false
         @running_nodes = []
         @waiting_ndoes = []
+
+        # nested model
+        @context = new ThreeNodes.Context()
+

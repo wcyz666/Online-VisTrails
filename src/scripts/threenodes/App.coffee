@@ -28,7 +28,10 @@ define [
           player_mode: false
         @settings = $.extend(settings, options)
 
+        _.extend(@, Backbone.Events)
+
         @workflow = new ThreeNodes.Workflow()
+        @on 'replaceWorkflow', @onReplaceWorkflow, @
 
         # Define renderer mouseX/Y for use in utils.Mouse node for instance
         ThreeNodes.renderer =
@@ -118,6 +121,7 @@ define [
           @ui = new ThreeNodes.UI
             el: $("body")
             settings: @settings
+            workflow: @workflow
 
 
           # Link UI to render events
@@ -224,7 +228,8 @@ define [
 
 
 
-
+      onReplaceWorkflow: ->
+        # @todo:
 
       setDisplayMode: (is_player = false) =>
         if @ui then @ui.setDisplayMode(is_player)
@@ -238,6 +243,7 @@ define [
 
       clearWorkspace: () =>
         @workflow = new ThreeNodes.Workflow()
+        @trigger 'replaceWorkflow'
         @nodes.clearWorkspace()
         @group_definitions.removeAll()
         if @ui then @ui.clearWorkspace()
