@@ -31,7 +31,6 @@ define [
         _.extend(@, Backbone.Events)
 
         @workflow = new ThreeNodes.Workflow()
-        @on 'replaceWorkflow', @onReplaceWorkflow, @
 
         # Define renderer mouseX/Y for use in utils.Mouse node for instance
         ThreeNodes.renderer =
@@ -227,9 +226,12 @@ define [
         null
 
 
-
-      onReplaceWorkflow: ->
-        # @todo:
+      # create new workflow model, replace old one
+      # with the new one, deal with all dependencies
+      replaceWorkflow: ->
+        @workflow = new ThreeNodes.Workflow()
+        # we don't have events on @workflow
+        @ui.replaceWorkflow(@workflow)
 
       setDisplayMode: (is_player = false) =>
         if @ui then @ui.setDisplayMode(is_player)
@@ -239,11 +241,13 @@ define [
         @setWorkflowContext()
 
       setWorkflowContext: =>
+        # console.log 'here'
         @ui.dialogView.openDialog()
 
+      # whenever you clear the current workspace, you should
+      # create a new workspace and new workflow models
       clearWorkspace: () =>
-        @workflow = new ThreeNodes.Workflow()
-        @trigger 'replaceWorkflow'
+        @replaceWorkflow()
         @nodes.clearWorkspace()
         @group_definitions.removeAll()
         if @ui then @ui.clearWorkspace()

@@ -58,7 +58,7 @@ define [
         @sidebar = new ThreeNodes.Sidebar({el: $("#sidebar")})
         @initMenubar()
         @dialogView = new ThreeNodes.DialogView(model: @workflow.context)
-        @dialogView.setElement(this.$("#dialog")).render()
+        @$('#dialog').append(@dialogView.render().el)
 
         # Set the layout and show application
         @initLayout()
@@ -106,6 +106,17 @@ define [
             $("#sidebar").show()
 
         return this
+
+      replaceWorkflow: (workflow)->
+        @workflow = workflow
+        @dialogView.remove()
+        @dialogView = new ThreeNodes.DialogView(model: @workflow.context)
+        @$('#dialog').append(@dialogView.render().el)
+        # using existing dom element for the view el has a drawback: when you remove
+        # the subview, it will remove the corresponding dom element, and you can't
+        # create another subview to replace it for the dom element has gone already
+
+
 
       clearWorkspace: () =>
         # Remove the nodes attributes from the sidebar

@@ -59,6 +59,11 @@ define [
         # Backbone.trigger("workflow:contextChange", formData)
         # @.trigger("setContext", formData)
 
+      remove: ->
+        super
+        @off()
+        @model.off null, null, @
+
 
 
 
