@@ -47,7 +47,7 @@ define [
         @nodes = new ThreeNodes.NodesCollection([], {settings: settings})
         @socket = new ThreeNodes.AppWebsocket(websocket_enabled)
         @webgl = new ThreeNodes.WebglBase()
-        @file_handler = new ThreeNodes.FileHandler(@nodes, @group_definitions)
+        @file_handler = new ThreeNodes.FileHandler(@, @nodes, @group_definitions)
 
         # Create a group node when selected nodes are grouped
         @group_definitions.bind "definition:created", @nodes.createGroup
@@ -226,10 +226,9 @@ define [
         null
 
 
-      # create new workflow model, replace old one
-      # with the new one, deal with all dependencies
-      replaceWorkflow: ->
-        @workflow = new ThreeNodes.Workflow()
+      # replace old one with the new one, deal with all dependencies
+      replaceWorkflow: (workflow)->
+        @workflow = workflow
         # we don't have events on @workflow
         @ui.replaceWorkflow(@workflow)
 
@@ -238,16 +237,14 @@ define [
 
       createNewWorkflow: =>
         @clearWorkspace()
+        workflow = new ThreeNodes.Workflow()
+        @replaceWorkflow(workflow)
         @setWorkflowContext()
 
       setWorkflowContext: =>
-        # console.log 'here'
         @ui.dialogView.openDialog()
 
-      # whenever you clear the current workspace, you should
-      # create a new workspace and new workflow models
       clearWorkspace: () =>
-        @replaceWorkflow()
         @nodes.clearWorkspace()
         @group_definitions.removeAll()
         if @ui then @ui.clearWorkspace()

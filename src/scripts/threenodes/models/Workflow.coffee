@@ -11,13 +11,15 @@ define [
 
   namespace "ThreeNodes",
     Workflow: class Workflow extends Backbone.Model
-      initialize: ->
+      initialize: (options)->
+        options = options || {}
         # helper states, will not save to the server side, nor are they data attrs
         # or bound to the representation
         @workflow_state = false
         @running_nodes = []
-        @waiting_ndoes = []
+        @waiting_nodes = []
 
         # nested model
-        @context = new ThreeNodes.Context()
+        context = new ThreeNodes.Context(options.context)
+        @set {context: context}
 
