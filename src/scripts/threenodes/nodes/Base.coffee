@@ -70,7 +70,7 @@ define [
 
       toJSON: ()=>
         res = super
-        res.context = @context
+        res.context = @context.toJSON()
         return res
 
 
