@@ -5,6 +5,7 @@ define [
   'cs!threenodes/models/Node',
   'cs!threenodes/nodes/Base',
   'cs!threenodes/nodes/Code',
+  'cs!threenodes/nodes/Data',
   'cs!threenodes/nodes/Conditional',
   'cs!threenodes/nodes/Geometry',
   'cs!threenodes/nodes/Lights',

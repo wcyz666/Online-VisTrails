@@ -74,21 +74,6 @@ define [
         return res
 
 
-    Data: class Data extends ThreeNodes.NodeBase
-      @node_name = 'Data'
-      @group_name = 'BasicModules'
-
-      initialize: ->
-        @value = ''
-        super
-
-      getFields: ->
-        base_fields = super
-        fields =
-          outputs:
-            'out': {type: 'Any', val: @value}
-        $.extend(true, base_fields, fields)
-
 
     Service: class Service extends ThreeNodes.NodeBase
       @node_name = 'Service'

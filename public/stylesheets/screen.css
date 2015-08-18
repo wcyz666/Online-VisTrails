@@ -1852,10 +1852,10 @@ body > header h2 {
   border: 1px solid #bdbdde;
   color: #aaa;
 }
-.node-Data {
+.type-Data {
   background: #dfe2db;
 }
-.node-Data.ui-selected {
+.type-Data.ui-selected {
   background: #e4e7e0;
 }
 .node-WebGLRenderer .inputs {
