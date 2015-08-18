@@ -1631,7 +1631,7 @@ body > header h2 {
 }
 .width-200,
 .node-Group,
-.node-AbstractTask,
+.type-Abstract,
 .node-LFO,
 .node-Mp3Input,
 .type-Three,
@@ -1838,19 +1838,30 @@ body > header h2 {
 .node-Group .outputs h3 {
   text-align: right;
 }
-.node-AbstractTask {
+.type-Abstract {
   background: #bdbdde;
   min-height: 50px;
 }
-.node-AbstractTask.ui-selected {
+.type-Abstract.ui-selected {
   background: #c2c2e3;
   border: 2px solid #000;
 }
-.node-AbstractTask input,
-.node-AbstractTask button {
+.type-Abstract input,
+.type-Abstract button {
   background: #bdbdde;
   border: 1px solid #bdbdde;
   color: #aaa;
+}
+.node-Subworkflow {
+  background: #74afad;
+}
+.node-Subworkflow.ui-selected {
+  background: #79b4b2;
+}
+.node-Subworkflow input,
+.node-Subworkflow button {
+  background: #74afad;
+  border: 1px solid #74afad;
 }
 .type-Data {
   background: #dfe2db;
