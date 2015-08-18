@@ -56,24 +56,6 @@ define [
             "out0": {type: "Any", val: @value}
         return $.extend(true, base_fields, fields)
 
-    AbstractTask: class AbstractTask extends ThreeNodes.NodeCustom
-      @node_name = 'AbstractTask'
-      @group_name = 'BasicModules'
-
-      initialize: (options) =>
-        @value = ""
-        super
-        # nested model, inherit initial context from the workflow
-        # the same model instance for contextFormView
-        @context = new ThreeNodes.Context options.context
-
-
-      toJSON: ()=>
-        res = super
-        res.context = @context.toJSON()
-        return res
-
-
 
     Service: class Service extends ThreeNodes.NodeBase
       @node_name = 'Service'
