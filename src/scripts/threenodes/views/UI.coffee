@@ -32,7 +32,7 @@ define [
         @settings = options.settings
         @is_grabbing = false
 
-        @workflow = options.workflow
+        @workflowState = options.workflowState
 
 
         # Bind events
@@ -57,7 +57,7 @@ define [
         # Setup the sidebar and menu subviews
         @sidebar = new ThreeNodes.Sidebar({el: $("#sidebar")})
         @initMenubar()
-        @dialogView = new ThreeNodes.DialogView(model: @workflow.get('context'))
+        @dialogView = new ThreeNodes.DialogView(model: @workflowState.get('context'))
         @$('#dialog').append(@dialogView.render().el)
 
         # Set the layout and show application
@@ -102,15 +102,15 @@ define [
             dx = ui.position.left + $("#container-wrapper").scrollLeft() - offset.left - 10
             dy = ui.position.top + $("#container-wrapper").scrollTop() - container.scrollTop() - offset.top
             #debugger
-            self.trigger("CreateNode", {type: nodename, x: dx, y: dy, definition: definition, context: self.workflow.get('context').toJSON()})
+            self.trigger("CreateNode", {type: nodename, x: dx, y: dy, definition: definition, context: self.workflowState.get('context').toJSON()})
             $("#sidebar").show()
 
         return this
 
-      replaceWorkflow: (workflow)->
-        @workflow = workflow
+      replaceWorkflowState: (workflowState)->
+        @workflowState = workflowState
         @dialogView.remove()
-        @dialogView = new ThreeNodes.DialogView(model: @workflow.get('context'))
+        @dialogView = new ThreeNodes.DialogView(model: @workflowState.get('context'))
         @$('#dialog').append(@dialogView.render().el)
         # using existing dom element for the view el has a drawback: when you remove
         # the subview, it will remove the corresponding dom element, and you can't
@@ -210,22 +210,6 @@ define [
             $(@).find("*").not(e.target).blur()
         return @
 
-      # Switch between player/editor mode
-      setDisplayMode: (is_player = false) =>
-        if is_player == true
-          $("body").addClass("player-mode")
-          $("body").removeClass("editor-mode")
-          $("#display-mode-switch").html("editor mode")
-        else
-          $("body").addClass("editor-mode")
-          $("body").removeClass("player-mode")
-          $("#display-mode-switch").html("player mode")
-
-        @settings.player_mode = is_player
-        if is_player == false
-          @trigger("renderConnections")
-        return true
-
       setupMouseScroll: () =>
         @scroll_target = $("#container-wrapper")
 
@@ -272,9 +256,15 @@ define [
         return this
 
       initDisplayModeSwitch: () =>
-        $("body").append("<div id='display-mode-switch'>switch mode</div>")
+        $button = $("<div id='display-mode-switch'>Back</div>")
+        $button.hide()
+        $("body").append($button)
         $("#display-mode-switch").click (e) =>
-          @switchDisplayMode()
+          @trigger 'back'
+
+      showBackButton: ->
+        $('#display-mode-switch').show()
+
 
       # Setup the bottom right dom container
       initBottomToolbox: () =>

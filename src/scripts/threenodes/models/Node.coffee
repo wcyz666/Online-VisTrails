@@ -15,6 +15,8 @@ define [
       @node_name = ''
       @group_name = ''
 
+      idAttribute: 'nid'
+
       defaults:
         nid: -1
         x: 0
@@ -148,7 +150,7 @@ define [
         # todo : remove when @model.postInit is removed in NodeView
         delete @fully_inited
 
-        @destroy()
+        @trigger 'destroy', @
 
       # Load the animation from json data
       loadAnimation: () =>

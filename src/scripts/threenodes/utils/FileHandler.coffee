@@ -14,9 +14,6 @@ define [
 			constructor: (@app, @nodes, @group_definitions) ->
         		_.extend(FileHandler::, Backbone.Events)
 
-			replaceWorkflow:(workflow)->
-				@workflow = workflow
-
 			saveLocalFile: () =>
 				bb = new BlobBuilder()
 				result_string = @getLocalJson()
@@ -37,7 +34,7 @@ define [
 			getLocalJson: (stringify = true) =>
 				res =
 					uid: @nodes.indexer.getUID(false)
-					workflow: @app.workflow.toJSON()
+					workflowState: @app.workflowState.toJSON()
 					nodes: jQuery.map(@nodes.models, (n, i) -> n.toJSON())
 					connections: jQuery.map(@nodes.connections.models, (c, i) -> c.toJSON())
 					groups: jQuery.map(@group_definitions.models, (g, i) -> g.toJSON())
@@ -52,8 +49,8 @@ define [
 				loaded_data = JSON.parse(txt)
 
 				# load workflow model
-				workflow = new ThreeNodes.Workflow(loaded_data.workflow)
-				@app.replaceWorkflow(workflow)
+				workflowState = new ThreeNodes.WorkflowState(loaded_data.workflowState)
+				@app.replaceWorkflowState(workflowState)
 
 	        # First recreate the group definitions
 				if loaded_data.groups

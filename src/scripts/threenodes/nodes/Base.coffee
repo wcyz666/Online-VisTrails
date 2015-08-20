@@ -25,9 +25,6 @@ define [
     Service: class Service extends ThreeNodes.nodes.views.NodeWithCenterTextfield
       getCenterField: () => @model.fields.getField("in")
 
-    # File: class File extends ThreeNodes.nodes.views.NodeWithCenterTextfield
-    #   getCenterField: () => @model.fields.getField("in")
-
     File: class File extends ThreeNodes.nodes.views.NodeWithUpload
 
 
@@ -56,6 +53,42 @@ define [
             "out0": {type: "Any", val: @value}
         return $.extend(true, base_fields, fields)
 
+    # Will need this in subworkflow as connection to outer world
+    # When going back to superworkflow, should ignore any nodes before
+    # InputPort or after OutputPort
+    InputPort: class InputPort extends ThreeNodes.NodeBase
+      @node_name = 'InputPort'
+      @group_name = 'BasicModules'
+
+      initialize: ->
+        @value = ''
+        super
+
+      getFields: =>
+        base_fields = super
+        fields =
+          inputs:
+            "in": ""
+          outputs:
+            "out": {type: "Any", val: @value}
+        return $.extend(true, base_fields, fields)
+
+    OutputPort: class OutputPort extends ThreeNodes.NodeBase
+      @node_name = 'OutputPort'
+      @group_name = 'BasicModules'
+
+      initialize: ->
+        @value = ''
+        super
+
+      getFields: =>
+        base_fields = super
+        fields =
+          inputs:
+            "in": ""
+          outputs:
+            "out": {type: "Any", val: @value}
+        return $.extend(true, base_fields, fields)
 
     Service: class Service extends ThreeNodes.NodeBase
       @node_name = 'Service'
@@ -243,43 +276,6 @@ define [
             "out0": {type: "Any", val: @value}
             "out1": {type: "Any", val: @value}
         return $.extend(true, base_fields, fields)
-
-
-    InputPort: class InputPort extends ThreeNodes.NodeBase
-      @node_name = 'InputPort'
-      @group_name = 'BasicModules'
-
-      initialize: (options) =>
-        @value = ""
-        super
-
-      getFields: =>
-        base_fields = super
-        fields =
-          inputs:
-            "in0": ""
-            "in1": ""
-          outputs:
-            "out": {type: "Any", val: @value}
-        return $.extend(true, base_fields, fields)
-
-
-    OutputPort: class OutputPort extends ThreeNodes.NodeBase
-      @node_name = 'OutputPort'
-      @group_name = 'BasicModules'
-
-      initialize: (options) =>
-        @value = ""
-        super
-
-      getFields: =>
-        base_fields = super
-        fields =
-          inputs:
-            "in0": ""
-            "in1": ""
-        return $.extend(true, base_fields, fields)
-
 
     OutputPath: class OutputPath extends ThreeNodes.NodeBase
       @node_name = 'OutputPath'

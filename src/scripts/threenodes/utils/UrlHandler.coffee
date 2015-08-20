@@ -13,7 +13,7 @@ define [
         "play/example/:file": "onPlayExample"
 
       onDefault: () =>
-        @trigger("SetDisplayModeCommand", false)
+        console.log 'default route'
 
       onPlay: () =>
         @trigger("SetDisplayModeCommand", true)
