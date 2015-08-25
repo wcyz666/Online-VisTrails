@@ -113,17 +113,17 @@ define [
         if subworkflow.get 'implementation'
           @loadNewSceneFromJSONString(subworkflow.get 'implementation')
         else
+          # create input and output ports
           @createNewWorkflow(null)
+          count = 0
+          for inputName in inputNames
+            @nodes.createNode({type:'InputPort', x: 3, y: 5 + 50 * count, name: inputName, definition: null, context: null})
+            count++
+          count = 0
+          for outputName in outputNames
+            @nodes.createNode({type:'OutputPort', x: 803, y: 5 + 50 * count, name: outputName, definition: null, context: null})
+            count++
         @ui.showBackButton()
-        # create input and output ports
-        count = 0
-        for inputName in inputNames
-          @nodes.createNode({type:'InputPort', x: 3, y: 5 + 50 * count, name: inputName, definition: null, context: null})
-          count++
-        count = 0
-        for outputName in outputNames
-          @nodes.createNode({type:'OutputPort', x: 803, y: 5 + 50 * count, name: outputName, definition: null, context: null})
-          count++
         # toggle the tabs to new
         @ui.sidebar.tabsNew()
 
