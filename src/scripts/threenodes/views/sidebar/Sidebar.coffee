@@ -88,6 +88,12 @@ define [
         @$el.tabs('option', 'active', 1)
         return this
 
+      # toggle the tabs to new
+      tabsNew: ->
+        setTimeout =>
+          @$el.tabs('option', 'active', 0)
+        , 100
+
       filterListItem: ($item, value) =>
         s = $.trim($("a", $item).html()).toLowerCase()
         if s.indexOf(value) == -1

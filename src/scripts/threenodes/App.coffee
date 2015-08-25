@@ -124,6 +124,8 @@ define [
         for outputName in outputNames
           @nodes.createNode({type:'OutputPort', x: 803, y: 5 + 50 * count, name: outputName, definition: null, context: null})
           count++
+        # toggle the tabs to new
+        @ui.sidebar.tabsNew()
 
       setWorkspaceFromDefinition: (definition) =>
         # always remove current edit node if it exists
