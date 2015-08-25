@@ -196,6 +196,7 @@ define [
           # @note: the cid will change each time a new model is created.
           enteredSubworkflow = @enteredSubworkflows.pop()
           @nodes.get(enteredSubworkflow.nid).set({implementation: cur})
+          if @superworkflows.length is 0 then @ui.hideBackButton()
 
       loadNewSceneFromJSONString: (wf)->
         @clearWorkspace()

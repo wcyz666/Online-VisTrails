@@ -265,6 +265,9 @@ define [
       showBackButton: ->
         $('#display-mode-switch').show()
 
+      hideBackButton: ->
+        $('#display-mode-switch').hide()
+
 
       # Setup the bottom right dom container
       initBottomToolbox: () =>
