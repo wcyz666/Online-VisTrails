@@ -17,7 +17,7 @@ define [
 
       idAttribute: 'nid'
 
-      defaults:
+      defaults: ->
         nid: -1
         x: 0
         y: 0
