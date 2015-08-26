@@ -1507,6 +1507,9 @@ body > header h2 {
 #sidebar input[type="submit"] {
   width: 60px;
 }
+#sidebar input[type='checkbox'] {
+  margin: 7px 0px;
+}
 #sidebar fieldset {
   margin: 10px 0px;
   padding: 4px;

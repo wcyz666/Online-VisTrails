@@ -1,6 +1,7 @@
 define [
   'Underscore',
   'Backbone',
+  'text!templates/sidebar/nodes/data_source.tmpl.html',
   'cs!threenodes/views/sidebar/fields/BoolField',
   'cs!threenodes/views/sidebar/fields/StringField',
   'cs!threenodes/views/sidebar/fields/FloatField',
@@ -17,7 +18,7 @@ define [
   'cs!threenodes/views/sidebar/ContextFormView',
   # 'cs!threenodes/nodes/Base'
 
-], (_, Backbone) ->
+], (_, Backbone, _data_source_template) ->
   #"use strict"
 
   ### NodeSidebarView ###
@@ -118,7 +119,13 @@ define [
         super
 
 
-
+  namespace 'ThreeNodes.sidebar.nodes',
+    DataSource: class DataSource extends ThreeNodes.NodeSidebarView
+      dataSourceTmpl: _.template(_data_source_template)
+      displayNode: ->
+        _typeForm = @dataSourceTmpl()
+        @.$el.append _typeForm
+        return @
 
 
 

@@ -78,7 +78,11 @@ define [
           return this
 
         for node in nodes
-          view = new ThreeNodes.NodeSidebarView
+          ViewClass = switch node.constructor
+            when ThreeNodes.nodes.models.DataSource then ThreeNodes.sidebar.nodes.DataSource
+            else ThreeNodes.NodeSidebarView
+          console.log ViewClass
+          view = new ViewClass
             model: node
             #el: $target
           $target.append(view.el)
