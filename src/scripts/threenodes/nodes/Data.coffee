@@ -12,6 +12,15 @@ define [
       @node_name = ''
       @group_name = 'Data'
 
+      defaults: ->
+        _.extend super,
+          # format is __atomic__
+          format: []
+
+      toJSON: ->
+        _.extend super,
+          format: @.get 'format'
+
     DataSource: class DataSource extends Data
       @node_name = 'DataSource'
 
