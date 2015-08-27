@@ -80,8 +80,8 @@ define [
         for node in nodes
           ViewClass = switch node.constructor
             when ThreeNodes.nodes.models.DataSource then ThreeNodes.sidebar.nodes.DataSource
+            when ThreeNodes.nodes.models.ModelStorage then ThreeNodes.sidebar.nodes.ModelStorage
             else ThreeNodes.NodeSidebarView
-          console.log ViewClass
           view = new ViewClass
             model: node
             #el: $target
