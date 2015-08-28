@@ -155,14 +155,19 @@ define [
       initTitleClick: () ->
         self = this
         @$el.find("> .head span").dblclick (e) ->
+          that = this
+          e.stopPropagation()
           prev = $(this).html()
           self.$el.find("> .head").append("<input type='text' />")
           $(this).hide()
+          # one is span, the other one is input, they are different
           $input = self.$el.find("> .head input", )
           $input.val(prev)
 
           apply_input_result = () ->
             self.model.set('name', $input.val())
+            if $input.val() is self.model.get 'name'
+              $(that).show()
             $input.remove()
 
           $input.blur (e) ->

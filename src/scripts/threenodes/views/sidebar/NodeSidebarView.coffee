@@ -1,6 +1,8 @@
 define [
   'Underscore',
   'Backbone',
+  'text!templates/sidebar/nodes/data_source.tmpl.html',
+  'text!templates/sidebar/nodes/model_storage.tmpl.html'
   'cs!threenodes/views/sidebar/fields/BoolField',
   'cs!threenodes/views/sidebar/fields/StringField',
   'cs!threenodes/views/sidebar/fields/FloatField',
@@ -17,7 +19,7 @@ define [
   'cs!threenodes/views/sidebar/ContextFormView',
   # 'cs!threenodes/nodes/Base'
 
-], (_, Backbone) ->
+], (_, Backbone, _data_source_template, _model_storage_template) ->
   #"use strict"
 
   ### NodeSidebarView ###
@@ -118,12 +120,53 @@ define [
         super
 
 
+  namespace 'ThreeNodes.sidebar.nodes',
+    Data: class Data extends ThreeNodes.NodeSidebarView
+      # to be implemented
+      formatTmpl: ->
+        return ''
+      # to be implemented
+      getTmplData: ->
+        return {}
+      # change the model immediately on view change
+      events: ->
+        'change input[type="checkbox"]': 'onChange'
+
+      onChange: (e)->
+        # get all checked inputs
+        formatArray = []
+        _.each(@.$('input[type="checkbox"]:checked'), (elem, idx)->
+          formatArray.push elem.name
+        )
+        @model.set {format: formatArray}
+
+      displayNode: ->
+        tmplData = @getTmplData()
+        # format is an array
+        format = @model.get 'format'
+        for name in format
+          tmplData[name] = 'checked'
+        _formatForm = @formatTmpl(tmplData)
+        @.$el.append _formatForm
+        return @
 
 
 
+    DataSource: class DataSource extends Data
+      formatTmpl: _.template(_data_source_template)
 
 
+      getTmplData: ->
+        HDFS: ''
+        File: ''
+        Kafka: ''
 
+    ModelStorage: class ModelStorage extends Data
+      formatTmpl: _.template(_model_storage_template)
 
-
+      getTmplData: ->
+        JSON: ''
+        Binary: ''
+        ML: ''
+        PMML: ''
 

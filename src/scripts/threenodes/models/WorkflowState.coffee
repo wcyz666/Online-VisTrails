@@ -7,10 +7,10 @@ define [
 ], (_, Backbone, Utils) ->
   #"use strict"
 
-  ### workflow model ###
+  ### workflowState model ###
 
   namespace "ThreeNodes",
-    Workflow: class Workflow extends Backbone.Model
+    WorkflowState: class WorkflowState extends Backbone.Model
       initialize: (options)->
         options = options || {}
         # helper states, will not save to the server side, nor are they data attrs

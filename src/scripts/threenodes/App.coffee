@@ -4,7 +4,7 @@ define [
   'jquery',
   'libs/namespace',
   "cs!threenodes/utils/Utils",
-  'cs!threenodes/models/Workflow',
+  'cs!threenodes/models/WorkflowState',
   'cs!threenodes/collections/Nodes',
   'cs!threenodes/collections/GroupDefinitions',
   'cs!threenodes/views/UI',
@@ -30,7 +30,11 @@ define [
 
         _.extend(@, Backbone.Events)
 
-        @workflow = new ThreeNodes.Workflow()
+        @workflowState = new ThreeNodes.WorkflowState()
+        # a stack to store super workflow strs
+        @superworkflows = []
+        # a stack to store the plain JSON representation of subworkflow instance
+        @enteredSubworkflows = []
 
         # Define renderer mouseX/Y for use in utils.Mouse node for instance
         ThreeNodes.renderer =
@@ -74,6 +78,8 @@ define [
         @url_handler.on("ClearWorkspace", () => @clearWorkspace())
         @url_handler.on("LoadJSON", @file_handler.loadFromJsonData)
 
+        Backbone.Events.on 'openSubworkflow', @openSubworkflow, @
+
         # Initialize the user interface and timeline
         @initUI()
         @initTimeline()
@@ -94,6 +100,32 @@ define [
           pushState: false
 
         return true
+
+      openSubworkflow: (subworkflow)->
+        # inputNames: [], outputNames: []
+        # key is field name
+        inputNames = (key for key of subworkflow.fields.inputs)
+        outputNames = (key for key of subworkflow.fields.outputs)
+        @superworkflows.push @file_handler.getLocalJson(true)
+        # @note: here run some risks in using the toJSON() method directly
+        @enteredSubworkflows.push subworkflow.toJSON()
+        # create a new workflow and drop the old one and related ui
+        if subworkflow.get 'implementation'
+          @loadNewSceneFromJSONString(subworkflow.get 'implementation')
+        else
+          # create input and output ports
+          @createNewWorkflow(null)
+          count = 0
+          for inputName in inputNames
+            @nodes.createNode({type:'InputPort', x: 3, y: 5 + 50 * count, name: inputName, definition: null, context: null})
+            count++
+          count = 0
+          for outputName in outputNames
+            @nodes.createNode({type:'OutputPort', x: 803, y: 5 + 50 * count, name: outputName, definition: null, context: null})
+            count++
+        @ui.showBackButton()
+        # toggle the tabs to new
+        @ui.sidebar.tabsNew()
 
       setWorkspaceFromDefinition: (definition) =>
         # always remove current edit node if it exists
@@ -120,7 +152,7 @@ define [
           @ui = new ThreeNodes.UI
             el: $("body")
             settings: @settings
-            workflow: @workflow
+            workflowState: @workflowState
 
 
           # Link UI to render events
@@ -142,10 +174,11 @@ define [
           # Special events
           @ui.on("CreateNode", @nodes.createNode)
           @nodes.on("nodeslist:rebuild", @ui.onNodeListRebuild)
-          @url_handler.on("SetDisplayModeCommand", @ui.setDisplayMode)
 
           #breadcrumb
           @ui.breadcrumb.on("click", @setWorkspaceFromDefinition)
+
+          @ui.on 'back', @backToSuperworkflow, @
 
 
         else
@@ -155,6 +188,21 @@ define [
 
         return this
 
+      backToSuperworkflow: ()->
+        # pop from stack the saved superworkflow
+        if @superworkflows.length != 0
+          cur = @file_handler.getLocalJson(true)
+          superworkflow = @superworkflows.pop()
+          @loadNewSceneFromJSONString(superworkflow)
+          # find the subworkflow module by nid and set the implementation attr
+          # @note: the cid will change each time a new model is created.
+          enteredSubworkflow = @enteredSubworkflows.pop()
+          @nodes.get(enteredSubworkflow.nid).set({implementation: cur})
+          if @superworkflows.length is 0 then @ui.hideBackButton()
+
+      loadNewSceneFromJSONString: (wf)->
+        @clearWorkspace()
+        @file_handler.loadFromJsonData(wf)
 
       initTimeline: () =>
         # Remove old timeline DOM elements
@@ -184,7 +232,7 @@ define [
       #j start running the workflow if it is not running,
       # run next node if it is
       runWorkflow: =>
-        if !@workflow.workflow_state
+        if !@workflowState.workflow_state
           @startRunningWorkflow()
         else
           @runNext()
@@ -196,49 +244,48 @@ define [
         start_nodes = @nodes.findStartNodesAndMarkReady()
         for node in start_nodes
           node.run()
-        @workflow.workflow_state = true
-        @workflow.running_nodes = start_nodes
+        @workflowState.workflow_state = true
+        @workflowState.running_nodes = start_nodes
         null
 
       runNext: =>
         # get nodes to run
-        nodes_to_run = [].concat @workflow.waiting_nodes
-        @workflow.waiting_nodes = []
-        for node in @workflow.running_nodes
+        nodes_to_run = [].concat @workflowState.waiting_nodes
+        @workflowState.waiting_nodes = []
+        for node in @workflowState.running_nodes
           # get nodes to run next
           nodes_to_run = nodes_to_run.concat node.next()
           # stop current running
           node.stop()
-        @workflow.running_nodes = []
+        @workflowState.running_nodes = []
 
         # if the end of workflow, change the workflow_state
         if !nodes_to_run.length
-          @workflow.workflow_state = false
+          @workflowState.workflow_state = false
         # else continue running
         else
           # run nodes_to_run
           for node in nodes_to_run
             if node.ready
               node.run()
-              @workflow.running_nodes.push node
+              @workflowState.running_nodes.push node
             else
-              @workflow.waiting_nodes.push node
+              @workflowState.waiting_nodes.push node
         null
 
 
       # replace old one with the new one, deal with all dependencies
-      replaceWorkflow: (workflow)->
-        @workflow = workflow
+      replaceWorkflowState: (workflowState)->
+        @workflowState = workflowState
         # we don't have events on @workflow
-        @ui.replaceWorkflow(@workflow)
+        @ui.replaceWorkflowState(@workflowState)
 
-      setDisplayMode: (is_player = false) =>
-        if @ui then @ui.setDisplayMode(is_player)
 
-      createNewWorkflow: =>
+      # create a new workflow or use the provided workflow to replace the old one
+      createNewWorkflow: (workflowState)=>
+        workflowState = workflowState || new ThreeNodes.WorkflowState()
         @clearWorkspace()
-        workflow = new ThreeNodes.Workflow()
-        @replaceWorkflow(workflow)
+        @replaceWorkflowState(workflowState)
         @setWorkflowContext()
 
       setWorkflowContext: =>

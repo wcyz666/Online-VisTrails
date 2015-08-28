@@ -78,7 +78,11 @@ define [
           return this
 
         for node in nodes
-          view = new ThreeNodes.NodeSidebarView
+          ViewClass = switch node.constructor
+            when ThreeNodes.nodes.models.DataSource then ThreeNodes.sidebar.nodes.DataSource
+            when ThreeNodes.nodes.models.ModelStorage then ThreeNodes.sidebar.nodes.ModelStorage
+            else ThreeNodes.NodeSidebarView
+          view = new ViewClass
             model: node
             #el: $target
           $target.append(view.el)
@@ -87,6 +91,12 @@ define [
         # toggle the tabs
         @$el.tabs('option', 'active', 1)
         return this
+
+      # toggle the tabs to new
+      tabsNew: ->
+        setTimeout =>
+          @$el.tabs('option', 'active', 0)
+        , 100
 
       filterListItem: ($item, value) =>
         s = $.trim($("a", $item).html()).toLowerCase()

@@ -152,22 +152,25 @@
   width: 6em
   cursor: pointer
 
-#sidebar input[type="radio"]
-  padding: 4px 7px
-  width: 10px
-  border: #333
-  background: #ffffff
-  box-shadow(#222, 0, 1px, 14px, false, inset)
-  &:focus
-    outline: 0
-    border: #444
-    box-shadow(#222, 0, 1px, 6px, false, inset)
-    background: #222
-  &:hover
-    border: #3a3a3a
+#sidebar
+  input[type="radio"]
+    padding: 4px 7px
+    width: 10px
+    border: #333
+    background: #ffffff
+    box-shadow(#222, 0, 1px, 14px, false, inset)
+    &:focus
+      outline: 0
+      border: #444
+      box-shadow(#222, 0, 1px, 6px, false, inset)
+      background: #222
+    &:hover
+      border: #3a3a3a
+  input[type="submit"]
+    width: 60px
+  input[type='checkbox']
+    margin: 7px 0px
 
-#sidebar input[type="submit"]
-  width: 60px
 
 
 #sidebar fieldset
